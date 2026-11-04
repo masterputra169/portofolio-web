@@ -40,10 +40,11 @@ export function ChainSection({ lang, projects }: { lang: Lang; projects: Project
             onUpdate: (self) => {
               bus.scroll = self.progress
               const seg = self.progress * (featured.length + 0.6) - 0.3
+              bus.focus = Math.max(0, seg + 0.5)
               bus.active = seg >= 0 && seg < featured.length ? Math.floor(seg) : -1
             },
             onLeave: () => { bus.active = -1 },
-            onLeaveBack: () => { bus.active = -1; bus.scroll = 0 },
+            onLeaveBack: () => { bus.active = -1; bus.scroll = 0; bus.focus = 0 },
           },
         })
         tl.to({}, { duration: 0.3 })

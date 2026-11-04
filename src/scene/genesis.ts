@@ -74,8 +74,12 @@ export class GenesisScene {
   private pointerW = new THREE.Vector3(999, 999, 0)
   private ray = new THREE.Raycaster()
   private plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0)
-  private camPath: THREE.CatmullRomCurve3
-  private lookPath: THREE.CatmullRomCurve3
+  private heroPos: THREE.Vector3
+  private heroLook: THREE.Vector3
+  private focusS = 0
+  private focusPt = new THREE.Vector3()
+  private tmpCam = new THREE.Vector3()
+  private tmpLook = new THREE.Vector3()
   private lookCur: THREE.Vector3
   private chain = new THREE.Group()
   private glow: THREE.PointLight
@@ -169,7 +173,7 @@ export class GenesisScene {
       })
       const edges = new THREE.LineSegments(edgeGeo, new THREE.LineBasicMaterial({ color: C.acc.clone(), transparent: true, opacity: 0 }))
       group.add(edges)
-      const core = new THREE.Mesh(coreGeo, new THREE.MeshBasicMaterial({ color: C.acc.clone().multiplyScalar(2.4), transparent: true, opacity: 0 }))
+      const core = new THREE.Mesh(coreGeo, new THREE.MeshBasicMaterial({ color: C.acc.clone().multiplyScalar(1.6), transparent: true, opacity: 0 }))
       group.add(core)
       group.position.copy(p)
       group.rotation.set(0.42, 0.62 + i * 0.04, 0)
@@ -289,17 +293,8 @@ export class GenesisScene {
     scene.add(this.dust)
 
     /* ---------- camera path through the chain ---------- */
-    const cp = this.chainPts
-    const heroPos = mobile ? new THREE.Vector3(-3, 1.4, 19) : new THREE.Vector3(-7, 1.8, 15)
-    const heroLook = mobile ? new THREE.Vector3(1, 1.6, -2) : new THREE.Vector3(-4, 0.5, -2)
-    this.camPath = new THREE.CatmullRomCurve3(
-      [heroPos, new THREE.Vector3(-3, 2.6, 10), ...cp.slice(1, 6).map((p) => new THREE.Vector3(p.x - 2.4, p.y + 1.9, p.z + 5.2)), new THREE.Vector3(cp[7].x - 1, 3.2, cp[7].z + 7)],
-      false, 'centripetal',
-    )
-    this.lookPath = new THREE.CatmullRomCurve3(
-      [heroLook, new THREE.Vector3(0.5, 0, -1), ...cp.slice(1, 6).map((p) => new THREE.Vector3(p.x + 1.2, p.y, p.z - 0.6)), new THREE.Vector3(cp[9].x, 0, cp[9].z)],
-      false, 'centripetal',
-    )
+    this.heroPos = mobile ? new THREE.Vector3(-3, 1.4, 19) : new THREE.Vector3(-7, 1.8, 15)
+    this.heroLook = mobile ? new THREE.Vector3(1, 1.6, -2) : new THREE.Vector3(-4, 0.5, -2)
 
     this.onResize = this.onResize.bind(this)
     this.onPointer = this.onPointer.bind(this)
@@ -385,9 +380,20 @@ export class GenesisScene {
     this.chain.position.y = Math.sin(t * 0.4) * 0.08
 
     /* camera: intro close-up → hero framing → path along the chain → pulled back for the outro */
-    const pathU = easeInOutCubic(clamp01(this.scrollS))
-    const camGoal = this.camPath.getPointAt(pathU)
-    const lookGoal = this.lookPath.getPointAt(Math.min(1, pathU + 0.02))
+    // focus index along the chain: dwell on each block, glide between them
+    const N0 = this.chainPts.length - 1
+    this.focusS = damp(this.focusS, bus.focus, 5, dt)
+    const f = Math.min(N0, Math.max(0, this.focusS))
+    const fi = Math.min(N0 - 1, Math.floor(f))
+    const ff = easeInOutCubic(f - fi)
+    const P = this.focusPt.copy(this.chainPts[fi]).lerp(this.chainPts[fi + 1], ff)
+    const chainCam = this.tmpCam.set(P.x - 1, P.y + 1.6, P.z + 5.6)
+    const chainLook = this.tmpLook.set(P.x + 3, P.y - 0.2, P.z - 1.6)
+    const w = clamp01(this.scrollS / 0.12)
+    const wE = w * w * (3 - 2 * w)
+    const pathU = clamp01(this.scrollS)
+    const camGoal = this.heroPos.clone().lerp(chainCam, wE)
+    const lookGoal = this.heroLook.clone().lerp(chainLook, wE)
     camGoal.lerp(this.introPos, st.intro)
     lookGoal.lerp(this.introLook, st.intro)
     camGoal.x += this.pointerS.x * (0.9 - pathU * 0.5)
@@ -423,8 +429,8 @@ export class GenesisScene {
       em.opacity = b.on * (0.4 + (i === 0 ? 0.35 : 0)) * (1 - open * 0.8)
       em.color.copy(accent).multiplyScalar(1 + (i === 0 ? 0.9 : 0))
       const cm = b.core.material as THREE.MeshBasicMaterial
-      cm.opacity = b.on * (i === 0 ? 0.95 : 0.1 + open * 0.9)
-      b.core.scale.setScalar(1 + open * 1.4)
+      cm.opacity = b.on * (i === 0 ? 0.9 : 0.1 + open * 0.75)
+      b.core.scale.setScalar(1 + open * 0.8)
       b.core.rotation.y = t * (0.6 + open * 1.5)
       b.core.rotation.x = t * 0.4
     })

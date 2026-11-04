@@ -63,8 +63,10 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
 
         const seed = `${SITE.url}|genesis|${new Date().toISOString().slice(0, 10)}|${Math.random().toString(36).slice(2, 8)}`
         const zeros = (h: string) => { const z = h.match(/^0*/)?.[0].length ?? 0; return `<span class="z">${h.slice(0, z)}</span>${h.slice(z)}` }
+        const t0 = performance.now()
         const r = await mine(seed, {
-          budgetMs: reduced ? 400 : 3400,
+          prefix: reduced ? '0000' : '00000',
+          budgetMs: reduced ? 400 : 2600,
           onTick: (tk) => {
             if (nonceEl) nonceEl.textContent = tk.nonce.toLocaleString('en-US')
             if (hashEl) hashEl.innerHTML = zeros(tk.best)
@@ -72,6 +74,10 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
             if (barEl) gsap.set(barEl, { scaleX: Math.min(0.94, tk.progress) })
           },
         })
+        // keep the miner on screen long enough to read, even on very fast machines
+        const MIN_MS = reduced ? 0 : 2200
+        const left = MIN_MS - (performance.now() - t0)
+        if (left > 0) await new Promise((res) => setTimeout(res, left))
         if (cancelled) return
         if (nonceEl) nonceEl.textContent = r.nonce.toLocaleString('en-US')
         if (hashEl) hashEl.innerHTML = zeros(r.hash)
@@ -203,7 +209,7 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
       <div className="miner" aria-live="polite">
         <div>
           <div className="m-row"><span>&gt; task</span><span>{t(UI.mining.task, lang)}</span></div>
-          <div className="m-row"><span>target</span><span>0000…</span></div>
+          <div className="m-row"><span>target</span><span>00000…</span></div>
           <div className="m-row"><span>nonce</span><span className="m-nonce">0</span></div>
           <div className="m-row"><span>hash/s</span><span className="m-rate">—</span></div>
           <div className="m-row"><span>sha-256</span><span className="m-hash">—</span></div>
