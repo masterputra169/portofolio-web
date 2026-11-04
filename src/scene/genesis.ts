@@ -293,8 +293,8 @@ export class GenesisScene {
     scene.add(this.dust)
 
     /* ---------- camera path through the chain ---------- */
-    this.heroPos = mobile ? new THREE.Vector3(-3, 1.4, 19) : new THREE.Vector3(-7, 1.8, 15)
-    this.heroLook = mobile ? new THREE.Vector3(1, 1.6, -2) : new THREE.Vector3(-4, 0.5, -2)
+    this.heroPos = mobile ? new THREE.Vector3(-3, 1.4, 19) : new THREE.Vector3(-5.2, 1.6, 11.5)
+    this.heroLook = mobile ? new THREE.Vector3(1, 1.6, -2) : new THREE.Vector3(-3, 0.4, -2)
 
     this.onResize = this.onResize.bind(this)
     this.onPointer = this.onPointer.bind(this)

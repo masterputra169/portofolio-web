@@ -222,22 +222,20 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
         <div className="hero-eyebrow">{t(UI.heroEyebrow, lang)} · <b className="g-hash">mining…</b></div>
         <h1 className={`hero-title${t(SITE.tagline, lang).length > 52 ? ' long' : ''}`}>{t(SITE.tagline, lang)}</h1>
         <div className="hero-sub">
-          <p>{t(SITE.identity, lang)}</p>
-          <div className="hero-side">
+          <p className="hero-lede">{t(SITE.identity, lang)}</p>
+          <div className="hero-row">
+            <a className="cta p" href={href(lang, '/work/')}>{t(UI.viewWork, lang)}</a>
+            {SITE.cvUrl ? <a className="cta" href={SITE.cvUrl}>{t(UI.cv, lang)}</a> : null}
             <button className="arc" type="button" onClick={nextArc} aria-label="Current arc. Click to switch.">
               <span className="dot" aria-hidden="true" />
               <span>{t(UI.currentArc, lang)}&nbsp;</span>
               <span className="arc-text">{ARCS[0].label}</span>
             </button>
-            <div className="hero-actions">
-              <a className="cta p" href={href(lang, '/work/')}>{t(UI.viewWork, lang)}</a>
-              {SITE.cvUrl ? <a className="cta" href={SITE.cvUrl}>{t(UI.cv, lang)}</a> : null}
-            </div>
-            <div className="soc">
-              {SOCIALS.map((s) => (
-                <a key={s.key} href={s.url} rel="me noopener" target="_blank"><span>{s.label}</span> {s.handle}</a>
-              ))}
-            </div>
+          </div>
+          <div className="soc">
+            {SOCIALS.map((s) => (
+              <a key={s.key} href={s.url} rel="me noopener" target="_blank"><span>{s.label}</span> {s.handle}</a>
+            ))}
           </div>
         </div>
         <div className="scroll-hint" aria-hidden="true">{t(UI.scroll, lang)}<i /></div>
