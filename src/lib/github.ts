@@ -29,9 +29,14 @@ const headers = (accept = 'application/vnd.github+json'): HeadersInit => {
 async function getJson<T>(url: string): Promise<T | null> {
   try {
     const res = await fetch(url, { headers: headers(), cache: 'force-cache' })
-    if (!res.ok) return null
+    if (!res.ok) {
+      // Visible in the build log: a missing/expired GITHUB_TOKEN shows up as 401 or 403 here.
+      console.warn(`[github] ${res.status} ${res.statusText} for ${url} (rate limit remaining: ${res.headers.get('x-ratelimit-remaining') ?? '?'})`)
+      return null
+    }
     return (await res.json()) as T
-  } catch {
+  } catch (e) {
+    console.warn(`[github] request failed for ${url}: ${(e as Error).message}`)
     return null
   }
 }
@@ -67,6 +72,7 @@ async function load(): Promise<Project[]> {
   const repos = (await getJson<Repo[]>(`${API}/users/${user}/repos?per_page=100&type=owner&sort=pushed`)) ?? []
   const visible = repos.filter((r) => !r.private && !(r.topics ?? []).includes('portfolio-hide') && r.name.toLowerCase() !== `${user}.github.io`)
   const byName = new Map(visible.map((r) => [r.name.toLowerCase(), r]))
+  console.log(`[github] token: ${process.env.GITHUB_TOKEN ? 'set' : 'NOT set'} · ${visible.length} public repos listed`)
 
   const readmeFor = async (repo: Repo) => {
     const [en, id] = await Promise.all([

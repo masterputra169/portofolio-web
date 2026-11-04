@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   images: { unoptimized: true },
   reactStrictMode: true,
   env: {
-    NEXT_PUBLIC_BUILD_SHA: (process.env.GITHUB_SHA ?? process.env.CF_PAGES_COMMIT_SHA ?? 'local').slice(0, 7),
+    NEXT_PUBLIC_BUILD_SHA: (process.env.WORKERS_CI_COMMIT_SHA ?? process.env.GITHUB_SHA ?? process.env.CF_PAGES_COMMIT_SHA ?? 'local').slice(0, 7),
     NEXT_PUBLIC_BUILD_DATE: new Date().toISOString().slice(0, 10),
   },
 }
