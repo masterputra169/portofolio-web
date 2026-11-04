@@ -27,7 +27,9 @@ export function Journeys({ lang, showTitle = true }: { lang: Lang; showTitle?: b
           const steps = lane.querySelectorAll('.step')
           const tl = gsap.timeline({
             defaults: { ease: 'none' },
-            scrollTrigger: { trigger: lane, start: 'top 75%', end: 'bottom 55%', scrub: 1 },
+            // clamp(): on /journey the page ends just below the lanes, so "bottom 55%" lies past
+            // the max scroll — the timeline never finished and the last steps stayed dimmed.
+            scrollTrigger: { trigger: lane, start: 'top 75%', end: 'clamp(bottom 55%)', scrub: 1 },
           })
           if (line) tl.fromTo(line, { drawSVG: '0%' }, { drawSVG: '100%', duration: 1 }, 0)
           steps.forEach((s, i) => {
