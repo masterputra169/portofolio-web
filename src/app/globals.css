@@ -90,6 +90,7 @@ a:hover { color: var(--acc); }
 .hero-eyebrow { font-family: var(--mono); font-size: 13px; color: var(--mut); letter-spacing: 0.08em; }
 .hero-eyebrow b { color: var(--acc); font-weight: 500; }
 .hero-title { font-family: var(--serif); font-weight: 400; font-size: clamp(52px, 9vw, 164px); line-height: 0.88; letter-spacing: -0.02em; margin: 0.18em 0 0.24em; max-width: 12.5ch; }
+.hero-title.long { font-size: clamp(44px, 6.4vw, 116px); max-width: 15ch; }
 .js .page-home .hero-title:not(.ready) { visibility: hidden; }
 .hero-sub { display: flex; flex-wrap: wrap; gap: 24px 48px; align-items: flex-end; justify-content: space-between; pointer-events: auto; }
 .hero-sub p { margin: 0; max-width: 540px; font-size: 17px; color: var(--fg-2); }
@@ -100,7 +101,7 @@ a:hover { color: var(--acc); }
 .arc:hover { border-color: var(--acc); }
 .arc .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--acc); box-shadow: 0 0 10px var(--acc); animation: pulse 2.4s var(--ease-in-out) infinite; }
 @keyframes pulse { 50% { opacity: 0.35; } }
-.soc { display: flex; gap: 22px; flex-wrap: wrap; font-family: var(--mono); font-size: 13px; }
+.soc { display: flex; gap: 4px 22px; flex-wrap: wrap; font-family: var(--mono); font-size: 13px; }
 .soc a { text-decoration: none; padding: 8px 0; }
 .soc a span { color: var(--mut); }
 .scroll-hint { position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); font-family: var(--mono); font-size: 11px; color: var(--mut); letter-spacing: 0.2em; display: flex; flex-direction: column; align-items: center; gap: 10px; white-space: nowrap; }
@@ -137,7 +138,8 @@ a:hover { color: var(--acc); }
 .sec-head { display: flex; flex-direction: column; gap: 14px; margin-bottom: clamp(36px, 6vh, 64px); max-width: 900px; }
 .sec-title, .page-title { font-family: var(--serif); font-weight: 400; font-size: clamp(44px, 6.4vw, 104px); line-height: 0.94; letter-spacing: -0.015em; margin: 0; }
 .sec-lead { font-size: 18px; color: var(--fg-2); max-width: 640px; margin: 0; }
-.page-head { padding-top: clamp(130px, 20vh, 200px); display: flex; flex-direction: column; gap: 16px; }
+.page-head { padding-top: clamp(130px, 20vh, 200px); padding-bottom: 24px; display: flex; flex-direction: column; gap: 16px; }
+.page-head + .section { padding-top: 24px; }
 
 /* journeys */
 .lanes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); }

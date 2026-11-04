@@ -220,7 +220,7 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
 
       <section className="hero" id="top">
         <div className="hero-eyebrow">{t(UI.heroEyebrow, lang)} · <b className="g-hash">mining…</b></div>
-        <h1 className="hero-title">{t(SITE.tagline, lang)}</h1>
+        <h1 className={`hero-title${t(SITE.tagline, lang).length > 52 ? ' long' : ''}`}>{t(SITE.tagline, lang)}</h1>
         <div className="hero-sub">
           <p>{t(SITE.identity, lang)}</p>
           <div className="hero-side">

@@ -52,10 +52,10 @@ export function ChainSection({ lang, projects }: { lang: Lang; projects: Project
           const kids = p.querySelectorAll('.cp-item')
           const at = 0.3 + i
           if (motion) {
-            tl.fromTo(p, { autoAlpha: 0, y: 70, rotateX: -8 }, { autoAlpha: 1, y: 0, rotateX: 0, duration: 0.28, ease: 'power3.out' }, at)
-              .fromTo(kids, { autoAlpha: 0, y: 26, filter: 'blur(6px)' }, { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 0.22, stagger: 0.035, ease: 'power3.out' }, at + 0.04)
+            tl.fromTo(p, { autoAlpha: 0, y: 70, rotateX: -8 }, { autoAlpha: 1, y: 0, rotateX: 0, duration: 0.18, ease: 'power3.out' }, at)
+              .fromTo(kids, { autoAlpha: 0, y: 26, filter: 'blur(6px)' }, { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 0.16, stagger: 0.022, ease: 'power3.out' }, at + 0.02)
               .fromTo(bars[i], { scaleX: 0 }, { scaleX: 1, duration: 1 }, at)
-              .to(p, { autoAlpha: 0, y: -60, duration: 0.2, ease: 'power2.in' }, at + 0.8)
+              .to(p, { autoAlpha: 0, y: -60, duration: 0.16, ease: 'power2.in' }, at + 0.84)
           } else {
             tl.fromTo(p, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.05 }, at).to(p, { autoAlpha: 0, duration: 0.05 }, at + 0.9)
           }
