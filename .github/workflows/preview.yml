@@ -1,0 +1,28 @@
+name: preview-bundle
+
+# Manual only: builds the site and prints the static output as a base64 tarball
+# into the job log, so it can be inspected in environments that cannot download artifacts.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - run: npm run build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Print bundle
+        run: |
+          tar czf site.tgz out
+          echo "BUNDLE-BEGIN"
+          base64 -w 2000 site.tgz
+          echo "BUNDLE-END"
