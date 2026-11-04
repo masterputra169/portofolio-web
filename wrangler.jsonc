@@ -1,0 +1,12 @@
+{
+  // Static site: `npm run build` exports plain HTML to ./out, and Workers serves it as static assets.
+  // Having this file stops `wrangler deploy` from auto-configuring a server adapter (OpenNext).
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "portofolio-web",
+  "compatibility_date": "2026-11-03",
+  "assets": {
+    "directory": "./out",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

@@ -53,3 +53,7 @@ Set `GITHUB_TOKEN` when building locally to avoid GitHub's unauthenticated rate 
 ## Deploy
 
 Any static host works. On Cloudflare Pages: build command `npm run build`, output directory `out`, environment variable `GITHUB_TOKEN` (a fine-grained token with public-repo read access), then point `masterputra.tech` at the project.
+
+### Cloudflare Workers (current setup)
+
+The repo includes `wrangler.jsonc`, so Workers Builds can use the defaults: build command `npm run build`, deploy command `npx wrangler deploy`. Wrangler uploads `./out` as static assets — no server adapter is needed. `public/_headers` sets long-lived caching for hashed assets.
