@@ -7,6 +7,7 @@ import { getProjects } from '@/lib/github'
 import { JsonLd, faqJsonLd, profilePageJsonLd, projectJsonLd } from '@/lib/seo'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
+import { HtmlLang } from '@/components/HtmlLang'
 import { HeroGenesis } from '@/components/home/HeroGenesis'
 import { ChainSection } from '@/components/home/ChainSection'
 import { Journeys } from '@/components/home/Journeys'
@@ -18,6 +19,7 @@ import { WorkGrid } from '@/components/work/WorkGrid'
 function Page({ lang, children, home = false }: { lang: Lang; children: ReactNode; home?: boolean }) {
   return (
     <div lang={lang} className={home ? 'page page-home' : 'page'}>
+      <HtmlLang lang={lang} />
       <a className="skip" href="#main">{lang === 'en' ? 'Skip to content' : 'Langsung ke konten'}</a>
       <Header lang={lang} hidden={home} />
       <main id="main">{children}</main>

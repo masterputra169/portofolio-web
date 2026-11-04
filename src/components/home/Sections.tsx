@@ -70,7 +70,7 @@ export function Certificates({ lang, all = false }: { lang: Lang; all?: boolean 
             <img src={`/certificates/${c.slug}.webp`} alt={`${c.title} — ${c.issuer}`} loading="lazy" width={900} height={640} />
             <div className="cert-body">
               <span className="cert-date">{t(c.date, lang)}</span>
-              <h3>{c.title}</h3>
+              {all ? <h2>{c.title}</h2> : <h3>{c.title}</h3>}
               <p className="cert-issuer">{c.issuer}</p>
               <p className="cert-topics">{t(c.topics, lang)}</p>
               <div className="cert-links">

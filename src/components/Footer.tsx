@@ -19,10 +19,13 @@ export function Footer({ lang }: { lang: Lang }) {
   const date = process.env.NEXT_PUBLIC_BUILD_DATE ?? ''
   return (
     <footer className="site-footer">
-      <span>
-        {t(UI.latestBlock, lang)} · <b>{mined ? shortHash(mined.hash) : `${t(UI.built, lang)} ${sha}`}</b>
-        {mined ? <> · {t(UI.minedIn, lang)} <b>{(mined.ms / 1000).toFixed(2)}s</b></> : null}
-      </span>
+      {mined ? (
+        <span>
+          {t(UI.latestBlock, lang)} · <b>{shortHash(mined.hash)}</b> · {t(UI.minedIn, lang)} <b>{(mined.ms / 1000).toFixed(2)}s</b>
+        </span>
+      ) : (
+        <span>© {date.slice(0, 4) || new Date().getFullYear()} {SITE.name}</span>
+      )}
       <span>
         {t(UI.built, lang)} <b>{sha}</b> · {date} · {t(SITE.location, lang)}
       </span>

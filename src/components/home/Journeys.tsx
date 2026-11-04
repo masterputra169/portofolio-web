@@ -16,6 +16,9 @@ gsap.registerPlugin(useGSAP, ScrollTrigger, DrawSVGPlugin)
 /** Three lanes whose lines draw with scroll; milestones light up as the line reaches them. */
 export function Journeys({ lang, showTitle = true }: { lang: Lang; showTitle?: boolean }) {
   const root = useRef<HTMLElement>(null)
+  // on /journey the page h1 replaces the section h2, so lanes move up one heading level
+  const LaneH = showTitle ? 'h3' : 'h2'
+  const StepH = showTitle ? 'h4' : 'h3'
 
   useGSAP(
     () => {
@@ -63,7 +66,7 @@ export function Journeys({ lang, showTitle = true }: { lang: Lang; showTitle?: b
           <div key={j.key} className="lane" style={{ ['--lane' as string]: j.color }}>
             <div className="lane-head">
               <span className="lane-chip" />
-              <h3>{t(j.name, lang)}</h3>
+              <LaneH>{t(j.name, lang)}</LaneH>
             </div>
             <div className="lane-body">
               <svg className="lane-svg" viewBox="0 0 4 100" preserveAspectRatio="none" aria-hidden="true">
@@ -74,7 +77,7 @@ export function Journeys({ lang, showTitle = true }: { lang: Lang; showTitle?: b
                 {j.steps.map((s, i) => (
                   <li key={i} className="step">
                     <span className="dot" aria-hidden="true" />
-                    <h4>{t(s.title, lang)}</h4>
+                    <StepH>{t(s.title, lang)}</StepH>
                     <p>{t(s.body, lang)}</p>
                     {s.project ? <Link className="step-link" href={href(lang, `/work/${s.project}/`)}>{t(UI.readCase, lang)} →</Link> : null}
                   </li>

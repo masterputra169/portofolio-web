@@ -35,8 +35,8 @@ export function Marquee({ items }: { items: string[] }) {
   )
   const row = [...items, ...items]
   return (
-    <div ref={root} className="marquee" aria-label={items.join(', ')}>
-      <div className="mq-track" aria-hidden="true">
+    <div ref={root} className="marquee" aria-hidden="true">
+      <div className="mq-track">
         {row.map((s, i) => (
           <span key={i}>{s}<i>◆</i></span>
         ))}

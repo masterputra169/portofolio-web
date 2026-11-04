@@ -6,7 +6,6 @@ export const otherLang = (lang: Lang): Lang => (lang === 'en' ? 'id' : 'en')
 
 export const UI = {
   nav: { work: { en: 'work', id: 'karya' }, journey: { en: 'journey', id: 'perjalanan' }, about: { en: 'about', id: 'tentang' }, certificates: { en: 'certificates', id: 'sertifikat' } },
-  terminal: { en: '>_ terminal', id: '>_ terminal' },
   langSwitch: { en: 'Bahasa Indonesia', id: 'English' },
   mining: { task: { en: 'mining genesis block · masterputra.tech', id: 'mining genesis block · masterputra.tech' }, found: { en: 'block found', id: 'blok ditemukan' }, searching: { en: 'searching', id: 'mencari' } },
   heroEyebrow: { en: 'BLOCK #0 · GENESIS', id: 'BLOK #0 · GENESIS' },

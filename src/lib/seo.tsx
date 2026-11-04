@@ -10,7 +10,7 @@ export function pageMeta({ lang, path, title, description }: { lang: Lang; path:
   const desc = description ?? t(SITE.identity, lang)
   const url = abs(href(lang, path))
   return {
-    title: title ?? `${SITE.name} — ${t(SITE.role, lang)}`,
+    title: title ?? { absolute: `${SITE.name} — ${t(SITE.role, lang)}` },
     description: desc,
     alternates: {
       canonical: url,
