@@ -29,3 +29,12 @@ jobs:
           name: site
           path: out
           retention-days: 7
+      # Only for commits whose message contains [preview]: print the static output as a
+      # base64 tarball into the log, for inspection where artifacts cannot be downloaded.
+      - name: Print preview bundle
+        if: contains(github.event.head_commit.message, '[preview]')
+        run: |
+          tar czf site.tgz out
+          echo "BUNDLE-BEGIN"
+          base64 -w 2000 site.tgz
+          echo "BUNDLE-END"
