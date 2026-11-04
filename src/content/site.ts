@@ -1,0 +1,123 @@
+import type { L10n } from './types'
+
+export const SITE = {
+  url: 'https://masterputra.tech',
+  name: 'Timotius Kusuma Wardana Putra',
+  shortName: 'Timotius',
+  alias: 'masterputra',
+  role: { en: 'Web3 developer', id: 'Web3 developer' } as L10n,
+  location: { en: 'Kediri, Indonesia', id: 'Kediri, Indonesia' } as L10n,
+  identity: {
+    en: 'Timotius Kusuma Wardana Putra (masterputra) is a Web3 developer from Kediri, Indonesia, building trading bots, on-chain apps and ML tools.',
+    id: 'Timotius Kusuma Wardana Putra (masterputra) adalah Web3 developer dari Kediri, Indonesia, yang membangun bot trading, aplikasi on-chain, dan tools machine learning.',
+  } as L10n,
+  tagline: {
+    en: 'I used to trade the market. Now I build for it.',
+    id: 'Dulu saya trading di pasar. Sekarang saya membangun untuknya.',
+  } as L10n,
+  githubUser: 'masterputra169',
+  /** Set to a path like '/cv.pdf' once the CV file exists in /public */
+  cvUrl: null as string | null,
+  /** Set once email routing for the domain is live, e.g. 'hello@masterputra.tech' */
+  email: null as string | null,
+  photo: '/images/timotius.webp',
+  photoJpg: '/images/timotius.jpg',
+  avatar: '/images/avatar.jpg',
+}
+
+export const SOCIALS = [
+  { key: 'x', label: 'X', handle: '@masterputra6969', url: 'https://x.com/masterputra6969' },
+  { key: 'instagram', label: 'Instagram', handle: '@masterputra_99', url: 'https://www.instagram.com/masterputra_99/' },
+  { key: 'github', label: 'GitHub', handle: 'masterputra169', url: 'https://github.com/masterputra169' },
+] as const
+
+/** "current arc" status — edit freely, the label cycles through these */
+export const ARCS = [
+  { key: 'builder', label: 'builder arc', meaning: { en: 'Shipping projects', id: 'Sedang shipping proyek' } },
+  { key: 'locked', label: 'locked in arc', meaning: { en: 'Heads down: thesis, study, code every day', id: 'Fokus penuh: TA, belajar, ngoding tiap hari' } },
+  { key: 'crypto', label: 'crypto arc', meaning: { en: 'Active in the market and on-chain', id: 'Aktif di pasar dan on-chain' } },
+] as const
+
+export const EXPERTISE = {
+  shipping: ['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'Laravel', 'Firebase', 'XGBoost', 'LightGBM', 'Solana', 'EVM / Base', 'Vercel', 'Cloudflare', 'Railway', 'VPS'],
+  obsessed: [
+    { en: 'Game theory', id: 'Game theory' },
+    { en: 'Quant finance — Monte Carlo, copulas, Brier score', id: 'Quant finance — Monte Carlo, copula, Brier score' },
+    { en: 'On-chain analytics', id: 'Analisis data on-chain' },
+    { en: 'Prediction markets', id: 'Prediction market' },
+  ] as L10n[],
+}
+
+export const EXPERIENCE = [
+  { org: 'PLN UP3 Kediri', role: { en: 'Intern', id: 'Magang' }, period: '2026', note: { en: 'Three-month internship.', id: 'Magang tiga bulan.' } },
+  { org: 'Colosseum Frontier 2026 · Superteam Indonesia', role: { en: 'Hackathon participant — dollarkilat', id: 'Peserta hackathon — dollarkilat' }, period: '2026', note: { en: 'Built a Solana payment PWA with a team.', id: 'Membangun PWA pembayaran Solana bersama tim.' } },
+  { org: 'Indonesia Web3 Hackathon 2026', role: { en: 'Online workshop participant', id: 'Peserta online workshop' }, period: 'Jul – Aug 2026', note: { en: 'Web3 fundamentals, smart contracts, AI × Web3. Mentored by Dev Web3 Jogja.', id: 'Fundamental Web3, smart contract, AI × Web3. Dimentori Dev Web3 Jogja.' } },
+  { org: 'Web3 Developer Jogja', role: { en: 'Community member', id: 'Anggota komunitas' }, period: { en: 'Ongoing', id: 'Berjalan' }, note: { en: 'Active in the Yogyakarta Web3 builder community.', id: 'Aktif di komunitas builder Web3 Yogyakarta.' } },
+  { org: 'Universitas Dian Nuswantoro · PSDKU Kediri', role: { en: 'B.Sc. Informatics Engineering', id: 'S1 Teknik Informatika' }, period: { en: '2023 – present', id: '2023 – sekarang' }, note: { en: 'Final-year thesis on Bitcoin price prediction.', id: 'Tugas akhir tentang prediksi harga Bitcoin.' } },
+] as const
+
+export const CERTIFICATES = [
+  {
+    slug: 'indonesia-web3-hackathon-2026',
+    title: 'Online Workshop Indonesia Web3 Hackathon 2026',
+    issuer: 'Binance Academy, BNB Chain, Coinvestasi · mentoring by Dev Web3 Jogja',
+    date: { en: 'Jul 5 – Aug 30, 2026', id: '5 Jul – 30 Agu 2026' },
+    topics: { en: 'Web3 fundamentals, smart contract development, AI × Web3', id: 'Fundamental Web3, smart contract development, AI × Web3' },
+    verify: null as string | null,
+  },
+  {
+    slug: 'asean-data-science-explorers-2026',
+    title: 'ASEAN Data Science Explorers 2026 — Enablement Session: SAP Analytics Cloud',
+    issuer: 'SAP & ASEAN Foundation',
+    date: { en: '2026', id: '2026' },
+    topics: { en: 'SAP Analytics Cloud training session', id: 'Sesi pelatihan SAP Analytics Cloud' },
+    verify: null as string | null,
+  },
+  {
+    slug: 'ibm-cloud-computing',
+    title: 'Introduction to Cloud Computing',
+    issuer: 'IBM via Coursera',
+    date: { en: 'Apr 12, 2026', id: '12 Apr 2026' },
+    topics: { en: 'Cloud service models, deployment models, cloud-native basics', id: 'Model layanan cloud, model deployment, dasar cloud-native' },
+    verify: 'https://coursera.org/verify/JJ8EY4UTVTRB',
+  },
+  {
+    slug: 'ibm-supervised-ml',
+    title: 'Supervised Machine Learning: Classification',
+    issuer: 'IBM via Coursera',
+    date: { en: 'Apr 9, 2026', id: '9 Apr 2026' },
+    topics: { en: 'Classification models and evaluation', id: 'Model klasifikasi dan evaluasinya' },
+    verify: 'https://coursera.org/verify/PNB7MJBIBW66',
+  },
+]
+
+export const FAQ: Array<{ q: L10n; a: L10n }> = [
+  {
+    q: { en: 'Who is Timotius Kusuma Wardana Putra?', id: 'Siapa Timotius Kusuma Wardana Putra?' },
+    a: {
+      en: 'Timotius Kusuma Wardana Putra, also known as masterputra, is a Web3 developer and Informatics Engineering student at Universitas Dian Nuswantoro in Kediri, Indonesia. He spent about four years in crypto as a trader, airdrop hunter and alpha hunter before becoming a builder.',
+      id: 'Timotius Kusuma Wardana Putra, dikenal juga sebagai masterputra, adalah Web3 developer dan mahasiswa Teknik Informatika Universitas Dian Nuswantoro di Kediri, Indonesia. Ia menghabiskan sekitar empat tahun di crypto sebagai trader, airdrop hunter, dan alpha hunter sebelum menjadi builder.',
+    },
+  },
+  {
+    q: { en: 'What has masterputra built?', id: 'Apa saja yang sudah dibangun masterputra?' },
+    a: {
+      en: 'A Polymarket BTC 15-minute prediction bot with a calibrated XGBoost + LightGBM ensemble, dollarkilat (a Solana payment PWA for Indonesian freelancers), SapuX (a Chrome extension that unfollows inactive X accounts), and thesis research comparing XGBoost and LSTM for Bitcoin price prediction.',
+      id: 'Bot prediksi Polymarket BTC 15 menit dengan ensemble XGBoost + LightGBM terkalibrasi, dollarkilat (PWA pembayaran Solana untuk freelancer Indonesia), SapuX (Chrome extension untuk unfollow akun X yang tidak aktif), dan riset tugas akhir yang membandingkan XGBoost dan LSTM untuk prediksi harga Bitcoin.',
+    },
+  },
+  {
+    q: { en: 'What technologies does he use?', id: 'Teknologi apa yang ia pakai?' },
+    a: {
+      en: 'React, Next.js and TypeScript on the frontend; Node.js, Python, Laravel and Firebase on the backend; XGBoost, LightGBM and LSTM for machine learning; Solana and EVM chains such as Base for Web3.',
+      id: 'React, Next.js, dan TypeScript di frontend; Node.js, Python, Laravel, dan Firebase di backend; XGBoost, LightGBM, dan LSTM untuk machine learning; Solana dan chain EVM seperti Base untuk Web3.',
+    },
+  },
+  {
+    q: { en: 'Where can I find him online?', id: 'Di mana saya bisa menemukannya?' },
+    a: {
+      en: 'On X as @masterputra6969, on Instagram as @masterputra_99, and on GitHub as masterputra169.',
+      id: 'Di X sebagai @masterputra6969, di Instagram sebagai @masterputra_99, dan di GitHub sebagai masterputra169.',
+    },
+  },
+]

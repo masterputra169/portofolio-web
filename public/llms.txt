@@ -1,0 +1,25 @@
+# masterputra.tech
+
+> Timotius Kusuma Wardana Putra (masterputra) is a Web3 developer from Kediri, Indonesia, building trading bots, on-chain apps and ML tools. Informatics Engineering student at Universitas Dian Nuswantoro (PSDKU Kediri), about four years in crypto: trader → airdrop hunter → alpha hunter → builder.
+
+The site is available in English (default) and Indonesian (under /id/).
+
+## Profile
+
+- [About and FAQ](https://masterputra.tech/about/): who Timotius is, background, frequently asked questions
+- [Journey](https://masterputra.tech/journey/): crypto, developer and AI explorer journeys
+- [Certificates](https://masterputra.tech/certificates/): IBM (Coursera), SAP & ASEAN Foundation, Indonesia Web3 Hackathon 2026
+
+## Featured work
+
+- [Polymarket BTC 15-min bot](https://masterputra.tech/work/polymarket-btc-15-minutes/): calibrated XGBoost + LightGBM ensemble, 79 features, 4 WebSocket feeds, Kelly-sized orders, 13 cut-loss gates, CUSUM drift detection
+- [dollarkilat](https://masterputra.tech/work/dollarkilat/): Solana PWA for Indonesian freelancers — receive USDC, spend via QRIS (Colosseum Frontier 2026 × Superteam Indonesia)
+- [SapuX](https://masterputra.tech/work/sapux/): free Chrome extension that unfollows inactive X accounts, filtered by follower count
+- [XGBoost vs LSTM, pre & post ETF](https://masterputra.tech/work/thesis-xgboost-lstm-btc/): thesis research on Bitcoin daily close prediction with technical + on-chain features
+- [All work](https://masterputra.tech/work/): every public GitHub repository
+
+## Elsewhere
+
+- X: https://x.com/masterputra6969
+- Instagram: https://www.instagram.com/masterputra_99/
+- GitHub: https://github.com/masterputra169
