@@ -16,8 +16,9 @@ export const SITE = {
     id: 'Dulu saya trading di pasar. Sekarang saya membangun untuknya.',
   } as L10n,
   githubUser: 'masterputra169',
-  /** Set to a path like '/cv.pdf' once the CV file exists in /public */
-  cvUrl: null as string | null,
+  /** public/cv.pdf (Indonesian CV, no phone number) */
+  cvUrl: '/cv.pdf' as string | null,
+  cvFileName: 'CV_Timotius_Kusuma_Wardana_Putra.pdf',
   email: 'timotiusputra1@gmail.com' as string | null,
   /** What I am doing right now: shown on /about, in the contact section and on the experience entry */
   status: {

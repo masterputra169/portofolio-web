@@ -34,11 +34,11 @@ Every **public repo** on `github.com/masterputra169` shows up on `/work` automat
 
 Optional `README.id.md` in a repo is used for the Indonesian page. A GitHub Action rebuilds the site every Monday so new repos appear on their own.
 
-### To do before launch
+### To do
 
-- Add `public/cv.pdf` and set `SITE.cvUrl = '/cv.pdf'` in `src/content/site.ts`.
-- Set `SITE.email` once email routing for the domain works.
 - Fill in milestone years in `src/content/journeys.ts`.
+
+The CV is `public/cv.pdf` (`SITE.cvUrl`); replace the file to update it.
 
 ## Develop
 

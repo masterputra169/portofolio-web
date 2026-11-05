@@ -144,6 +144,7 @@ export function AboutView({ lang }: { lang: Lang }) {
             : 'Saya sampai ke dunia coding lewat pasar. Empat tahun trading, berburu airdrop, dan berburu alpha mengajari saya soal risiko, kesabaran, dan rasanya memakai protokol dari sisi user. Sekarang saya membangun tools yang dulu saya cari: bot yang tahu kapan berhenti, jalur pembayaran untuk freelancer seperti saya, dan model yang bisa saya jelaskan.'}</p>
           <ul className="soc-list">
             {SITE.email ? <li><a href={`mailto:${SITE.email}`}><span>{t(UI.email, lang)}</span>{SITE.email} ↗</a></li> : null}
+            {SITE.cvUrl ? <li><a href={SITE.cvUrl} download={SITE.cvFileName}><span>CV</span>{t(UI.cv, lang)} (PDF) ↓</a></li> : null}
             {SOCIALS.map((s) => <li key={s.key}><a href={s.url} target="_blank" rel="me noopener"><span>{s.label}</span>{s.handle} ↗</a></li>)}
           </ul>
         </div>
