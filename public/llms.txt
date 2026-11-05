@@ -13,7 +13,7 @@ The site is available in English (default) and Indonesian (under /id/).
 ## Featured work
 
 - [Polymarket BTC 15-min bot](https://masterputra.tech/work/polymarket-btc-15-minutes/): TypeScript bot + Python training pipeline; Platt-calibrated XGBoost + LightGBM ensemble, 79 features, 20 trade filters, Kelly-sized orders, 13 cut-loss gates, CUSUM drift detection; 800+ simulated trades and a small live pilot in October 2026
-- [dollarkilat](https://masterputra.tech/work/dollarkilat/): Solana PWA for Indonesian freelancers — receive USDC, spend via QRIS (Colosseum Frontier 2026 × Superteam Indonesia)
+- [dollarkilat](https://masterputra.tech/work/dollarkilat/): Solana PWA for Indonesian freelancers — receive USDC, spend via QRIS (Colosseum Frontier 2026 and Superteam Indonesia’s National Campus Hackathon)
 - [SapuX](https://masterputra.tech/work/sapux/): free Chrome extension that unfollows inactive X accounts, filtered by follower count
 - [XGBoost vs LSTM, pre & post ETF](https://masterputra.tech/work/thesis-xgboost-lstm-btc/): thesis research on Bitcoin daily close prediction with technical + on-chain features
 - [All work](https://masterputra.tech/work/): every public GitHub repository

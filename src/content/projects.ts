@@ -83,7 +83,7 @@ export const CURATED: CuratedProject[] = [
     categories: ['web3'],
     journeys: ['crypto', 'dev'],
     homepage: 'https://dollarkilat.xyz',
-    team: { en: 'Team project for Colosseum Frontier 2026 × Superteam Indonesia', id: 'Proyek tim untuk Colosseum Frontier 2026 × Superteam Indonesia' },
+    team: { en: 'Team project for Colosseum Frontier 2026 and Superteam Indonesia’s National Campus Hackathon', id: 'Proyek tim untuk Colosseum Frontier 2026 dan Indonesia National Campus Hackathon dari Superteam Indonesia' },
     summary: {
       en: 'A Solana PWA for Indonesian freelancers: get paid in USDC, spend it anywhere that takes QRIS.',
       id: 'PWA Solana untuk freelancer Indonesia: terima bayaran dalam USDC, belanjakan di mana pun yang menerima QRIS.',
@@ -112,8 +112,8 @@ export const CURATED: CuratedProject[] = [
         id: 'Bagian tersulitnya bukan di chain, tapi di jalur yang diregulasi di sisi lain: onboarding merchant QRIS dan perizinan pembayaran menentukan apa yang bisa dirilis.',
       },
       results: {
-        en: 'Submitted to Colosseum Frontier 2026 with Superteam Indonesia and deployed at dollarkilat.xyz.',
-        id: 'Disubmit ke Colosseum Frontier 2026 bersama Superteam Indonesia dan sudah live di dollarkilat.xyz.',
+        en: 'Submitted to Colosseum Frontier 2026 and to Superteam Indonesia’s National Campus Hackathon, and deployed at dollarkilat.xyz.',
+        id: 'Disubmit ke Colosseum Frontier 2026 dan ke Indonesia National Campus Hackathon dari Superteam Indonesia, dan sudah live di dollarkilat.xyz.',
       },
     },
   },
