@@ -161,6 +161,7 @@ a:hover { color: var(--acc); }
 .lane ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 26px; }
 .step { position: relative; }
 .step .dot { position: absolute; left: -31px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--bg); border: 2px solid var(--lane); }
+.step-when { display: block; margin-bottom: 4px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; color: var(--lane); }
 .step h3, .step h4 { margin: 0 0 4px; font-size: 17px; font-weight: 500; }
 .step p { margin: 0; color: var(--mut); font-size: 15px; }
 .step-link { display: inline-block; margin-top: 6px; font-family: var(--mono); font-size: 12px; padding: 6px 0; }

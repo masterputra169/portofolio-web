@@ -77,6 +77,7 @@ export function Journeys({ lang, showTitle = true }: { lang: Lang; showTitle?: b
                 {j.steps.map((s, i) => (
                   <li key={i} className="step">
                     <span className="dot" aria-hidden="true" />
+                    {s.when ? <span className="step-when">{t(s.when, lang)}</span> : null}
                     <StepH>{t(s.title, lang)}</StepH>
                     <p>{t(s.body, lang)}</p>
                     {s.project ? <Link className="step-link" href={href(lang, `/work/${s.project}/`)}>{t(UI.readCase, lang)} →</Link> : null}
