@@ -25,4 +25,5 @@ The site is available in English (default) and Indonesian (under /id/).
 - GitHub: https://github.com/masterputra169
 - LinkedIn: https://www.linkedin.com/in/timotius-kusuma-wardana-putra/
 - Email: timotiusputra1@gmail.com
-- CV (PDF, Indonesian): https://masterputra.tech/cv.pdf
+- CV (PDF, English): https://masterputra.tech/cv-en.pdf
+- CV (PDF, Indonesian): https://masterputra.tech/cv-id.pdf

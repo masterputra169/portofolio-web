@@ -1,4 +1,4 @@
-import type { L10n } from './types'
+import type { L10n, Lang } from './types'
 
 export const SITE = {
   url: 'https://masterputra.tech',
@@ -16,9 +16,11 @@ export const SITE = {
     id: 'Dulu saya trading di pasar. Sekarang saya membangun untuknya.',
   } as L10n,
   githubUser: 'masterputra169',
-  /** public/cv.pdf (Indonesian CV, no phone number) */
-  cvUrl: '/cv.pdf' as string | null,
-  cvFileName: 'CV_Timotius_Kusuma_Wardana_Putra.pdf',
+  /** One CV per site language (public/cv-en.pdf, public/cv-id.pdf); the page offers the one in its own language. */
+  cv: {
+    en: { url: '/cv-en.pdf', file: 'CV_Timotius_Kusuma_Wardana_Putra_EN.pdf', name: 'English' },
+    id: { url: '/cv-id.pdf', file: 'CV_Timotius_Kusuma_Wardana_Putra_ID.pdf', name: 'Bahasa Indonesia' },
+  } as Record<Lang, { url: string; file: string; name: string }> | null,
   email: 'timotiusputra1@gmail.com' as string | null,
   /** What I am doing right now: shown on /about, in the contact section and on the experience entry */
   status: {

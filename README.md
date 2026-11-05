@@ -38,7 +38,7 @@ Optional `README.id.md` in a repo is used for the Indonesian page. A GitHub Acti
 
 - Fill in milestone years in `src/content/journeys.ts`.
 
-The CV is `public/cv.pdf` (`SITE.cvUrl`); replace the file to update it.
+The CV comes in two languages, `public/cv-en.pdf` and `public/cv-id.pdf` (`SITE.cv`); each page offers the one in its own language. Replace the files to update them.
 
 ## Develop
 

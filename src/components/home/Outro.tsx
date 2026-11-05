@@ -50,7 +50,7 @@ export function Outro({ lang }: { lang: Lang }) {
       <p className="now"><span className="dot" aria-hidden="true" />{t(SITE.status, lang)}</p>
       <div className="outro-row">
         {SITE.email ? <a className="cta p" href={`mailto:${SITE.email}`} onPointerMove={onMove} onPointerLeave={onLeave}>{SITE.email}</a> : null}
-        {SITE.cvUrl ? <a className="cta" href={SITE.cvUrl} download={SITE.cvFileName} onPointerMove={onMove} onPointerLeave={onLeave}>{t(UI.cv, lang)} ↓</a> : null}
+        {SITE.cv ? <a className="cta" href={SITE.cv[lang].url} download={SITE.cv[lang].file} hrefLang={lang} onPointerMove={onMove} onPointerLeave={onLeave}>{t(UI.cv, lang)} ↓</a> : null}
         <a className={SITE.email ? 'cta' : 'cta p'} href={`https://github.com/${SITE.githubUser}`} target="_blank" rel="noopener" onPointerMove={onMove} onPointerLeave={onLeave}>{t(UI.allRepos, lang)} ↗</a>
         {SOCIALS.filter((s) => s.key !== 'github').map((s) => (
           <a key={s.key} className="cta" href={s.url} target="_blank" rel="me noopener" onPointerMove={onMove} onPointerLeave={onLeave}>{s.label} {s.handle} ↗</a>
