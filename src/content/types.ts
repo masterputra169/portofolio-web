@@ -5,6 +5,9 @@ export type Category = 'web3' | 'ml' | 'fullstack' | 'tools' | 'research' | 'oth
 
 export type Stat = { value: string; label: L10n }
 
+/** A screenshot on a case study page; src is under /public */
+export type Shot = { src: string; width: number; height: number; alt: L10n; caption: L10n }
+
 export type CaseStudy = {
   overview: L10n
   problem: L10n
@@ -25,6 +28,7 @@ export type CuratedProject = {
   stack: string[]
   homepage?: string
   team?: L10n
+  gallery?: Shot[]
   caseStudy: CaseStudy
 }
 
@@ -44,6 +48,7 @@ export type Project = {
   language?: string
   pushedAt?: string
   team?: L10n
+  gallery?: Shot[]
   caseStudy?: CaseStudy
   readme?: L10n
 }

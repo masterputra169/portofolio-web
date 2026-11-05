@@ -105,6 +105,7 @@ async function load(): Promise<Project[]> {
         language: repo?.language ?? undefined,
         pushedAt: repo?.pushed_at,
         team: c.team,
+        gallery: c.gallery,
         caseStudy: c.caseStudy,
         readme: repo ? await readmeFor(repo) : undefined,
       }

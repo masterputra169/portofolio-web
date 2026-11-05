@@ -47,14 +47,15 @@ export function Outro({ lang }: { lang: Lang }) {
   return (
     <section ref={root} className="outro" id="contact">
       <RevealText className="outro-title">{t(UI.outro, lang)}</RevealText>
+      <p className="now"><span className="dot" aria-hidden="true" />{t(SITE.status, lang)}</p>
       <div className="outro-row">
-        <a className="cta p" href={`https://github.com/${SITE.githubUser}`} target="_blank" rel="noopener" onPointerMove={onMove} onPointerLeave={onLeave}>{t(UI.allRepos, lang)} ↗</a>
+        {SITE.email ? <a className="cta p" href={`mailto:${SITE.email}`} onPointerMove={onMove} onPointerLeave={onLeave}>{SITE.email}</a> : null}
+        <a className={SITE.email ? 'cta' : 'cta p'} href={`https://github.com/${SITE.githubUser}`} target="_blank" rel="noopener" onPointerMove={onMove} onPointerLeave={onLeave}>{t(UI.allRepos, lang)} ↗</a>
         {SOCIALS.filter((s) => s.key !== 'github').map((s) => (
           <a key={s.key} className="cta" href={s.url} target="_blank" rel="me noopener" onPointerMove={onMove} onPointerLeave={onLeave}>{s.label} {s.handle} ↗</a>
         ))}
         <button className="cta" type="button" onClick={openTerminal} onPointerMove={onMove} onPointerLeave={onLeave}>{t(UI.tryTerminal, lang)}</button>
       </div>
-      {SITE.email ? <p className="outro-mail">{SITE.email}</p> : null}
     </section>
   )
 }

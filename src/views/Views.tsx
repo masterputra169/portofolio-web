@@ -88,6 +88,19 @@ export async function CaseStudyView({ lang, slug }: { lang: Lang; slug: string }
           ) : null}
           {p.stack.length ? <ul className="chips">{p.stack.map((s) => <li key={s}>{s}</li>)}</ul> : null}
         </header>
+        {p.gallery?.length ? (
+          <section className="section gallery" aria-labelledby="shots">
+            <h2 id="shots">{t(UI.screens, lang)}</h2>
+            {p.gallery.map((g, i) => (
+              <figure key={g.src}>
+                <a href={g.src} target="_blank" rel="noopener">
+                  <img src={g.src} alt={t(g.alt, lang)} width={g.width} height={g.height} loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
+                </a>
+                <figcaption>{t(g.caption, lang)}</figcaption>
+              </figure>
+            ))}
+          </section>
+        ) : null}
         {sections.length ? (
           <RevealGroup className="section case-body">
             {sections.map(([k, v]) => (
@@ -125,10 +138,12 @@ export function AboutView({ lang }: { lang: Lang }) {
           <span className="eyebrow">/about</span>
           <RevealText as="h1" className="page-title">{SITE.name}</RevealText>
           <p className="about-lead">{t(SITE.identity, lang)}</p>
+          <p className="now"><span className="dot" aria-hidden="true" />{t(SITE.status, lang)}</p>
           <p>{lang === 'en'
             ? 'I came to code through markets. Four years of trading, airdrop hunting and alpha hunting taught me risk, patience and how protocols feel from the user’s side. Now I build the tools I wished I had: bots that know when to stop, payment rails for freelancers like me, and models I can explain.'
             : 'Saya sampai ke dunia coding lewat pasar. Empat tahun trading, berburu airdrop, dan berburu alpha mengajari saya soal risiko, kesabaran, dan rasanya memakai protokol dari sisi user. Sekarang saya membangun tools yang dulu saya cari: bot yang tahu kapan berhenti, jalur pembayaran untuk freelancer seperti saya, dan model yang bisa saya jelaskan.'}</p>
           <ul className="soc-list">
+            {SITE.email ? <li><a href={`mailto:${SITE.email}`}><span>{t(UI.email, lang)}</span>{SITE.email} ↗</a></li> : null}
             {SOCIALS.map((s) => <li key={s.key}><a href={s.url} target="_blank" rel="me noopener"><span>{s.label}</span>{s.handle} ↗</a></li>)}
           </ul>
         </div>

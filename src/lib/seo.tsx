@@ -45,6 +45,7 @@ export function personJsonLd(lang: Lang) {
     memberOf: { '@type': 'Organization', name: 'Web3 Developer Jogja' },
     knowsAbout: [...EXPERTISE.shipping, 'Web3', 'Machine learning', 'Prediction markets', 'On-chain analytics'],
     sameAs: SOCIALS.map((s) => s.url),
+    ...(SITE.email ? { email: `mailto:${SITE.email}` } : {}),
     hasCredential: CERTIFICATES.map((c) => ({
       '@type': 'EducationalOccupationalCredential',
       name: c.title,

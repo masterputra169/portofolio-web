@@ -13,6 +13,8 @@ export const UI = {
   scroll: { en: 'SCROLL TO TRAVERSE THE CHAIN', id: 'SCROLL UNTUK MENJELAJAHI RANTAI' },
   viewWork: { en: 'View work', id: 'Lihat karya' },
   cv: { en: 'Download CV', id: 'Unduh CV' },
+  email: { en: 'Email', id: 'Email' },
+  screens: { en: 'Screenshots', id: 'Tangkapan layar' },
   confirmed: { en: 'confirmed', id: 'terkonfirmasi' },
   readCase: { en: 'Read the case study', id: 'Baca studi kasus' },
   onGithub: { en: 'View on GitHub', id: 'Lihat di GitHub' },

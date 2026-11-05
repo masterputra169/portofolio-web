@@ -82,7 +82,7 @@ export function Terminal() {
     if (!c) return
     switch (c) {
       case 'help': return print(HELP)
-      case 'whoami': return print(`${SITE.name} <span class="m">(${SITE.alias})</span>\nWeb3 developer · Informatics @ UDINUS Kediri · ~4 years in crypto\ntrader → airdrop hunter → alpha hunter → <span class="c">builder</span>`)
+      case 'whoami': return print(`${SITE.name} <span class="m">(${SITE.alias})</span>\nWeb3 developer · Informatics @ UDINUS Kediri · ~4 years in crypto\ntrader → airdrop hunter → alpha hunter → <span class="c">builder</span>\n<span class="m">now:</span> ${esc(SITE.status.en)}`)
       case 'ls': return print(CURATED.map((p) => `<span class="c">${p.slug}</span>`).join('   ') + `\n<span class="m">…plus every public repo on github.com/${SITE.githubUser}</span>`)
       case 'cat': {
         const q = (args[0] ?? '').toLowerCase()
@@ -92,7 +92,10 @@ export function Terminal() {
       case 'journey':
         return print(`<span class="y">crypto     </span> trader ─ airdrop ─ alpha ─────┐\n<span class="b">developer  </span> informatics ─ infra ─ bots ─┼──▶ <span class="c">builder</span>\n<span class="g">ai explorer</span> ml ─ vision ─ production ───┘`)
       case 'arc': return print(ARCS.map((a) => `<span class="c">${a.label}</span>  ${esc(a.meaning.en)}`).join('\n'))
-      case 'socials': return print(SOCIALS.map((s) => `${s.label.padEnd(10)}<a href="${s.url}">${s.handle}</a>`).join('\n'))
+      case 'socials': return print([
+        ...(SITE.email ? [`${'Email'.padEnd(10)}<a href="mailto:${SITE.email}">${SITE.email}</a>`] : []),
+        ...SOCIALS.map((s) => `${s.label.padEnd(10)}<a href="${s.url}">${s.handle}</a>`),
+      ].join('\n'))
       case 'certs': return print(CERTIFICATES.map((x) => `${esc(x.title)} <span class="m">· ${esc(x.issuer)} · ${x.date.en}</span>`).join('\n'))
       case 'mine': {
         print('<span class="m">mining… target 0000</span>')

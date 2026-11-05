@@ -12,8 +12,8 @@ export const CURATED: CuratedProject[] = [
     categories: ['ml', 'web3'],
     journeys: ['crypto', 'dev', 'ai'],
     summary: {
-      en: 'Trades Polymarket’s 15-minute Bitcoin markets with a Platt-calibrated XGBoost + LightGBM ensemble, twenty trade filters and Kelly-sized orders. Live with a small pilot bankroll since October 2026.',
-      id: 'Trading di market Bitcoin 15 menit Polymarket dengan ensemble XGBoost + LightGBM terkalibrasi Platt, dua puluh filter trade, dan order berukuran Kelly. Live dengan modal pilot kecil sejak Oktober 2026.',
+      en: 'Trades Polymarket’s 15-minute Bitcoin markets with a Platt-calibrated XGBoost + LightGBM ensemble, twenty trade filters and Kelly-sized orders. More than 800 paper trades and a small live pilot in October 2026.',
+      id: 'Trading di market Bitcoin 15 menit Polymarket dengan ensemble XGBoost + LightGBM terkalibrasi Platt, dua puluh filter trade, dan order berukuran Kelly. Lebih dari 800 trade simulasi dan pilot live kecil pada Oktober 2026.',
     },
     stats: [
       { value: '79', label: { en: 'features', id: 'fitur' } },
@@ -22,10 +22,42 @@ export const CURATED: CuratedProject[] = [
       { value: '800+', label: { en: 'simulated trades', id: 'trade simulasi' } },
     ],
     stack: ['TypeScript', 'Node.js', 'Python', 'XGBoost', 'LightGBM', 'WebSocket', 'Polymarket CLOB', 'Chainlink', 'React 19'],
+    gallery: [
+      {
+        src: '/images/work/polymarket/dashboard-overview.webp',
+        width: 1318,
+        height: 662,
+        alt: { en: 'POLY//15 dashboard: market pulse, bot decision, prediction, edge analysis and the Polymarket order book', id: 'Dashboard POLY//15: market pulse, keputusan bot, prediksi, analisis edge, dan order book Polymarket' },
+        caption: {
+          en: 'The live dashboard (dry run, 4 Nov 2026). Chainlink oracle price against the exact price to beat (TWAP), the bot’s decision, model and rule probabilities, and edge against the Polymarket book.',
+          id: 'Dashboard live (dry run, 4 Nov 2026). Harga oracle Chainlink terhadap price to beat yang tepat (TWAP), keputusan bot, probabilitas model dan rule, serta edge terhadap order book Polymarket.',
+        },
+      },
+      {
+        src: '/images/work/polymarket/dashboard-signals.webp',
+        width: 1318,
+        height: 662,
+        alt: { en: 'Dashboard panels: TA matrix, ML engine, JEV LLM layer, positions, session and bet sizing', id: 'Panel dashboard: matriks TA, ML engine, layer LLM JEV, posisi, sesi, dan bet sizing' },
+        caption: {
+          en: 'Signal internals: indicators, the ML ensemble blended with the rules, the LLM advisor in shadow mode, and Kelly sizing.',
+          id: 'Isi sinyal: indikator, ensemble ML yang dipadukan dengan rule, advisor LLM dalam mode shadow, dan Kelly sizing.',
+        },
+      },
+      {
+        src: '/images/work/polymarket/dashboard-journal.webp',
+        width: 1318,
+        height: 662,
+        alt: { en: 'Dashboard panels: trade accuracy, journal analytics against breakeven, and the global risk feed', id: 'Panel dashboard: akurasi trade, analitik jurnal terhadap titik impas, dan feed risiko global' },
+        caption: {
+          en: 'Every trade is journaled and scored against breakeven, including a “realistic fills” view that keeps only fills a live order would have got.',
+          id: 'Setiap trade dicatat dan dinilai terhadap titik impas, termasuk tampilan “realistic fills” yang hanya memakai fill yang benar-benar bisa didapat order live.',
+        },
+      },
+    ],
     caseStudy: {
       overview: {
-        en: 'A trading system for Polymarket’s 15-minute Bitcoin markets: a TypeScript bot with a Python training pipeline. Live market feeds become 79 features on every poll; a Platt-calibrated XGBoost + LightGBM ensemble turns them into a probability; twenty trade filters and Kelly sizing decide whether and how much to bet. It ran more than 800 simulated trades before going live with a small pilot bankroll in October 2026.',
-        id: 'Sistem trading untuk market Bitcoin 15 menit di Polymarket: bot TypeScript dengan pipeline training Python. Data pasar live diolah jadi 79 fitur di setiap polling; ensemble XGBoost + LightGBM terkalibrasi Platt mengubahnya jadi probabilitas; dua puluh filter trade dan Kelly sizing memutuskan apakah dan seberapa besar bertaruh. Bot ini menjalankan lebih dari 800 trade simulasi sebelum live dengan modal pilot kecil pada Oktober 2026.',
+        en: 'A trading system for Polymarket’s 15-minute Bitcoin markets: a TypeScript bot with a Python training pipeline. Live market feeds become 79 features on every poll; a Platt-calibrated XGBoost + LightGBM ensemble turns them into a probability; twenty trade filters and Kelly sizing decide whether and how much to bet. It has run more than 800 simulated trades, plus a small live pilot with real funds in October 2026.',
+        id: 'Sistem trading untuk market Bitcoin 15 menit di Polymarket: bot TypeScript dengan pipeline training Python. Data pasar live diolah jadi 79 fitur di setiap polling; ensemble XGBoost + LightGBM terkalibrasi Platt mengubahnya jadi probabilitas; dua puluh filter trade dan Kelly sizing memutuskan apakah dan seberapa besar bertaruh. Bot ini sudah menjalankan lebih dari 800 trade simulasi, ditambah pilot live kecil dengan dana sungguhan pada Oktober 2026.',
       },
       problem: {
         en: 'Fifteen minutes is short enough that noise dominates and long enough that fees and slippage matter. The market price is already a strong forecast, so a model has to beat it, not just be accurate. And a raw classifier score is not a probability: betting on an uncalibrated score is how accounts go to zero.',
@@ -40,8 +72,8 @@ export const CURATED: CuratedProject[] = [
         id: 'Tiga hal terlihat baik-baik saja sampai diukur. Model pertama mengklaim keyakinan sekitar 88% di paper trading tapi hanya menang 68%: data latihnya punya look-ahead 60 detik dan price-to-beat palsu, sehingga fitur training dan live dibangun ulang lewat satu builder yang sama. Bot membandingkan Bitcoin dengan acuan yang salah — Polymarket menyelesaikan market dengan TWAP 60 detik Chainlink, bukan harga spot — dan tidak ada satu pun dari 130 market yang cocok persis sampai bot membaca tick TWAP. Dan model fee hanya menghitung sekitar seperempat dari taker fee sebenarnya, sehingga titik impas 1–1,3 poin terlalu rendah.',
       },
       results: {
-        en: 'Live since 26 October 2026 with a small pilot bankroll, after more than 800 simulated trades. The LLM advisor stays in shadow because its calibrated forecast (Brier 0.233 over 617 markets) still trails the market’s own (0.228). Results are shown as architecture and lessons, not profit claims.',
-        id: 'Live sejak 26 Oktober 2026 dengan modal pilot kecil, setelah lebih dari 800 trade simulasi. Advisor LLM tetap di mode shadow karena prediksinya yang sudah dikalibrasi (Brier 0,233 dari 617 market) masih kalah dari harga pasar (0,228). Hasil ditampilkan sebagai arsitektur dan pelajaran, bukan klaim profit.',
+        en: 'After more than 800 simulated trades, a small live pilot ran from 26 October 2026. One of its trades entered against the model’s own direction, so a consensus gate now blocks that, and the bot is back in dry run while the stricter filters are evaluated. The LLM advisor stays in shadow because its calibrated forecast (Brier 0.233 over 617 markets) still trails the market’s own (0.228). Results are shown as architecture and lessons, not profit claims.',
+        id: 'Setelah lebih dari 800 trade simulasi, pilot live kecil berjalan sejak 26 Oktober 2026. Salah satu trade-nya masuk berlawanan dengan arah model sendiri, jadi sekarang ada gate konsensus yang memblokirnya, dan bot kembali ke dry run selama filter yang lebih ketat dievaluasi. Advisor LLM tetap di mode shadow karena prediksinya yang sudah dikalibrasi (Brier 0,233 dari 617 market) masih kalah dari harga pasar (0,228). Hasil ditampilkan sebagai arsitektur dan pelajaran, bukan klaim profit.',
       },
     },
   },

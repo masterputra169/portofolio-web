@@ -201,7 +201,9 @@ a:hover { color: var(--acc); }
 .outro { position: relative; z-index: 5; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: 0 var(--pad); background: linear-gradient(var(--bg), transparent 35%); }
 .outro-title { font-family: var(--serif); font-weight: 400; font-size: clamp(48px, 8vw, 140px); line-height: 0.9; margin: 0 0 36px; max-width: 13ch; }
 .outro-row { display: flex; gap: 12px; flex-wrap: wrap; }
-.outro-mail { font-family: var(--mono); color: var(--mut); margin-top: 24px; }
+.now { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 24px; font-family: var(--mono); font-size: 14px; color: var(--fg-2); }
+.now .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ai); box-shadow: 0 0 10px var(--ai); flex: none; }
+.about-text .now { margin: 0; font-size: 14px; }
 
 /* work */
 .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
@@ -230,6 +232,14 @@ a:hover { color: var(--acc); }
 .case-head { padding-top: clamp(130px, 20vh, 200px); display: flex; flex-direction: column; gap: 18px; }
 .case-team { font-family: var(--mono); font-size: 13px; color: var(--mut); margin: 0; }
 .case-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; padding-top: 0; }
+.gallery h2 { grid-column: 1 / -1; margin: 0; font-family: var(--mono); font-size: 12px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mut); }
+.gallery figure { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.gallery figure:first-of-type { grid-column: 1 / -1; }
+.gallery a { display: block; border: 1px solid var(--line); transition: border-color var(--dur-2) var(--ease); }
+.gallery a:hover { border-color: var(--acc); }
+.gallery img { display: block; width: 100%; height: auto; }
+.gallery figcaption { font-size: 14px; line-height: 1.55; color: var(--mut); max-width: 70ch; }
 .case-body { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 56px; padding-top: 0; }
 .case-sec h2 { font-family: var(--mono); font-weight: 400; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--acc); margin: 0 0 10px; }
 .case-sec p { margin: 0; font-size: 18px; line-height: 1.65; color: var(--fg-2); }
@@ -291,7 +301,7 @@ a:hover { color: var(--acc); }
 
 /* ---------- responsive ---------- */
 @media (max-width: 960px) {
-  .lanes, .two-col, .cert-grid, .case-body, .about, .faq-list div { grid-template-columns: minmax(0, 1fr); }
+  .lanes, .two-col, .cert-grid, .case-body, .gallery, .about, .faq-list div { grid-template-columns: minmax(0, 1fr); }
   .wgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .about-photo { position: static; max-width: 520px; }
 }

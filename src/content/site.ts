@@ -18,8 +18,12 @@ export const SITE = {
   githubUser: 'masterputra169',
   /** Set to a path like '/cv.pdf' once the CV file exists in /public */
   cvUrl: null as string | null,
-  /** Set once email routing for the domain is live, e.g. 'hello@masterputra.tech' */
-  email: null as string | null,
+  email: 'timotiusputra1@gmail.com' as string | null,
+  /** What I am doing right now: shown on /about, in the contact section and on the experience entry */
+  status: {
+    en: 'Currently an intern at PLN UP3 Kediri.',
+    id: 'Saat ini magang di PLN UP3 Kediri.',
+  } as L10n,
   photo: '/images/timotius.webp',
   photoJpg: '/images/timotius.jpg',
   avatar: '/images/avatar.jpg',
@@ -29,6 +33,7 @@ export const SOCIALS = [
   { key: 'x', label: 'X', handle: '@masterputra6969', url: 'https://x.com/masterputra6969' },
   { key: 'instagram', label: 'Instagram', handle: '@masterputra_99', url: 'https://www.instagram.com/masterputra_99/' },
   { key: 'github', label: 'GitHub', handle: 'masterputra169', url: 'https://github.com/masterputra169' },
+  { key: 'linkedin', label: 'LinkedIn', handle: 'Timotius K. W. Putra', url: 'https://www.linkedin.com/in/timotius-kusuma-wardana-putra/' },
 ] as const
 
 /** "current arc" status — edit freely, the label cycles through these */
@@ -49,7 +54,7 @@ export const EXPERTISE = {
 }
 
 export const EXPERIENCE = [
-  { org: 'PLN UP3 Kediri', role: { en: 'Intern', id: 'Magang' }, period: '2026', note: { en: 'Three-month internship.', id: 'Magang tiga bulan.' } },
+  { org: 'PLN UP3 Kediri', role: { en: 'Intern — current', id: 'Magang — saat ini' }, period: { en: '2026 – now', id: '2026 – sekarang' }, note: { en: 'Three-month internship.', id: 'Magang tiga bulan.' } },
   { org: 'Colosseum Frontier 2026 · Superteam Indonesia', role: { en: 'Hackathon participant — dollarkilat', id: 'Peserta hackathon — dollarkilat' }, period: '2026', note: { en: 'Built a Solana payment PWA with a team.', id: 'Membangun PWA pembayaran Solana bersama tim.' } },
   { org: 'Indonesia Web3 Hackathon 2026', role: { en: 'Online workshop participant', id: 'Peserta online workshop' }, period: 'Jul – Aug 2026', note: { en: 'Web3 fundamentals, smart contracts, AI × Web3. Mentored by Dev Web3 Jogja.', id: 'Fundamental Web3, smart contract, AI × Web3. Dimentori Dev Web3 Jogja.' } },
   { org: 'Web3 Developer Jogja', role: { en: 'Community member', id: 'Anggota komunitas' }, period: { en: 'Ongoing', id: 'Berjalan' }, note: { en: 'Active in the Yogyakarta Web3 builder community.', id: 'Aktif di komunitas builder Web3 Yogyakarta.' } },
@@ -116,8 +121,8 @@ export const FAQ: Array<{ q: L10n; a: L10n }> = [
   {
     q: { en: 'Where can I find him online?', id: 'Di mana saya bisa menemukannya?' },
     a: {
-      en: 'On X as @masterputra6969, on Instagram as @masterputra_99, and on GitHub as masterputra169.',
-      id: 'Di X sebagai @masterputra6969, di Instagram sebagai @masterputra_99, dan di GitHub sebagai masterputra169.',
+      en: 'By email at timotiusputra1@gmail.com, on LinkedIn as Timotius Kusuma Wardana Putra, on GitHub as masterputra169, on X as @masterputra6969 and on Instagram as @masterputra_99.',
+      id: 'Lewat email di timotiusputra1@gmail.com, di LinkedIn sebagai Timotius Kusuma Wardana Putra, di GitHub sebagai masterputra169, di X sebagai @masterputra6969, dan di Instagram sebagai @masterputra_99.',
     },
   },
 ]
