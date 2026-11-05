@@ -32,6 +32,10 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
       let cancelled = false
       let arcTimer = 0
       const splits: SplitText[] = []
+      let introStarted = false
+      let settled = false
+      let introTl: gsap.core.Timeline | null = null
+      let watchdog = 0
 
       if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
       window.scrollTo(0, 0)
@@ -45,7 +49,11 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
         try {
           const { GenesisScene } = await import('@/scene/genesis')
           if (cancelled || !canvas.current) return
-          scene = new GenesisScene(canvas.current, { mobile, reduced })
+          scene = new GenesisScene(canvas.current, {
+            mobile,
+            reduced,
+            onContextLost: () => document.documentElement.classList.add('nogl'),
+          })
           scene.start()
         } catch {
           document.documentElement.classList.add('nogl')
@@ -103,14 +111,54 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
       }
 
       const release = () => {
+        settled = true
+        window.clearTimeout(watchdog)
         bus.introPending = false
         bus.lenis?.start()
         ScrollTrigger.refresh()
       }
 
+      // Show the finished hero at once. Used when mining or the scene fails or stalls: the page
+      // starts hidden and scroll-locked, so without this an error would leave it black for good.
+      const revealNow = () => {
+        if (settled) return
+        introStarted = true
+        introTl?.kill()
+        splits.forEach((sp) => sp.revert())
+        splits.length = 0
+        gsap.set(q('.miner'), { autoAlpha: 0, y: 0 })
+        q('.hero-title')[0]?.classList.add('ready')
+        gsap.set(q('.hero-eyebrow, .hero-sub, .scroll-hint'), { autoAlpha: 1, y: 0 })
+        if (header) gsap.set(header, { autoAlpha: 1, y: 0 })
+        const st = scene?.state
+        if (scene && st) {
+          Object.assign(st, { alpha: 1, intro: 0, packets: 1, spread: 1.25, flow: 0.4, bloom: 0.8 })
+          scene.blocks.forEach((b) => Object.assign(b, { on: 1, scale: 1 }))
+          scene.links.forEach((l) => (l.draw = 1))
+        }
+        release()
+      }
+      // mining + labels normally finish in under 6 s, even on slow machines
+      watchdog = window.setTimeout(revealNow, 9000)
+
       const runIntro = (sc: GenesisScene | null, rm: boolean) => {
+        if (settled || introStarted) return
+        introStarted = true
+        // the intro timeline itself lasts ~4.5 s; if it has not released the page by then, finish it
+        window.clearTimeout(watchdog)
+        watchdog = window.setTimeout(revealNow, 8000)
+        try {
+          playIntro(sc, rm)
+        } catch (err) {
+          console.error('[intro]', err)
+          revealNow()
+        }
+      }
+
+      const playIntro = (sc: GenesisScene | null, rm: boolean) => {
         const words = q('.hero-title')[0]
         const tl = gsap.timeline({ defaults: { ease: EASE_OUT }, onComplete: release })
+        introTl = tl
         const st = sc?.state
 
         if (rm) {
@@ -185,7 +233,10 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
         ;(root.current as HTMLDivElement & { __nextArc?: () => void }).__nextArc = next
       }
 
-      void init()
+      init().catch((err) => {
+        console.error('[intro]', err)
+        revealNow()
+      })
 
       // The canvas is fixed behind the page, so it always "intersects" the viewport. Between the
       // chain and the outro the opaque .solid sections hide it completely; stop rendering there.
@@ -204,6 +255,7 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
         cover?.kill()
         bus.covered = false
         cancelled = true
+        window.clearTimeout(watchdog)
         window.clearInterval(arcTimer)
         splits.forEach((sp) => sp.revert())
         scene?.dispose()

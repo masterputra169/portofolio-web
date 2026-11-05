@@ -98,13 +98,25 @@ export class GenesisScene {
   private readonly introLook = new THREE.Vector3(0, 0, 0)
   private colors: { crypto: THREE.Color; dev: THREE.Color; ai: THREE.Color; acc: THREE.Color }
 
-  constructor(private canvas: HTMLCanvasElement, private opts: { mobile: boolean; reduced: boolean }) {
+  constructor(private canvas: HTMLCanvasElement, private opts: { mobile: boolean; reduced: boolean; onContextLost?: () => void }) {
     const { mobile } = opts
     this.colors = { crypto: css('--crypto', '#F5B83D'), dev: css('--dev', '#5AA9FF'), ai: css('--ai', '#B7F05A'), acc: css('--acc', '#FF6A1F') }
     const C = this.colors
     const dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 1.75)
 
-    this.renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' })
+    // No GPU (hardware acceleration off, blocklisted driver, VM): the browser would emulate WebGL on the CPU,
+    // where this scene renders at a few frames per second or takes the tab down. Refuse it; the caller
+    // falls back to the static background.
+    this.renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance', failIfMajorPerformanceCaveat: true })
+    const gl = this.renderer.getContext()
+    const dbg = gl.getExtension('WEBGL_debug_renderer_info')
+    const gpu = String(gl.getParameter(dbg ? dbg.UNMASKED_RENDERER_WEBGL : gl.RENDERER) ?? '')
+    if (/swiftshader|llvmpipe|softpipe|basic render|software/i.test(gpu)) {
+      this.renderer.dispose()
+      throw new Error(`software WebGL renderer: ${gpu}`)
+    }
+    this.onContextLost = this.onContextLost.bind(this)
+    canvas.addEventListener('webglcontextlost', this.onContextLost)
     this.renderer.setPixelRatio(dpr)
     this.renderer.setSize(window.innerWidth, window.innerHeight, false)
     this.renderer.setClearColor(0x07080a, 1)
@@ -344,6 +356,13 @@ export class GenesisScene {
     this.composer.setSize(w, h)
   }
 
+  /** The GPU reset or dropped the context (driver crash, sleep, too many contexts): stop drawing. */
+  private onContextLost(e: Event) {
+    e.preventDefault()
+    cancelAnimationFrame(this.raf)
+    this.opts.onContextLost?.()
+  }
+
   start() {
     this.clock.start()
     this.raf = requestAnimationFrame(this.frame)
@@ -479,6 +498,7 @@ export class GenesisScene {
     cancelAnimationFrame(this.raf)
     window.removeEventListener('resize', this.onResize)
     window.removeEventListener('pointermove', this.onPointer)
+    this.canvas.removeEventListener('webglcontextlost', this.onContextLost)
     this.io?.disconnect()
     this.scene.traverse((o) => {
       const m = o as THREE.Mesh

@@ -46,7 +46,14 @@ export function sha256js(bytes: Uint8Array): ArrayBuffer {
 const hasSubtle = () => typeof crypto !== 'undefined' && !!crypto.subtle && typeof crypto.subtle.digest === 'function'
 export const sha256 = async (s: string): Promise<string> => {
   const bytes = enc.encode(s)
-  return hex(hasSubtle() ? await crypto.subtle.digest('SHA-256', bytes as BufferSource) : sha256js(bytes))
+  if (hasSubtle()) {
+    try {
+      return hex(await crypto.subtle.digest('SHA-256', bytes as BufferSource))
+    } catch {
+      // fall through to the pure-JS hash
+    }
+  }
+  return hex(sha256js(bytes))
 }
 
 export type MineResult = { nonce: number; hash: string; ms: number }
@@ -56,7 +63,7 @@ export async function mine(data: string, opts: { prefix?: string; budgetMs?: num
   const prefix = opts.prefix ?? '0000'
   const budget = opts.budgetMs ?? 3600
   const BATCH = 256
-  const useSubtle = hasSubtle()
+  let useSubtle = hasSubtle()
   const t0 = performance.now()
   let nonce = 0
   let best: { nonce: number; hash: string } | null = null
@@ -68,7 +75,14 @@ export async function mine(data: string, opts: { prefix?: string; budgetMs?: num
       const bytes = enc.encode(`${data}|${nonce + i}`)
       jobs.push(useSubtle ? crypto.subtle.digest('SHA-256', bytes as BufferSource) : Promise.resolve(sha256js(bytes)))
     }
-    const res = await Promise.all(jobs)
+    let res: ArrayBuffer[]
+    try {
+      res = await Promise.all(jobs)
+    } catch {
+      // WebCrypto refused: redo this batch with the pure-JS hash
+      useSubtle = false
+      continue
+    }
     for (let i = 0; i < BATCH; i++) {
       const h = hex(res[i])
       if (h.startsWith(prefix)) return { nonce: nonce + i, hash: h, ms: performance.now() - t0 }
