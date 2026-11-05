@@ -7,18 +7,20 @@ export type Journey = {
   steps: Array<{ title: L10n; body: L10n; project?: string }>
 }
 
-/** Milestones are in order; years are left out until confirmed. */
+/** Milestones are in order; years only where confirmed. */
 export const JOURNEYS: Journey[] = [
   {
     key: 'crypto',
     name: { en: 'Crypto Journey', id: 'Crypto Journey' },
     color: 'var(--crypto)',
     steps: [
-      { title: { en: 'Trader', id: 'Trader' }, body: { en: 'Where it started: risk, charts and the discipline to cut a loss.', id: 'Awal mula: risiko, chart, dan disiplin cut-loss.' } },
-      { title: { en: 'Airdrop hunter', id: 'Airdrop hunter' }, body: { en: 'Tried protocol after protocol from the user’s side of the screen.', id: 'Mencoba protokol demi protokol dari sisi user.' } },
-      { title: { en: 'Alpha hunter', id: 'Alpha hunter' }, body: { en: 'On-chain research, Polymarket liquidity farming, PancakeSwap LP mechanics.', id: 'Riset on-chain, LP farming di Polymarket, mekanik LP PancakeSwap.' } },
-      { title: { en: 'Collector & miner', id: 'Collector & miner' }, body: { en: 'eDMT/eNAT block collecting — including eNAT #21,895,238, the ByBit hack trigger block — and GPU mining experiments on Vast.ai.', id: 'Koleksi blok eDMT/eNAT — termasuk eNAT #21,895,238, blok pemicu hack ByBit — dan eksperimen mining GPU di Vast.ai.' } },
-      { title: { en: 'Builder', id: 'Builder' }, body: { en: 'Bots on Polymarket and Base, a Solana payment app, the Web3 Developer Jogja community.', id: 'Bot di Polymarket dan Base, aplikasi pembayaran Solana, komunitas Web3 Developer Jogja.' }, project: 'dollarkilat' },
+      { title: { en: 'Trader', id: 'Trader' }, body: { en: 'Where it started: risk, charts and the discipline to cut a loss. I wasn’t a great trader, but I never gave up. I traded memecoins for positive expected value: the best asymmetric bets.', id: 'Awal mula: risiko, chart, dan disiplin cut-loss. Saya bukan trader yang hebat, tapi saya tidak pernah menyerah. Trading memecoin untuk EV positif: taruhan asimetris terbaik.' } },
+      { title: { en: 'Airdrop hunter', id: 'Airdrop hunter' }, body: { en: 'Hunted airdrops from 2022 to 2024, trying protocol after protocol from the user’s side of the screen. Completed tasks set by project teams to qualify, and farmed retroactive airdrops.', id: 'Fokus berburu airdrop pada 2022–2024, mencoba protokol demi protokol dari sisi user. Mengerjakan task dari tim proyek supaya lolos airdrop, dan berburu retroactive airdrop.' } },
+      { title: { en: 'GameFi era', id: 'Era GameFi' }, body: { en: 'Focused on GameFi in 2022. I started out playing without spending real money; once I had some, I put real funds into other GameFi games.', id: 'Fokus di GameFi pada 2022. Awalnya bermain tanpa uang sungguhan; setelah punya modal, saya memakai uang sungguhan di game GameFi lain.' } },
+      { title: { en: 'Alpha hunter', id: 'Alpha hunter' }, body: { en: 'On-chain research and tracking on-chain alpha, the NFT hunting era, early hunting (getting into projects early for the biggest upside), and alpha hunting on X (Twitter).', id: 'Riset on-chain dan melacak alpha on-chain, era berburu NFT, early hunter (masuk ke proyek sejak awal untuk profit maksimal), dan alpha hunter di X (Twitter).' } },
+      { title: { en: 'Liquidity provider', id: 'Liquidity provider' }, body: { en: 'Provided liquidity on Solana with Meteora, and on EVM chains with Uniswap, PancakeSwap and PRJX on HyperEVM.', id: 'Menyediakan likuiditas di Solana dengan Meteora, dan di chain EVM dengan Uniswap, PancakeSwap, serta PRJX di HyperEVM.' } },
+      { title: { en: 'Miner', id: 'Miner' }, body: { en: 'GPU mining experiments on Vast.ai, including mining $Pearl.', id: 'Eksperimen mining GPU di Vast.ai, termasuk mining $Pearl.' } },
+      { title: { en: 'Builder', id: 'Builder' }, body: { en: 'Bots on Polymarket, a Solana payment app, a simple DEX built on the 0x aggregator API, and Alphabot Auto Entry, a bot that enters NFT raffles automatically.', id: 'Bot di Polymarket, aplikasi pembayaran Solana, DEX sederhana dengan API agregator 0x, dan Alphabot Auto Entry, bot yang otomatis ikut raffle NFT.' }, project: 'dollarkilat' },
     ],
   },
   {
