@@ -8,7 +8,7 @@ import { JsonLd, faqJsonLd, profilePageJsonLd, projectJsonLd } from '@/lib/seo'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { HtmlLang } from '@/components/HtmlLang'
-import { XProfileCard, XProfileDialog } from '@/components/XProfile'
+import { XProfileBadge, XProfileDialog } from '@/components/XProfile'
 import { HeroGenesis } from '@/components/home/HeroGenesis'
 import { ChainSection } from '@/components/home/ChainSection'
 import { Journeys } from '@/components/home/Journeys'
@@ -144,7 +144,6 @@ export function AboutView({ lang }: { lang: Lang }) {
           <p>{lang === 'en'
             ? 'I came to code through markets. Four years of trading, airdrop hunting and alpha hunting taught me risk, patience and how protocols feel from the user’s side. Now I build the tools I wished I had: bots that know when to stop, payment rails for freelancers like me, and models I can explain.'
             : 'Saya sampai ke dunia coding lewat pasar. Empat tahun trading, berburu airdrop, dan berburu alpha mengajari saya soal risiko, kesabaran, dan rasanya memakai protokol dari sisi user. Sekarang saya membangun tools yang dulu saya cari: bot yang tahu kapan berhenti, jalur pembayaran untuk freelancer seperti saya, dan model yang bisa saya jelaskan.'}</p>
-          <XProfileCard lang={lang} />
           <ul className="soc-list">
             {SITE.email ? <li><a href={`mailto:${SITE.email}`}><span>{t(UI.email, lang)}</span>{SITE.email} ↗</a></li> : null}
             {SITE.cv
@@ -162,6 +161,7 @@ export function AboutView({ lang }: { lang: Lang }) {
             <source srcSet={SITE.photo} type="image/webp" />
             <img src={SITE.photoJpg} alt={SITE.name} width={1200} height={1226} loading="eager" />
           </picture>
+          <XProfileBadge lang={lang} />
           <figcaption>{lang === 'en' ? 'Timotius in East Java.' : 'Timotius di Jawa Timur.'}</figcaption>
         </figure>
       </section>

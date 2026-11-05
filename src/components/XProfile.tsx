@@ -12,19 +12,25 @@ export const openXProfile = () => window.dispatchEvent(new CustomEvent(EVT))
 
 const X = SOCIALS.find((s) => s.key === 'x')
 
-/** The compact X card on /about; it opens the pop-up instead of leaving the site. */
-export function XProfileCard({ lang }: { lang: Lang }) {
+/**
+ * /about: the X avatar overlapping the bottom of the real photo, like a profile picture over a banner,
+ * with the name and handle beside it. Avatar and text open the pop-up instead of leaving the site.
+ */
+export function XProfileBadge({ lang }: { lang: Lang }) {
   if (!X) return null
   return (
-    <button type="button" className="xcard" onClick={openXProfile} aria-haspopup="dialog">
-      <img src={SITE.xProfile.avatar} alt="" width={88} height={88} />
-      <span className="xcard-text">
+    <div className="xbadge">
+      <button type="button" className="xbadge-av" onClick={openXProfile} aria-haspopup="dialog" aria-label={t(UI.viewProfile, lang)}>
+        <img src={SITE.xProfile.avatar} alt="" width={104} height={104} />
+      </button>
+      <button type="button" className="xbadge-text" onClick={openXProfile} aria-haspopup="dialog">
+        <span className="xbadge-aka">{t(UI.aka, lang)}</span>
         <b>{SITE.xProfile.name}</b>
-        <span>{X.handle} {t(UI.onX, lang)}</span>
-        <em>{SITE.xProfile.bio}</em>
-        <span className="xcard-cta">{t(UI.viewProfile, lang)} →</span>
-      </span>
-    </button>
+        <span className="xbadge-handle">{X.handle}</span>
+        <span className="xbadge-bio">{SITE.xProfile.bio}</span>
+        <span className="xbadge-cta">{t(UI.viewProfile, lang)} →</span>
+      </button>
+    </div>
   )
 }
 

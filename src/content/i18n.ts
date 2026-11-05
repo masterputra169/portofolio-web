@@ -22,6 +22,7 @@ export const UI = {
   email: { en: 'Email', id: 'Email' },
   onX: { en: 'on X', id: 'di X' },
   viewProfile: { en: 'View profile', id: 'Lihat profil' },
+  aka: { en: 'online as', id: 'di dunia online' },
   openOnX: { en: 'Open on X', id: 'Buka di X' },
   close: { en: 'Close', id: 'Tutup' },
   pfpAlt: { en: 'masterputra’s profile picture: a pixel-art portrait with purple braids and round sunglasses', id: 'Foto profil masterputra: potret pixel art dengan rambut kepang ungu dan kacamata bulat' },
