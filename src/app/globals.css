@@ -104,9 +104,11 @@ a:hover { color: var(--acc); }
 .hero-sub { display: flex; flex-direction: column; gap: 22px; align-items: flex-start; pointer-events: auto; }
 .hero-lede { margin: 0; max-width: 34em; font-size: clamp(16px, 1.25vw, 18px); line-height: 1.55; color: var(--fg); }
 .hero-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: stretch; }
-.arc { font-family: var(--mono); font-size: 13px; display: inline-flex; gap: 10px; align-items: center; background: rgba(7, 8, 10, 0.55); border: 1px solid var(--line); color: var(--fg); padding: 12px 14px; cursor: pointer; min-width: 250px; min-height: 44px;
+.arc { position: relative; overflow: hidden; font-family: var(--mono); font-size: 13px; display: inline-flex; gap: 10px; align-items: center; background: rgba(7, 8, 10, 0.55); border: 1px solid var(--line); color: var(--fg); padding: 12px 14px; cursor: pointer; min-width: 250px; min-height: 44px;
   transition: border-color var(--dur-2) var(--ease), transform var(--dur-1) var(--ease-out); }
 .arc:hover { border-color: var(--acc); }
+/* fills while an arc is shown; at full width the label scrambles to the next one */
+.arc-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--acc); transform: scaleX(0); transform-origin: left center; opacity: 0.8; pointer-events: none; }
 .arc .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--acc); box-shadow: 0 0 10px var(--acc); animation: pulse 2.4s var(--ease-in-out) infinite; }
 @keyframes pulse { 50% { opacity: 0.35; } }
 .soc { display: flex; gap: 4px 22px; flex-wrap: wrap; font-family: var(--mono); font-size: 13px; }

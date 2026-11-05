@@ -41,7 +41,7 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
       const header = document.getElementById('site-header')
       let scene: GenesisScene | null = null
       let cancelled = false
-      let arcTimer = 0
+      let arcTl: gsap.core.Timeline | null = null
       const splits: SplitText[] = []
       let introStarted = false
       let settled = false
@@ -247,18 +247,25 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
         tl.call(() => startArcs(), undefined, 'type+=1.4')
       }
 
-      // "current arc" label scrambles through the arcs while the hero is visible
+      // "current arc" label scrambles through the arcs while the hero is visible; a bar under it fills
+      // up to the next one (ARC_HOLD seconds per arc), and a click switches at once and restarts the bar
+      const ARC_HOLD = 3
       const startArcs = () => {
         const el = q('.arc-text')[0]
-        if (!el || reduced) return
+        const bar = q('.arc-bar')[0]
+        if (!el || !bar || reduced) return
         let i = 0
         const next = () => {
           if (window.scrollY > window.innerHeight * 0.9 || document.hidden) return
           i = (i + 1) % ARCS.length
-          gsap.to(el, { duration: 0.8, scrambleText: { text: ARCS[i].label, chars: '0123456789abcdef', speed: 0.6 } })
+          gsap.to(el, { duration: 0.5, overwrite: true, scrambleText: { text: ARCS[i].label, chars: '0123456789abcdef', speed: 1 } })
         }
-        arcTimer = window.setInterval(next, 7000)
-        ;(root.current as HTMLDivElement & { __nextArc?: () => void }).__nextArc = next
+        arcTl = gsap.timeline({ repeat: -1 })
+        arcTl.fromTo(bar, { scaleX: 0 }, { scaleX: 1, duration: ARC_HOLD, ease: 'none', immediateRender: true }).call(next)
+        ;(root.current as HTMLDivElement & { __nextArc?: () => void }).__nextArc = () => {
+          next()
+          arcTl?.restart()
+        }
       }
 
       init().catch((err) => {
@@ -285,7 +292,7 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
         cancelled = true
         window.clearTimeout(watchdog)
         document.removeEventListener('visibilitychange', onVisibility)
-        window.clearInterval(arcTimer)
+        arcTl?.kill()
         splits.forEach((sp) => sp.revert())
         scene?.dispose()
         bus.introPending = false
@@ -326,6 +333,7 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
               <span className="dot" aria-hidden="true" />
               <span>{t(UI.currentArc, lang)}&nbsp;</span>
               <span className="arc-text">{ARCS[0].label}</span>
+              <span className="arc-bar" aria-hidden="true" />
             </button>
           </div>
           <div className="soc">
