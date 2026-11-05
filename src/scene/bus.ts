@@ -17,6 +17,8 @@ export const bus = {
   /** true while opaque sections fill the whole viewport: the canvas is hidden, so skip rendering */
   covered: false,
   mined: false,
+  /** how the 3D scene is running, for the terminal's `gpu` command */
+  gl: 'not started',
   /** true while the home intro is playing; smooth scrolling stays paused */
   introPending: false,
   genesisHash: '',

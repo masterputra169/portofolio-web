@@ -18,6 +18,17 @@ gsap.registerPlugin(useGSAP, SplitText, ScrambleTextPlugin, ScrollTrigger)
 const EASE_OUT = 'expo.out'
 const EASE_IN_OUT = 'power3.inOut'
 
+const whenVisible = () =>
+  new Promise<void>((resolve) => {
+    if (!document.hidden) return resolve()
+    const on = () => {
+      if (document.hidden) return
+      document.removeEventListener('visibilitychange', on)
+      resolve()
+    }
+    document.addEventListener('visibilitychange', on)
+  })
+
 export function HeroGenesis({ lang }: { lang: Lang }) {
   const root = useRef<HTMLDivElement>(null)
   const canvas = useRef<HTMLCanvasElement>(null)
@@ -52,12 +63,23 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
           scene = new GenesisScene(canvas.current, {
             mobile,
             reduced,
-            onContextLost: () => document.documentElement.classList.add('nogl'),
+            onContextLost: () => {
+              document.documentElement.classList.add('nogl')
+              bus.gl = 'off: the GPU dropped the WebGL context'
+            },
           })
           scene.start()
-        } catch {
+          bus.gl = scene.lite ? `lite (software WebGL: ${scene.gpu})` : `full (${scene.gpu})`
+        } catch (err) {
           document.documentElement.classList.add('nogl')
+          bus.gl = `off: ${(err as Error).message}`
         }
+
+        // A tab opened in the background does not animate, but mining would still run, and when the tab is
+        // shown GSAP (lagSmoothing 0) jumps straight to the end of the intro. Start once it is visible.
+        await whenVisible()
+        if (cancelled) return
+        arm(9000)
 
         const nonceEl = q('.m-nonce')[0], hashEl = q('.m-hash')[0], rateEl = q('.m-rate')[0], barEl = q('.m-bar i')[0], statusEl = q('.m-status')[0]
         const s = scene?.state
@@ -138,15 +160,21 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
         }
         release()
       }
-      // mining + labels normally finish in under 6 s, even on slow machines
-      watchdog = window.setTimeout(revealNow, 9000)
+      // mining + labels normally finish in under 6 s, even on slow machines; the clock runs only while
+      // the tab is visible (a hidden tab would otherwise skip the intro it never showed)
+      const arm = (ms: number) => {
+        window.clearTimeout(watchdog)
+        if (!settled) watchdog = window.setTimeout(revealNow, ms)
+      }
+      const onVisibility = () => { if (!document.hidden && !introStarted) arm(9000) }
+      document.addEventListener('visibilitychange', onVisibility)
+      if (!document.hidden) arm(9000)
 
       const runIntro = (sc: GenesisScene | null, rm: boolean) => {
         if (settled || introStarted) return
         introStarted = true
         // the intro timeline itself lasts ~4.5 s; if it has not released the page by then, finish it
-        window.clearTimeout(watchdog)
-        watchdog = window.setTimeout(revealNow, 8000)
+        arm(8000)
         try {
           playIntro(sc, rm)
         } catch (err) {
@@ -256,6 +284,7 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
         bus.covered = false
         cancelled = true
         window.clearTimeout(watchdog)
+        document.removeEventListener('visibilitychange', onVisibility)
         window.clearInterval(arcTimer)
         splits.forEach((sp) => sp.revert())
         scene?.dispose()

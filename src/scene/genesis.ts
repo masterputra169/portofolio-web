@@ -63,6 +63,15 @@ export class GenesisScene {
   private composer: EffectComposer
   private bloomPass: UnrealBloomPass
   private rgbPass: ShaderPass | null = null
+  /**
+   * true when WebGL runs on the CPU (hardware acceleration off, blocklisted driver, VM, or Chrome after a GPU
+   * crash): fewer particles, lower resolution, no post-processing, so the scene still plays without
+   * saturating the machine.
+   */
+  readonly lite: boolean
+  private liteLast = 0
+  /** the WebGL renderer name, for the terminal's `gpu` command */
+  readonly gpu: string
   private scene = new THREE.Scene()
   private camera: THREE.PerspectiveCamera
   private clock = new THREE.Clock()
@@ -102,19 +111,23 @@ export class GenesisScene {
     const { mobile } = opts
     this.colors = { crypto: css('--crypto', '#F5B83D'), dev: css('--dev', '#5AA9FF'), ai: css('--ai', '#B7F05A'), acc: css('--acc', '#FF6A1F') }
     const C = this.colors
-    const dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 1.75)
-
-    // No GPU (hardware acceleration off, blocklisted driver, VM): the browser would emulate WebGL on the CPU,
-    // where this scene renders at a few frames per second or takes the tab down. Refuse it; the caller
-    // falls back to the static background.
-    this.renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance', failIfMajorPerformanceCaveat: true })
+    // Ask for a hardware context first; if the browser only offers a software one ("major performance
+    // caveat"), take it anyway and run the lite scene. No WebGL at all still throws to the caller.
+    const make = (caveat: boolean) =>
+      new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance', failIfMajorPerformanceCaveat: caveat })
+    let caveat = false
+    try {
+      this.renderer = make(true)
+    } catch {
+      caveat = true
+      this.renderer = make(false)
+    }
     const gl = this.renderer.getContext()
     const dbg = gl.getExtension('WEBGL_debug_renderer_info')
-    const gpu = String(gl.getParameter(dbg ? dbg.UNMASKED_RENDERER_WEBGL : gl.RENDERER) ?? '')
-    if (/swiftshader|llvmpipe|softpipe|basic render|software/i.test(gpu)) {
-      this.renderer.dispose()
-      throw new Error(`software WebGL renderer: ${gpu}`)
-    }
+    this.gpu = String(gl.getParameter(dbg ? dbg.UNMASKED_RENDERER_WEBGL : gl.RENDERER) ?? '')
+    this.lite = caveat || /swiftshader|llvmpipe|softpipe|basic render|software/i.test(this.gpu)
+    const lite = this.lite
+    const dpr = lite ? 0.75 : Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 1.75)
     this.onContextLost = this.onContextLost.bind(this)
     canvas.addEventListener('webglcontextlost', this.onContextLost)
     this.renderer.setPixelRatio(dpr)
@@ -219,7 +232,7 @@ export class GenesisScene {
     scene.add(this.ring)
 
     /* ---------- GPU particle streams ---------- */
-    const PER = mobile ? 2200 : 6500
+    const PER = lite ? (mobile ? 900 : 1800) : mobile ? 2200 : 6500
     const TOTAL = PER * 3
     const A = {
       aStream: new Float32Array(TOTAL), aT0: new Float32Array(TOTAL), aSp: new Float32Array(TOTAL), aR: new Float32Array(TOTAL),
@@ -296,7 +309,7 @@ export class GenesisScene {
     particles.frustumCulled = false
     scene.add(particles)
 
-    const DUST = mobile ? 500 : 1300
+    const DUST = lite ? 300 : mobile ? 500 : 1300
     const dpos = new Float32Array(DUST * 3)
     for (let i = 0; i < DUST; i++) dpos.set([(Math.random() - 0.35) * 90, (Math.random() - 0.5) * 46, (Math.random() - 0.7) * 60], i * 3)
     const dGeo = new THREE.BufferGeometry()
@@ -371,6 +384,12 @@ export class GenesisScene {
   private frame() {
     this.raf = requestAnimationFrame(this.frame)
     if (!this.visible || bus.covered) return
+    // lite (software WebGL): 30 fps is plenty for slow particles and halves the CPU the scene costs
+    if (this.lite) {
+      const now = performance.now()
+      if (now - this.liteLast < 30) return
+      this.liteLast = now
+    }
     const dt = Math.min(this.clock.getDelta(), 0.05)
     const t = this.clock.elapsedTime
     const st = this.state
@@ -486,7 +505,8 @@ export class GenesisScene {
     this.bloomPass.strength = st.bloom + this.velS * 0.35
     if (this.rgbPass) this.rgbPass.uniforms['amount'].value = st.rgb + this.velS * 0.0035
     this.renderer.toneMappingExposure = st.exposure
-    this.composer.render()
+    if (this.lite) this.renderer.render(this.scene, this.camera)
+    else this.composer.render()
   }
 
   /** Point the shockwave ring at the camera before it expands. */
