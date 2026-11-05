@@ -47,6 +47,25 @@ export const SITE = {
   },
 }
 
+/** /about: the opening line under the name (the name itself is the heading, so it is not repeated) */
+export const ABOUT = {
+  lead: {
+    en: 'Web3 developer from Kediri, Indonesia, building trading bots, on-chain apps and ML tools.',
+    id: 'Web3 developer dari Kediri, Indonesia, yang membangun bot trading, aplikasi on-chain, dan tools machine learning.',
+  } as L10n,
+  story: {
+    en: 'I came to code through markets. Four years of trading, airdrop hunting and alpha hunting taught me risk, patience and how protocols feel from the user’s side. Now I build the tools I wished I had: bots that know when to stop, payment rails for freelancers like me, and models I can explain.',
+    id: 'Saya sampai ke dunia coding lewat pasar. Empat tahun trading, berburu airdrop, dan berburu alpha mengajari saya soal risiko, kesabaran, dan rasanya memakai protokol dari sisi user. Sekarang saya membangun tools yang dulu saya cari: bot yang tahu kapan berhenti, jalur pembayaran untuk freelancer seperti saya, dan model yang bisa saya jelaskan.',
+  } as L10n,
+  /** "at a glance" numbers; keep them true (the trades are the bot's paper trades, followers as of the X snapshot) */
+  glance: [
+    { value: '4+', label: { en: 'years in crypto', id: 'tahun di crypto' } },
+    { value: '800+', label: { en: 'paper trades by my bot', id: 'trade simulasi bot saya' } },
+    { value: '2', label: { en: 'hackathons', id: 'hackathon' } },
+    { value: { en: '1,791', id: '1.791' }, label: { en: 'followers on X', id: 'follower di X' } },
+  ] as Array<{ value: string | L10n; label: L10n }>,
+}
+
 export const SOCIALS = [
   { key: 'x', label: 'X', handle: '@masterputra6969', url: 'https://x.com/masterputra6969' },
   { key: 'instagram', label: 'Instagram', handle: '@masterputra_99', url: 'https://www.instagram.com/masterputra_99/' },
