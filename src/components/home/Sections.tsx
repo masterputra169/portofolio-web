@@ -40,7 +40,7 @@ export function Experience({ lang }: { lang: Lang }) {
         <RevealText className="sec-title">{t(UI.experienceTitle, lang)}</RevealText>
       </div>
       <RevealGroup as="ol" className="xp-list">
-        {EXPERIENCE.map((x) => (
+        {[...EXPERIENCE].sort((a, b) => b.start.localeCompare(a.start)).map((x) => (
           <li key={x.org} className="rv">
             <span className="xp-period">{t(x.period, lang)}</span>
             <div>

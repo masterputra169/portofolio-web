@@ -53,12 +53,12 @@ export const EXPERTISE = {
   ] as L10n[],
 }
 
+/** `start` (YYYY-MM) orders the list: newest first, whatever order the entries are written in. */
 export const EXPERIENCE = [
-  { org: 'PLN UP3 Kediri', role: { en: 'Intern — current', id: 'Magang — saat ini' }, period: { en: '2026 – now', id: '2026 – sekarang' }, note: { en: 'Three-month internship.', id: 'Magang tiga bulan.' } },
-  { org: 'Colosseum Frontier 2026 · Superteam Indonesia', role: { en: 'Hackathon participant — dollarkilat', id: 'Peserta hackathon — dollarkilat' }, period: '2026', note: { en: 'Built a Solana payment PWA with a team.', id: 'Membangun PWA pembayaran Solana bersama tim.' } },
-  { org: 'Indonesia Web3 Hackathon 2026', role: { en: 'Online workshop participant', id: 'Peserta online workshop' }, period: 'Jul – Aug 2026', note: { en: 'Web3 fundamentals, smart contracts, AI × Web3. Mentored by Dev Web3 Jogja.', id: 'Fundamental Web3, smart contract, AI × Web3. Dimentori Dev Web3 Jogja.' } },
-  { org: 'Web3 Developer Jogja', role: { en: 'Community member', id: 'Anggota komunitas' }, period: { en: 'Ongoing', id: 'Berjalan' }, note: { en: 'Active in the Yogyakarta Web3 builder community.', id: 'Aktif di komunitas builder Web3 Yogyakarta.' } },
-  { org: 'Universitas Dian Nuswantoro · PSDKU Kediri', role: { en: 'B.Sc. Informatics Engineering', id: 'S1 Teknik Informatika' }, period: { en: '2023 – present', id: '2023 – sekarang' }, note: { en: 'Final-year thesis on Bitcoin price prediction.', id: 'Tugas akhir tentang prediksi harga Bitcoin.' } },
+  { start: '2026-09', org: 'PLN UP3 Kediri', role: { en: 'Intern — current', id: 'Magang — saat ini' }, period: { en: 'Sep – Dec 2026 · now', id: 'Sep – Des 2026 · sekarang' }, note: { en: 'Three-month internship.', id: 'Magang tiga bulan.' } },
+  { start: '2026-07', org: 'Indonesia Web3 Hackathon 2026', role: { en: 'Online workshop participant', id: 'Peserta online workshop' }, period: { en: 'Jul – Aug 2026', id: 'Jul – Agu 2026' }, note: { en: 'Web3 fundamentals, smart contracts, AI × Web3. Mentored by Dev Web3 Jogja.', id: 'Fundamental Web3, smart contract, AI × Web3. Dimentori Dev Web3 Jogja.' } },
+  { start: '2026-04', org: 'Colosseum Frontier 2026 · Superteam Indonesia', role: { en: 'Hackathon participant — dollarkilat', id: 'Peserta hackathon — dollarkilat' }, period: { en: 'Apr – May 2026', id: 'Apr – Mei 2026' }, note: { en: 'Built a Solana payment PWA with a team.', id: 'Membangun PWA pembayaran Solana bersama tim.' } },
+  { start: '2023-09', org: 'Universitas Dian Nuswantoro · PSDKU Kediri', role: { en: 'B.Sc. Informatics Engineering', id: 'S1 Teknik Informatika' }, period: { en: '2023 – present', id: '2023 – sekarang' }, note: { en: 'Final-year thesis on Bitcoin price prediction.', id: 'Tugas akhir tentang prediksi harga Bitcoin.' } },
 ] as const
 
 export const CERTIFICATES = [
