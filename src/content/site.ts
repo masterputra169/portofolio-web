@@ -58,6 +58,7 @@ export const EXPERTISE = {
     { en: 'Quant finance — Monte Carlo, copulas, Brier score', id: 'Quant finance — Monte Carlo, copula, Brier score' },
     { en: 'On-chain analytics', id: 'Analisis data on-chain' },
     { en: 'Prediction markets', id: 'Prediction market' },
+    { en: 'Liquidity providing', id: 'Liquidity providing' },
   ] as L10n[],
 }
 
