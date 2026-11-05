@@ -111,7 +111,9 @@ a:hover { color: var(--acc); }
 .arc-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--acc); transform: scaleX(0); transform-origin: left center; opacity: 0.8; pointer-events: none; }
 .arc .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--acc); box-shadow: 0 0 10px var(--acc); animation: pulse 2.4s var(--ease-in-out) infinite; }
 @keyframes pulse { 50% { opacity: 0.35; } }
-.soc { display: flex; gap: 4px 22px; flex-wrap: wrap; font-family: var(--mono); font-size: 13px; }
+.soc { display: flex; gap: 4px 22px; flex-wrap: wrap; align-items: center; font-family: var(--mono); font-size: 13px; }
+/* every item as tall as the X item (avatar 26 px + its ring), text centred, so the row lines up */
+.soc > span { display: inline-flex; align-items: center; min-height: 34px; }
 .soc a { text-decoration: none; padding: 8px 0; }
 .soc a span { color: var(--mut); }
 .soc-x { display: inline-flex; align-items: center; gap: 8px; }
