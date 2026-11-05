@@ -53,7 +53,10 @@ export function Outro({ lang }: { lang: Lang }) {
         {SITE.cv ? <a className="cta" href={href(lang, '/cv/')} onPointerMove={onMove} onPointerLeave={onLeave}>{t(UI.cv, lang)} →</a> : null}
         <a className={SITE.email ? 'cta' : 'cta p'} href={`https://github.com/${SITE.githubUser}`} target="_blank" rel="noopener" onPointerMove={onMove} onPointerLeave={onLeave}>{t(UI.allRepos, lang)} ↗</a>
         {SOCIALS.filter((s) => s.key !== 'github').map((s) => (
-          <a key={s.key} className="cta" href={s.url} target="_blank" rel="me noopener" onPointerMove={onMove} onPointerLeave={onLeave}>{s.label} {s.handle} ↗</a>
+          <a key={s.key} className="cta" href={s.url} target="_blank" rel="me noopener" onPointerMove={onMove} onPointerLeave={onLeave}>
+            {s.key === 'x' ? <img className="cta-av" src={SITE.xProfile.avatar} alt="" width={24} height={24} /> : null}
+            {s.label} {s.handle} ↗
+          </a>
         ))}
         <button className="cta" type="button" onClick={openTerminal} onPointerMove={onMove} onPointerLeave={onLeave}>{t(UI.tryTerminal, lang)}</button>
       </div>

@@ -20,6 +20,7 @@ export const UI = {
   cvOther: { en: 'Versi Bahasa Indonesia', id: 'English version' },
   cvPage: { en: 'CV, page', id: 'CV, halaman' },
   email: { en: 'Email', id: 'Email' },
+  onX: { en: 'on X', id: 'di X' },
   screens: { en: 'Screenshots', id: 'Tangkapan layar' },
   confirmed: { en: 'confirmed', id: 'terkonfirmasi' },
   readCase: { en: 'Read the case study', id: 'Baca studi kasus' },

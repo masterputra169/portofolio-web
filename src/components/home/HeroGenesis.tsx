@@ -338,7 +338,10 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
           </div>
           <div className="soc">
             {SOCIALS.map((s) => (
-              <a key={s.key} href={s.url} rel="me noopener" target="_blank"><span>{s.label}</span> {s.handle}</a>
+              <a key={s.key} href={s.url} rel="me noopener" target="_blank" className={s.key === 'x' ? 'soc-x' : undefined}>
+                {s.key === 'x' ? <img src={SITE.xProfile.avatar} alt="" width={26} height={26} /> : null}
+                <span>{s.label}</span> {s.handle}
+              </a>
             ))}
           </div>
         </div>

@@ -35,6 +35,8 @@ export const SITE = {
   photo: '/images/timotius.webp',
   photoJpg: '/images/timotius.jpg',
   avatar: '/images/avatar.jpg',
+  /** the X profile picture and bio, shown with the X link (hero, /about card, contact) */
+  xProfile: { avatar: '/images/x-avatar.webp', name: 'masterputra', bio: 'comeback arc | builder arc' },
 }
 
 export const SOCIALS = [
