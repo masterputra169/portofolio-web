@@ -11,6 +11,8 @@ import { UI, href, t } from '@/content/i18n'
 gsap.registerPlugin(useGSAP, Flip)
 
 const ORDER: Category[] = ['web3', 'ml', 'fullstack', 'tools', 'research', 'other']
+/** everything that moves when the filter changes; the archive heading too, or it jumps while the rows glide */
+const FLIP_TARGETS = '.wcard, .archive-title'
 
 /** Filterable project grid; filtering animates with GSAP Flip so cards glide to their new places. */
 export function WorkGrid({ lang, projects }: { lang: Lang; projects: Project[] }) {
@@ -25,24 +27,34 @@ export function WorkGrid({ lang, projects }: { lang: Lang; projects: Project[] }
 
   const { contextSafe } = useGSAP({ scope: root })
 
+  // Every card stays in the DOM; filtered-out cards get `hidden` (display: none). That is what lets Flip
+  // fade leaving cards out and entering cards in, instead of React removing or adding them mid-animation.
   const pick = contextSafe((c: Category | 'all') => {
-    flipState.current = Flip.getState(gsap.utils.toArray('.wcard', root.current))
+    if (c === filter) return
+    // recorded mid-flight too, so a click during an animation continues from where the cards are
+    flipState.current = Flip.getState(gsap.utils.toArray(FLIP_TARGETS, root.current))
     setFilter(c)
   })
 
   useGSAP(
     () => {
-      if (!flipState.current) return
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      Flip.from(flipState.current, {
-        duration: reduce ? 0 : 0.7,
-        ease: 'power3.inOut',
-        absolute: true,
-        stagger: 0.03,
-        onEnter: (els) => gsap.fromTo(els, { autoAlpha: 0, scale: 0.94 }, { autoAlpha: 1, scale: 1, duration: 0.5, ease: 'power3.out' }),
-        onLeave: (els) => gsap.to(els, { autoAlpha: 0, scale: 0.94, duration: 0.3, ease: 'power2.in' }),
-      })
+      const state = flipState.current
+      if (!state) return
       flipState.current = null
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      Flip.from(state, {
+        targets: gsap.utils.toArray(FLIP_TARGETS, root.current),
+        duration: reduce ? 0 : 0.6,
+        ease: 'power3.inOut',
+        // in-flow (not absolute): the grid keeps its height while cards move, so the page does not jump
+        scale: false,
+        nested: true,
+        prune: true,
+        // leaving cards are lifted out of the grid while they fade, so the rest can move into their place
+        absoluteOnLeave: true,
+        onEnter: (els) => gsap.fromTo(els, { autoAlpha: 0, scale: 0.94 }, { autoAlpha: 1, scale: 1, duration: reduce ? 0 : 0.4, delay: reduce ? 0 : 0.3, ease: 'power3.out' }),
+        onLeave: (els) => gsap.to(els, { autoAlpha: 0, scale: 0.94, duration: reduce ? 0 : 0.25, ease: 'power2.in' }),
+      })
     },
     { scope: root, dependencies: [filter] },
   )
@@ -56,8 +68,8 @@ export function WorkGrid({ lang, projects }: { lang: Lang; projects: Project[] }
         ))}
       </div>
       <div className="wgrid">
-        {withCase.filter(shown).map((p, i) => (
-          <Link key={p.slug} href={href(lang, `/work/${p.slug}/`)} className={`wcard${p.featured ? ' featured' : ''}`} data-flip-id={p.slug}>
+        {withCase.map((p, i) => (
+          <Link key={p.slug} href={href(lang, `/work/${p.slug}/`)} className={`wcard${p.featured ? ' featured' : ''}`} data-flip-id={p.slug} hidden={!shown(p)}>
             <span className="w-tx">block #{i + 1}{p.fork ? ` · ${t(UI.fork, lang)}` : ''}{p.stars ? ` · ★ ${p.stars}` : ''}</span>
             <span className="w-cat">{p.categories.map((c) => t(UI.categories[c], lang)).join(' · ')}</span>
             <h2>{p.title}</h2>
@@ -66,12 +78,12 @@ export function WorkGrid({ lang, projects }: { lang: Lang; projects: Project[] }
           </Link>
         ))}
       </div>
-      {archive.filter(shown).length ? (
+      {archive.length ? (
         <>
-          <h2 className="archive-title">{t(UI.archive, lang)}</h2>
+          <h2 className="archive-title" data-flip-id="archive-title" hidden={!archive.some(shown)}>{t(UI.archive, lang)}</h2>
           <ul className="archive">
-            {archive.filter(shown).map((p) => (
-              <li key={p.slug} className="wcard arow" data-flip-id={p.slug}>
+            {archive.map((p) => (
+              <li key={p.slug} className="wcard arow" data-flip-id={p.slug} hidden={!shown(p)}>
                 <a href={p.repoUrl} target="_blank" rel="noopener"><b>{p.title}</b>{p.fork ? <em>{t(UI.fork, lang)}</em> : null}</a>
                 <span>{t(p.summary, lang)}</span>
                 <span className="a-meta">{p.language ?? ''}{p.pushedAt ? ` · ${p.pushedAt.slice(0, 10)}` : ''}</span>

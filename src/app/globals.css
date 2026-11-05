@@ -214,8 +214,10 @@ a:hover { color: var(--acc); }
 .filters button[aria-pressed='true'] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
 .wgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .wcard { display: flex; flex-direction: column; gap: 10px; padding: 26px; background: var(--bg-2); border: 1px solid var(--line); text-decoration: none; color: var(--fg); min-height: 250px;
-  transition: border-color var(--dur-2) var(--ease), transform var(--dur-2) var(--ease-out); }
-.wcard:hover { border-color: var(--acc); color: var(--fg); transform: translateY(-3px); }
+  transition: border-color var(--dur-2) var(--ease), translate var(--dur-2) var(--ease-out); }
+/* hover lifts with `translate`, not `transform`: GSAP Flip owns transform while the filter animates */
+.wcard:hover { border-color: var(--acc); color: var(--fg); translate: 0 -3px; }
+.wcard[hidden], .archive-title[hidden] { display: none; }
 .wcard.featured { grid-column: span 1; background: linear-gradient(160deg, #161009, var(--bg-2) 55%); }
 .wcard h2 { font-family: var(--serif); font-weight: 400; font-size: 34px; line-height: 1; margin: 6px 0 0; word-break: break-word; }
 .wcard p { margin: 0; color: var(--fg-2); font-size: 15px; }
