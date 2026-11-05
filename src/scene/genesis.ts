@@ -509,6 +509,11 @@ export class GenesisScene {
     else this.composer.render()
   }
 
+  /** Upload the block label textures now, so the first frame of the intro does not pay for it. */
+  uploadLabels() {
+    this.blocks.forEach((b) => this.renderer.initTexture(b.label))
+  }
+
   /** Point the shockwave ring at the camera before it expands. */
   faceRingToCamera() {
     this.ring.lookAt(this.camera.position)

@@ -30,10 +30,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" suppressHydrationWarning className={`${serif.variable} ${sans.variable} ${mono.variable}`}>
       <body>
         {/* .js lets CSS hide what the intro reveals, from the first paint. If the app never hydrates
-            (blocked or failed scripts), drop it after 10 s so the page falls back to its static layout. */}
+            (blocked or failed scripts), drop it after 15 s so the page falls back to its static layout. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: "var d=document.documentElement;d.classList.add('js');setTimeout(function(){if(!d.hasAttribute('data-hydrated'))d.classList.remove('js')},10000)",
+            __html: "var d=document.documentElement;d.classList.add('js');setTimeout(function(){if(!d.hasAttribute('data-hydrated')){d.classList.remove('js');d.setAttribute('data-js-fallback','')}},15000)",
           }}
         />
         <JsonLd data={websiteJsonLd()} />

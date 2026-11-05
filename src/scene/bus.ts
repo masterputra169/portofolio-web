@@ -19,6 +19,9 @@ export const bus = {
   mined: false,
   /** how the 3D scene is running, for the terminal's `gpu` command */
   gl: 'not started',
+  /** how the home intro ended, for the terminal's `intro` command */
+  intro: 'not run on this page',
+  introInfo: '',
   /** true while the home intro is playing; smooth scrolling stays paused */
   introPending: false,
   genesisHash: '',

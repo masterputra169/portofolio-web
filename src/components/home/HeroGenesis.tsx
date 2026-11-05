@@ -80,7 +80,7 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
         // shown GSAP (lagSmoothing 0) jumps straight to the end of the intro. Start once it is visible.
         await whenVisible()
         if (cancelled) return
-        arm(9000)
+        arm(9000, NOT_STARTED)
 
         const nonceEl = q('.m-nonce')[0], hashEl = q('.m-hash')[0], rateEl = q('.m-rate')[0], barEl = q('.m-bar i')[0], statusEl = q('.m-status')[0]
         const s = scene?.state
@@ -128,13 +128,26 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
             scene.drawLabel(scene.blocks[i], i, h)
             prev = h
           }
+          scene.uploadLabels()
         }
         bus.setMined(r.hash, r.ms)
+        bus.introInfo = `mined in ${(r.ms / 1000).toFixed(2)} s · intro started ${(performance.now() / 1000).toFixed(1)} s after load`
         runIntro(scene, reduced)
       }
 
+      // real gaps between frames (GSAP's own delta is already smoothed while the intro runs)
+      let longestFrame = 0
+      let lastFrame = 0
+      const trackFrames = () => {
+        const now = performance.now()
+        if (lastFrame) longestFrame = Math.max(longestFrame, now - lastFrame)
+        lastFrame = now
+      }
       const release = () => {
+        if (!settled && bus.intro === 'running') bus.intro = `played · longest frame ${Math.round(longestFrame)} ms`
         settled = true
+        gsap.ticker.remove(trackFrames)
+        gsap.ticker.lagSmoothing(0) // back to what SmoothScroll uses with Lenis
         window.clearTimeout(watchdog)
         bus.introPending = false
         bus.lenis?.start()
@@ -143,8 +156,9 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
 
       // Show the finished hero at once. Used when mining or the scene fails or stalls: the page
       // starts hidden and scroll-locked, so without this an error would leave it black for good.
-      const revealNow = () => {
+      const revealNow = (reason: string) => {
         if (settled) return
+        bus.intro = `skipped: ${reason}`
         introStarted = true
         introTl?.kill()
         splits.forEach((sp) => sp.revert())
@@ -163,24 +177,25 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
       }
       // mining + labels normally finish in under 6 s, even on slow machines; the clock runs only while
       // the tab is visible (a hidden tab would otherwise skip the intro it never showed)
-      const arm = (ms: number) => {
+      const NOT_STARTED = 'the intro had not started 9 s after the page was shown (loading or mining stalled)'
+      const arm = (ms: number, reason: string) => {
         window.clearTimeout(watchdog)
-        if (!settled) watchdog = window.setTimeout(revealNow, ms)
+        if (!settled) watchdog = window.setTimeout(() => revealNow(reason), ms)
       }
-      const onVisibility = () => { if (!document.hidden && !introStarted) arm(9000) }
+      const onVisibility = () => { if (!document.hidden && !introStarted) arm(9000, NOT_STARTED) }
       document.addEventListener('visibilitychange', onVisibility)
-      if (!document.hidden) arm(9000)
+      if (!document.hidden) arm(9000, NOT_STARTED)
 
       const runIntro = (sc: GenesisScene | null, rm: boolean) => {
         if (settled || introStarted) return
         introStarted = true
         // the intro timeline itself lasts ~4.5 s; if it has not released the page by then, finish it
-        arm(8000)
+        arm(8000, 'the intro was still running 8 s after it started')
         try {
           playIntro(sc, rm)
         } catch (err) {
           console.error('[intro]', err)
-          revealNow()
+          revealNow(`error: ${(err as Error).message}`)
         }
       }
 
@@ -191,6 +206,7 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
         const st = sc?.state
 
         if (rm) {
+          bus.intro = 'skipped by design: the device asks for reduced motion (Windows: Settings → Accessibility → Visual effects → Animation effects)'
           words?.classList.add('ready')
           gsap.set(q('.miner'), { autoAlpha: 0 })
           gsap.set(q('.hero-eyebrow, .hero-sub, .scroll-hint'), { autoAlpha: 1, y: 0 })
@@ -204,6 +220,11 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
           return
         }
 
+        bus.intro = 'running'
+        // a frame stalled by more than 0.5 s (shader compile, texture upload, a busy main thread) pauses the
+        // intro instead of jumping past it; SmoothScroll's lagSmoothing(0) is restored in release()
+        gsap.ticker.lagSmoothing(500, 33)
+        gsap.ticker.add(trackFrames)
         tl.addLabel('suck', 0.35)
         if (st) {
           tl.to(st, { rush: 2.6, suck: 1, spread: 0.45, duration: 0.6, ease: EASE_IN_OUT }, 'suck')
@@ -271,7 +292,7 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
 
       init().catch((err) => {
         console.error('[intro]', err)
-        revealNow()
+        revealNow(`error: ${(err as Error).message}`)
       })
 
       // The canvas is fixed behind the page, so it always "intersects" the viewport. Between the
