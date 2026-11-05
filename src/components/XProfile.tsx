@@ -28,7 +28,7 @@ export function XProfileBadge({ lang }: { lang: Lang }) {
         <b>{SITE.xProfile.name}</b>
         <span className="xbadge-handle">{X.handle}</span>
         <span className="xbadge-bio">{SITE.xProfile.bio}</span>
-        <span className="xbadge-cta">{t(UI.viewProfile, lang)} →</span>
+        <span className="xbadge-cta">{t(UI.viewProfile, lang)} <span aria-hidden="true">⤢</span></span>
       </button>
     </div>
   )

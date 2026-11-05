@@ -156,14 +156,16 @@ export function AboutView({ lang }: { lang: Lang }) {
             {SOCIALS.map((s) => <li key={s.key}><a href={s.url} target="_blank" rel="me noopener"><span>{s.label}</span>{s.handle} ↗</a></li>)}
           </ul>
         </div>
-        <figure className="about-photo">
-          <picture>
-            <source srcSet={SITE.photo} type="image/webp" />
-            <img src={SITE.photoJpg} alt={SITE.name} width={1200} height={1226} loading="eager" />
-          </picture>
+        <div className="about-photo">
+          <figure className="about-pic">
+            <picture>
+              <source srcSet={SITE.photo} type="image/webp" />
+              <img src={SITE.photoJpg} alt={SITE.name} width={1200} height={1226} loading="eager" />
+            </picture>
+            <figcaption>{lang === 'en' ? 'Timotius in East Java.' : 'Timotius di Jawa Timur.'}</figcaption>
+          </figure>
           <XProfileBadge lang={lang} />
-          <figcaption>{lang === 'en' ? 'Timotius in East Java.' : 'Timotius di Jawa Timur.'}</figcaption>
-        </figure>
+        </div>
       </section>
       <section className="section faq">
         <RevealText className="sec-title">{t(UI.faqTitle, lang)}</RevealText>

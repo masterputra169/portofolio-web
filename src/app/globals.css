@@ -133,7 +133,6 @@ a:hover { color: var(--acc); }
 .xbadge-bio { color: var(--acc); }
 .xbadge-cta { margin-top: 6px; color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
 .xbadge .xbadge-text:hover .xbadge-cta { color: var(--acc); }
-.about-photo .xbadge + figcaption { margin-top: 18px; }
 
 /* ---------- X profile pop-up ---------- */
 .xmodal { width: min(980px, calc(100vw - 32px)); max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); padding: 0; border: 1px solid var(--line-2); background: var(--bg); color: var(--fg); overflow: auto; overscroll-behavior: contain; }
@@ -326,9 +325,13 @@ a:hover { color: var(--acc); }
 .soc-list { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-direction: column; border-top: 1px solid var(--line); }
 .soc-list a { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--line); text-decoration: none; font-family: var(--mono); font-size: 14px; }
 .soc-list a span { color: var(--mut); }
-.about-photo { margin: 0; position: sticky; top: 100px; }
-.about-photo picture img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 42% 20%; filter: grayscale(0.15) contrast(1.03); }
-.about-photo figcaption { font-family: var(--mono); font-size: 12px; color: var(--mut); margin-top: 10px; }
+.about-photo { position: sticky; top: 100px; }
+/* 1. photo + X badge (~140 px under the photo) must fit the viewport below the sticky offset, or on a
+   768 px laptop the badge is cut off while the column sticks; the photo crops instead of the badge */
+.about-photo picture img { width: 100%; aspect-ratio: 4 / 5; max-height: max(300px, calc(100vh - 300px)); max-height: max(300px, calc(100svh - 300px)); object-fit: cover; object-position: 42% 20%; filter: grayscale(0.15) contrast(1.03); }
+/* 2. the caption sits on the photo it describes (bottom right; the X avatar takes the bottom left) */
+.about-pic { position: relative; margin: 0; }
+.about-pic figcaption { position: absolute; right: 12px; bottom: 10px; font-family: var(--mono); font-size: 11px; color: rgba(236, 235, 227, 0.92); text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 0 12px rgba(0, 0, 0, 0.75); pointer-events: none; }
 .faq-list { margin: 40px 0 0; }
 .faq-list div { border-top: 1px solid var(--line); padding: 24px 0; display: grid; grid-template-columns: 1fr 1.4fr; gap: 24px; }
 .faq-list dt { font-family: var(--serif); font-size: clamp(24px, 2.2vw, 32px); line-height: 1.2; }
