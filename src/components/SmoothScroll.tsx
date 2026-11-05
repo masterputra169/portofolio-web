@@ -11,6 +11,8 @@ gsap.registerPlugin(ScrollTrigger)
 /** Lenis smooth scrolling, driven by GSAP's ticker so ScrollTrigger and Lenis share one clock. */
 export function SmoothScroll() {
   useEffect(() => {
+    // the inline script in layout.tsx keeps the intro styles only once this is set
+    document.documentElement.setAttribute('data-hydrated', '')
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const lenis = new Lenis({ lerp: 0.09, smoothWheel: true, autoRaf: false })
     bus.lenis = lenis

@@ -29,7 +29,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className={`${serif.variable} ${sans.variable} ${mono.variable}`}>
       <body>
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        {/* .js lets CSS hide what the intro reveals, from the first paint. If the app never hydrates
+            (blocked or failed scripts), drop it after 10 s so the page falls back to its static layout. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "var d=document.documentElement;d.classList.add('js');setTimeout(function(){if(!d.hasAttribute('data-hydrated'))d.classList.remove('js')},10000)",
+          }}
+        />
         <JsonLd data={websiteJsonLd()} />
         <JsonLd data={personJsonLd('en')} />
         <SmoothScroll />
