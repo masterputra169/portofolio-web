@@ -40,7 +40,9 @@ export const SITE = {
     avatar: '/images/x-avatar.webp',
     name: 'masterputra',
     bio: 'comeback arc | builder arc',
-    /** screenshot of the X profile (followers, smart followers), shown under the /about card */
+    /** the full profile artwork (the avatar is its centre square), shown in the X pop-up */
+    artwork: { src: '/images/x-pfp.webp', width: 1000, height: 1258 },
+    /** screenshot of the X profile (followers, smart followers), shown in the X pop-up */
     snapshot: { src: '/images/x-profile.webp', width: 472, height: 617, date: { en: 'November 2026', id: 'November 2026' } as L10n },
   },
 }

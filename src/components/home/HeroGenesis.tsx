@@ -11,6 +11,7 @@ import { ARCS, SITE, SOCIALS } from '@/content/site'
 import { UI, href, t } from '@/content/i18n'
 import { mine, sha256, shortHash } from '@/lib/pow'
 import { bus } from '@/scene/bus'
+import { openXProfile } from '../XProfile'
 import type { GenesisScene } from '@/scene/genesis'
 
 gsap.registerPlugin(useGSAP, SplitText, ScrambleTextPlugin, ScrollTrigger)
@@ -338,10 +339,14 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
           </div>
           <div className="soc">
             {SOCIALS.map((s) => (
-              <a key={s.key} href={s.url} rel="me noopener" target="_blank" className={s.key === 'x' ? 'soc-x' : undefined}>
-                {s.key === 'x' ? <img src={SITE.xProfile.avatar} alt="" width={26} height={26} /> : null}
-                <span>{s.label}</span> {s.handle}
-              </a>
+              <span key={s.key} className={s.key === 'x' ? 'soc-x' : 'soc-item'}>
+                {s.key === 'x' ? (
+                  <button type="button" className="soc-av" onClick={openXProfile} aria-haspopup="dialog" aria-label={t(UI.viewProfile, lang)}>
+                    <img src={SITE.xProfile.avatar} alt="" width={26} height={26} />
+                  </button>
+                ) : null}
+                <a href={s.url} rel="me noopener" target="_blank"><span>{s.label}</span> {s.handle}</a>
+              </span>
             ))}
           </div>
         </div>
