@@ -351,7 +351,7 @@ export class GenesisScene {
 
   private frame() {
     this.raf = requestAnimationFrame(this.frame)
-    if (!this.visible) return
+    if (!this.visible || bus.covered) return
     const dt = Math.min(this.clock.getDelta(), 0.05)
     const t = this.clock.elapsedTime
     const st = this.state

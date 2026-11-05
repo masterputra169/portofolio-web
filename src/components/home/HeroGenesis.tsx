@@ -187,7 +187,22 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
 
       void init()
 
+      // The canvas is fixed behind the page, so it always "intersects" the viewport. Between the
+      // chain and the outro the opaque .solid sections hide it completely; stop rendering there.
+      // .solid fades in over its first 18vh, so it covers the viewport once its top is 18% above it.
+      const solid = document.querySelector<HTMLElement>('.solid')
+      const cover = solid
+        ? ScrollTrigger.create({
+            trigger: solid, start: 'top -18%', end: 'bottom bottom',
+            // measured after the pinned chain section adds its spacer (created later, by ChainSection)
+            refreshPriority: -1,
+            onToggle: (self) => { bus.covered = self.isActive },
+          })
+        : null
+
       return () => {
+        cover?.kill()
+        bus.covered = false
         cancelled = true
         window.clearInterval(arcTimer)
         splits.forEach((sp) => sp.revert())

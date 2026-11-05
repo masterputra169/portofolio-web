@@ -14,6 +14,8 @@ export const bus = {
   active: -1,
   /** 0..1 progress into the outro section */
   outro: 0,
+  /** true while opaque sections fill the whole viewport: the canvas is hidden, so skip rendering */
+  covered: false,
   mined: false,
   /** true while the home intro is playing; smooth scrolling stays paused */
   introPending: false,
