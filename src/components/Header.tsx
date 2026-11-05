@@ -56,7 +56,7 @@ export function Header({ lang, hidden = false }: { lang: Lang; hidden?: boolean 
             {open ? (lang === 'en' ? 'close' : 'tutup') : 'menu'}
           </button>
           <ul id="mnav" className="mnav" hidden={!open}>
-            {[...links, { key: 'certificates', label: t(nav.certificates, lang), path: '/certificates/' }].map((l) => (
+            {[...links, { key: 'certificates', label: t(nav.certificates, lang), path: '/certificates/' }, { key: 'cv', label: t(nav.cv, lang), path: '/cv/' }].map((l) => (
               <li key={l.key}>
                 <Link href={href(lang, l.path)} aria-current={current(l.path)}>{l.label}</Link>
               </li>

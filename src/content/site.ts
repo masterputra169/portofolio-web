@@ -16,11 +16,16 @@ export const SITE = {
     id: 'Dulu saya trading di pasar. Sekarang saya membangun untuknya.',
   } as L10n,
   githubUser: 'masterputra169',
-  /** One CV per site language (public/cv-en.pdf, public/cv-id.pdf); the page offers the one in its own language. */
+  /**
+   * One CV per site language (public/cv-en.pdf, public/cv-id.pdf), shown on /cv/ and /id/cv/.
+   * `pages` are the PDF pages rendered at 150 dpi (public/images/cv/cv-<lang>-<n>.webp, 1241×1754),
+   * so the CV can be read on phones whose browsers download PDFs instead of showing them.
+   * After replacing a PDF: pdftoppm -r 150 -png public/cv-en.pdf <tmp>/cv-en, then convert to WebP.
+   */
   cv: {
-    en: { url: '/cv-en.pdf', file: 'CV_Timotius_Kusuma_Wardana_Putra_EN.pdf', name: 'English' },
-    id: { url: '/cv-id.pdf', file: 'CV_Timotius_Kusuma_Wardana_Putra_ID.pdf', name: 'Bahasa Indonesia' },
-  } as Record<Lang, { url: string; file: string; name: string }> | null,
+    en: { url: '/cv-en.pdf', file: 'CV_Timotius_Kusuma_Wardana_Putra_EN.pdf', name: 'English', pages: 2 },
+    id: { url: '/cv-id.pdf', file: 'CV_Timotius_Kusuma_Wardana_Putra_ID.pdf', name: 'Bahasa Indonesia', pages: 2 },
+  } as Record<Lang, { url: string; file: string; name: string; pages: number }> | null,
   email: 'timotiusputra1@gmail.com' as string | null,
   /** What I am doing right now: shown on /about, in the contact section and on the experience entry */
   status: {

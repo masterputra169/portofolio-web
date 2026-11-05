@@ -292,7 +292,7 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
           <p className="hero-lede">{t(SITE.identity, lang)}</p>
           <div className="hero-row">
             <a className="cta p" href={href(lang, '/work/')}>{t(UI.viewWork, lang)}</a>
-            {SITE.cv ? <a className="cta" href={SITE.cv[lang].url} download={SITE.cv[lang].file} hrefLang={lang}>{t(UI.cv, lang)}</a> : null}
+            {SITE.cv ? <a className="cta" href={href(lang, '/cv/')}>{t(UI.cv, lang)}</a> : null}
             <button className="arc" type="button" onClick={nextArc} aria-label="Current arc. Click to switch.">
               <span className="dot" aria-hidden="true" />
               <span>{t(UI.currentArc, lang)}&nbsp;</span>

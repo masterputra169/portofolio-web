@@ -147,7 +147,7 @@ export function AboutView({ lang }: { lang: Lang }) {
             {SITE.cv
               ? ([lang, lang === 'en' ? 'id' : 'en'] as const).map((l) => (
                   <li key={l}>
-                    <a href={SITE.cv![l].url} download={SITE.cv![l].file} hrefLang={l}><span>CV · {SITE.cv![l].name}</span>PDF ↓</a>
+                    <Link href={href(l, '/cv/')} hrefLang={l}><span>CV · {SITE.cv![l].name}</span>{t(UI.cv, lang)} →</Link>
                   </li>
                 ))
               : null}
@@ -186,6 +186,41 @@ export function JourneyView({ lang }: { lang: Lang }) {
         <p className="sec-lead">{t(UI.journeysLead, lang)}</p>
       </section>
       <Journeys lang={lang} showTitle={false} />
+    </Page>
+  )
+}
+
+export function CvView({ lang }: { lang: Lang }) {
+  const cv = SITE.cv
+  if (!cv) return null
+  const mine = cv[lang]
+  const other: Lang = lang === 'en' ? 'id' : 'en'
+  return (
+    <Page lang={lang}>
+      <section className="section page-head">
+        <span className="eyebrow">/cv · {mine.name}</span>
+        <RevealText as="h1" className="page-title">{t(UI.cvTitle, lang)}</RevealText>
+        <p className="sec-lead">{t(UI.cvLead, lang)}</p>
+        <div className="case-links">
+          <a className="cta p" href={mine.url} target="_blank" rel="noopener" type="application/pdf">{t(UI.openPdf, lang)} ↗</a>
+          <a className="cta" href={mine.url} download={mine.file}>{t(UI.downloadPdf, lang)} ↓</a>
+          <Link className="cta" href={href(other, '/cv/')} hrefLang={other} lang={other}>{t(UI.cvOther, lang)} →</Link>
+        </div>
+      </section>
+      <section className="section cv-pages" aria-label={t(UI.cvTitle, lang)}>
+        {Array.from({ length: mine.pages }, (_, i) => (
+          <a key={i} href={mine.url} target="_blank" rel="noopener" className="cv-page">
+            <img
+              src={`/images/cv/cv-${lang}-${i + 1}.webp`}
+              alt={`${t(UI.cvPage, lang)} ${i + 1} / ${mine.pages}`}
+              width={1241}
+              height={1754}
+              loading={i === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+          </a>
+        ))}
+      </section>
     </Page>
   )
 }

@@ -5,14 +5,20 @@ export const href = (lang: Lang, path: string) => (lang === 'id' ? `/id${path ==
 export const otherLang = (lang: Lang): Lang => (lang === 'en' ? 'id' : 'en')
 
 export const UI = {
-  nav: { work: { en: 'work', id: 'karya' }, journey: { en: 'journey', id: 'perjalanan' }, about: { en: 'about', id: 'tentang' }, certificates: { en: 'certificates', id: 'sertifikat' } },
+  nav: { work: { en: 'work', id: 'karya' }, journey: { en: 'journey', id: 'perjalanan' }, about: { en: 'about', id: 'tentang' }, certificates: { en: 'certificates', id: 'sertifikat' }, cv: { en: 'cv', id: 'cv' } },
   langSwitch: { en: 'Bahasa Indonesia', id: 'English' },
   mining: { task: { en: 'mining genesis block · masterputra.tech', id: 'mining genesis block · masterputra.tech' }, found: { en: 'block found', id: 'blok ditemukan' }, searching: { en: 'searching', id: 'mencari' } },
   heroEyebrow: { en: 'BLOCK #0 · GENESIS', id: 'BLOK #0 · GENESIS' },
   currentArc: { en: 'current arc:', id: 'current arc:' },
   scroll: { en: 'SCROLL TO TRAVERSE THE CHAIN', id: 'SCROLL UNTUK MENJELAJAHI RANTAI' },
   viewWork: { en: 'View work', id: 'Lihat karya' },
-  cv: { en: 'Download CV', id: 'Unduh CV' },
+  cv: { en: 'View CV', id: 'Lihat CV' },
+  cvTitle: { en: 'Curriculum vitae', id: 'Curriculum vitae' },
+  cvLead: { en: 'Two pages. Open the PDF in your browser’s viewer, download it, or read it right here.', id: 'Dua halaman. Buka PDF-nya di viewer browser, unduh, atau baca langsung di sini.' },
+  openPdf: { en: 'Open PDF', id: 'Buka PDF' },
+  downloadPdf: { en: 'Download PDF', id: 'Unduh PDF' },
+  cvOther: { en: 'Versi Bahasa Indonesia', id: 'English version' },
+  cvPage: { en: 'CV, page', id: 'CV, halaman' },
   email: { en: 'Email', id: 'Email' },
   screens: { en: 'Screenshots', id: 'Tangkapan layar' },
   confirmed: { en: 'confirmed', id: 'terkonfirmasi' },
