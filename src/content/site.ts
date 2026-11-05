@@ -36,7 +36,13 @@ export const SITE = {
   photoJpg: '/images/timotius.jpg',
   avatar: '/images/avatar.jpg',
   /** the X profile picture and bio, shown with the X link (hero, /about card, contact) */
-  xProfile: { avatar: '/images/x-avatar.webp', name: 'masterputra', bio: 'comeback arc | builder arc' },
+  xProfile: {
+    avatar: '/images/x-avatar.webp',
+    name: 'masterputra',
+    bio: 'comeback arc | builder arc',
+    /** screenshot of the X profile (followers, smart followers), shown under the /about card */
+    snapshot: { src: '/images/x-profile.webp', width: 472, height: 617, date: { en: 'November 2026', id: 'November 2026' } as L10n },
+  },
 }
 
 export const SOCIALS = [

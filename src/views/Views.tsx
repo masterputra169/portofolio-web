@@ -155,6 +155,19 @@ export function AboutView({ lang }: { lang: Lang }) {
               </a>
             ) : null
           })()}
+          <figure className="xshot">
+            <a href={SOCIALS.find((s) => s.key === 'x')?.url} target="_blank" rel="me noopener">
+              <img
+                src={SITE.xProfile.snapshot.src}
+                width={SITE.xProfile.snapshot.width}
+                height={SITE.xProfile.snapshot.height}
+                alt={lang === 'en' ? 'Screenshot of the masterputra profile on X' : 'Tangkapan layar profil masterputra di X'}
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+            <figcaption>{t(UI.xSnapshot, lang).replace('{date}', t(SITE.xProfile.snapshot.date, lang))}</figcaption>
+          </figure>
           <ul className="soc-list">
             {SITE.email ? <li><a href={`mailto:${SITE.email}`}><span>{t(UI.email, lang)}</span>{SITE.email} ↗</a></li> : null}
             {SITE.cv

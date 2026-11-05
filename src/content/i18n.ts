@@ -21,6 +21,7 @@ export const UI = {
   cvPage: { en: 'CV, page', id: 'CV, halaman' },
   email: { en: 'Email', id: 'Email' },
   onX: { en: 'on X', id: 'di X' },
+  xSnapshot: { en: 'My X profile, {date}: 1,791 followers, followed by founders, KOL traders and DeFi researchers.', id: 'Profil X saya, {date}: 1.791 follower, di-follow para founder, KOL trader, dan DeFi researcher.' },
   screens: { en: 'Screenshots', id: 'Tangkapan layar' },
   confirmed: { en: 'confirmed', id: 'terkonfirmasi' },
   readCase: { en: 'Read the case study', id: 'Baca studi kasus' },
