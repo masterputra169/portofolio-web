@@ -79,19 +79,21 @@ export const CURATED: CuratedProject[] = [
   },
   {
     slug: 'dollarkilat',
+    repo: 'dollarkilat',
     title: 'dollarkilat',
     categories: ['web3'],
     journeys: ['crypto', 'dev'],
     homepage: 'https://dollarkilat.xyz',
     team: { en: 'Team project for Colosseum Frontier 2026 and Superteam Indonesia’s National Campus Hackathon', id: 'Proyek tim untuk Colosseum Frontier 2026 dan Indonesia National Campus Hackathon dari Superteam Indonesia' },
     summary: {
-      en: 'A hackathon MVP: a Solana PWA for Indonesian freelancers to get paid in USDC and spend it anywhere that takes QRIS. A working demo on Solana devnet, not a launched product.',
-      id: 'MVP hackathon: PWA Solana untuk freelancer Indonesia, terima bayaran dalam USDC dan belanjakan di mana pun yang menerima QRIS. Demo yang berjalan di Solana devnet, belum produk yang diluncurkan.',
+      en: 'An MVP for Indonesian freelancers: USDC on Solana in, QRIS payments out. Open source, live on devnet.',
+      id: 'MVP untuk freelancer Indonesia: USDC di Solana masuk, bayar QRIS keluar. Open source, live di devnet.',
     },
     stats: [
       { value: 'USDC', label: { en: 'in', id: 'masuk' } },
       { value: 'QRIS', label: { en: 'out', id: 'keluar' } },
-      { value: 'MVP', label: { en: 'hackathon prototype', id: 'prototipe hackathon' } },
+      { value: 'MVP', label: { en: 'live on Solana devnet', id: 'live di Solana devnet' } },
+      { value: 'MIT', label: { en: 'open source', id: 'open source' } },
     ],
     stack: ['Solana', 'Next.js', 'PWA', 'QRIS', 'Vercel'],
     caseStudy: {
@@ -112,8 +114,8 @@ export const CURATED: CuratedProject[] = [
         id: 'Bagian tersulitnya bukan di chain, tapi di jalur yang diregulasi di sisi lain: onboarding merchant QRIS dan perizinan pembayaran menentukan apa yang bisa dirilis.',
       },
       results: {
-        en: 'A prototype built for the hackathons, submitted to Colosseum Frontier 2026 and Superteam Indonesia’s National Campus Hackathon. The demo runs at dollarkilat.xyz on Solana devnet; it has had a handful of test users, not a production user base, and real QRIS payouts would still need a licensed payment partner.',
-        id: 'Prototipe yang dibuat untuk hackathon, disubmit ke Colosseum Frontier 2026 dan Indonesia National Campus Hackathon dari Superteam Indonesia. Demonya berjalan di dollarkilat.xyz di Solana devnet; penggunanya baru segelintir penguji, belum user produksi, dan pembayaran QRIS sungguhan masih butuh mitra pembayaran berizin.',
+        en: 'Shipped as an MVP for Colosseum Frontier 2026 and Superteam Indonesia’s National Campus Hackathon: the full code is open source under MIT on GitHub, and the app is live at dollarkilat.xyz on Solana devnet. It was built for the hackathons, so its users so far are a small group; taking QRIS payouts to mainnet would need a licensed payment partner.',
+        id: 'Dirilis sebagai MVP untuk Colosseum Frontier 2026 dan Indonesia National Campus Hackathon dari Superteam Indonesia: seluruh kodenya open source (MIT) di GitHub, dan aplikasinya live di dollarkilat.xyz di Solana devnet. Karena dibuat untuk hackathon, penggunanya sejauh ini masih sedikit; membawa pembayaran QRIS ke mainnet butuh mitra pembayaran berizin.',
       },
     },
   },
