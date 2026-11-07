@@ -145,8 +145,8 @@ export const FAQ: Array<{ q: L10n; a: L10n }> = [
   {
     q: { en: 'What has masterputra built?', id: 'Apa saja yang sudah dibangun masterputra?' },
     a: {
-      en: 'A Polymarket BTC 15-minute prediction bot with a calibrated XGBoost + LightGBM ensemble, dollarkilat (a Solana payment PWA for Indonesian freelancers), SapuX (a Chrome extension that unfollows inactive X accounts), and thesis research comparing XGBoost and LSTM for Bitcoin price prediction.',
-      id: 'Bot prediksi Polymarket BTC 15 menit dengan ensemble XGBoost + LightGBM terkalibrasi, dollarkilat (PWA pembayaran Solana untuk freelancer Indonesia), SapuX (Chrome extension untuk unfollow akun X yang tidak aktif), dan riset tugas akhir yang membandingkan XGBoost dan LSTM untuk prediksi harga Bitcoin.',
+      en: 'A Polymarket BTC 15-minute prediction bot with a calibrated XGBoost + LightGBM ensemble, dollarkilat (a hackathon MVP of a Solana payment PWA for Indonesian freelancers), SapuX (a Chrome extension that unfollows inactive X accounts), and thesis research comparing XGBoost and LSTM for Bitcoin price prediction.',
+      id: 'Bot prediksi Polymarket BTC 15 menit dengan ensemble XGBoost + LightGBM terkalibrasi, dollarkilat (MVP hackathon berupa PWA pembayaran Solana untuk freelancer Indonesia), SapuX (Chrome extension untuk unfollow akun X yang tidak aktif), dan riset tugas akhir yang membandingkan XGBoost dan LSTM untuk prediksi harga Bitcoin.',
     },
   },
   {

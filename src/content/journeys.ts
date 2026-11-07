@@ -34,7 +34,7 @@ export const JOURNEYS: Journey[] = [
       { title: { en: 'Web foundations', id: 'Fondasi web' }, body: { en: 'React, Next.js, TypeScript — and a GitHub profile README with live widgets.', id: 'React, Next.js, TypeScript — dan GitHub profile README dengan widget dinamis.' } },
       { title: { en: 'Own infrastructure', id: 'Infrastruktur sendiri' }, body: { en: 'A VPS, Cloudflare catch-all email, deploys on Netlify, Railway and Vercel; IBM Introduction to Cloud Computing.', id: 'VPS, email catch-all Cloudflare, deploy di Netlify, Railway, dan Vercel; sertifikat IBM Introduction to Cloud Computing.' } },
       { title: { en: 'Bots & tools', id: 'Bot & tools' }, body: { en: 'CRUDE Driller through 35+ versions, a tweet curation tool, the SapuX extension.', id: 'CRUDE Driller hingga 35+ versi, tweet curation tool, extension SapuX.' }, project: 'sapux' },
-      { title: { en: 'Shipped for real users', id: 'Dipakai user nyata' }, body: { en: 'dollarkilat for Indonesian freelancers; SapuX released free for everyone.', id: 'dollarkilat untuk freelancer Indonesia; SapuX dirilis gratis untuk publik.' } },
+      { title: { en: 'Shipped in public', id: 'Dirilis ke publik' }, body: { en: 'SapuX released free for everyone; dollarkilat as a hackathon MVP on Solana devnet.', id: 'SapuX dirilis gratis untuk publik; dollarkilat sebagai MVP hackathon di Solana devnet.' } },
     ],
   },
   {
