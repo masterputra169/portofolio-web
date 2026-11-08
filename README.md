@@ -1,17 +1,17 @@
 # masterputra.tech
 
-Portfolio of **Timotius Kusuma Wardana Putra** (masterputra) — Web3 developer from Kediri, Indonesia.
+Portfolio of **Timotius Kusuma Wardana Putra** (masterputra), Web3 developer from Kediri, Indonesia.
 
 Static Next.js site: every page is exported to plain HTML at build time.
 
 ## What's inside
 
-- **Genesis intro** — the visitor's browser mines a real SHA-256 block (target `0000…`) before the page opens. Every visitor gets a different genesis hash, which is then shown in the hero and footer.
-- **three.js scene** (`src/scene/genesis.ts`) — three GPU particle streams (crypto / developer / AI) braid into a chain of blocks. Blocks carry their real chained hashes on their faces and open up to reveal a glowing core as you scroll past their project. Bloom, RGB shift and particle turbulence react to scroll velocity.
-- **GSAP** — a single intro timeline, a pinned ScrollTrigger narrative through the featured projects, SplitText headline reveals, DrawSVG journey lanes, a velocity-skewed stack marquee, and Flip-animated filters on `/work`. Smooth scrolling with Lenis.
-- **Terminal** — press `` ` `` (or the `>_ terminal` button). Try `help`, `whoami`, `ls`, `cat sapux`, `mine`.
+- **Genesis intro**: the visitor's browser mines a real SHA-256 block (target `0000…`) before the page opens. Every visitor gets a different genesis hash, which is then shown in the hero and footer.
+- **three.js scene** (`src/scene/genesis.ts`): three GPU particle streams (crypto / developer / AI) braid into a chain of blocks. Blocks carry their real chained hashes on their faces and open up to reveal a glowing core as you scroll past their project. Bloom, RGB shift and particle turbulence react to scroll velocity.
+- **GSAP**: a single intro timeline, a pinned ScrollTrigger narrative through the featured projects, SplitText headline reveals, DrawSVG journey lanes, a velocity-skewed stack marquee, and Flip-animated filters on `/work`. Smooth scrolling with Lenis.
+- **Terminal**: press `` ` `` (or the `>_ terminal` button). Try `help`, `whoami`, `ls`, `cat sapux`, `mine`.
 - **English by default, Indonesian under `/id/`.**
-- **SEO & GEO** — canonical + hreflang, JSON-LD (Person, WebSite, ProfilePage, FAQPage, SoftwareSourceCode), `sitemap.xml`, `robots.txt` that welcomes every crawler including AI assistants, and `llms.txt`.
+- **SEO & GEO**: canonical + hreflang, JSON-LD (Person, WebSite, ProfilePage, FAQPage, SoftwareSourceCode), `sitemap.xml`, `robots.txt` that welcomes every crawler including AI assistants, and `llms.txt`.
 
 ## Content
 
@@ -56,4 +56,4 @@ Any static host works. On Cloudflare Pages: build command `npm run build`, outpu
 
 ### Cloudflare Workers (current setup)
 
-The repo includes `wrangler.jsonc`, so Workers Builds can use the defaults: build command `npm run build`, deploy command `npx wrangler deploy`. Wrangler uploads `./out` as static assets — no server adapter is needed. `public/_headers` sets long-lived caching for hashed assets.
+The repo includes `wrangler.jsonc`, so Workers Builds can use the defaults: build command `npm run build`, deploy command `npx wrangler deploy`. Wrangler uploads `./out` as static assets; no server adapter is needed. `public/_headers` sets long-lived caching for hashed assets.

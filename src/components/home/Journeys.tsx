@@ -31,7 +31,7 @@ export function Journeys({ lang, showTitle = true }: { lang: Lang; showTitle?: b
           const tl = gsap.timeline({
             defaults: { ease: 'none' },
             // clamp(): on /journey the page ends just below the lanes, so "bottom 55%" lies past
-            // the max scroll — the timeline never finished and the last steps stayed dimmed.
+            // the max scroll, so the timeline never finished and the last steps stayed dimmed.
             scrollTrigger: { trigger: lane, start: 'top 75%', end: 'clamp(bottom 55%)', scrub: 1 },
           })
           if (line) tl.fromTo(line, { drawSVG: '0%' }, { drawSVG: '100%', duration: 1 }, 0)
@@ -80,7 +80,7 @@ export function Journeys({ lang, showTitle = true }: { lang: Lang; showTitle?: b
                     {s.when ? <span className="step-when">{t(s.when, lang)}</span> : null}
                     <StepH>{t(s.title, lang)}</StepH>
                     <p>{t(s.body, lang)}</p>
-                    {s.project ? <Link className="step-link" href={href(lang, `/work/${s.project}/`)}>{t(UI.readCase, lang)} →</Link> : null}
+                    {s.project ? <Link className="step-link" href={href(lang, `/work/${s.project}/`)}>{t(UI.readCase, lang)}</Link> : null}
                   </li>
                 ))}
               </ol>

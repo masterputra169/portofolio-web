@@ -69,11 +69,18 @@ export function WorkGrid({ lang, projects }: { lang: Lang; projects: Project[] }
       </div>
       <div className="wgrid">
         {withCase.map((p, i) => (
-          <Link key={p.slug} href={href(lang, `/work/${p.slug}/`)} className={`wcard${p.featured ? ' featured' : ''}`} data-flip-id={p.slug} hidden={!shown(p)}>
-            <span className="w-tx">block #{i + 1}{p.fork ? ` · ${t(UI.fork, lang)}` : ''}{p.stars ? ` · ★ ${p.stars}` : ''}</span>
+          <Link key={p.slug} href={href(lang, `/work/${p.slug}/`)} className={`wcard${p.caseStudy ? ' case' : ''}`} data-flip-id={p.slug} hidden={!shown(p)}>
+            <span className="w-tx">block #{i + 1}{p.caseStudy ? ` · ${t(UI.caseLabel, lang)}` : ''}{p.fork ? ` · ${t(UI.fork, lang)}` : ''}{p.stars ? ` · ★ ${p.stars}` : ''}</span>
             <span className="w-cat">{p.categories.map((c) => t(UI.categories[c], lang)).join(' · ')}</span>
             <h2>{p.title}</h2>
             {t(p.summary, lang) ? <p>{t(p.summary, lang)}</p> : null}
+            {p.caseStudy && p.stats.length ? (
+              <span className="w-stats">
+                {p.stats.slice(0, 3).map((s) => (
+                  <span key={s.value}><b>{s.value}</b>{t(s.label, lang)}</span>
+                ))}
+              </span>
+            ) : null}
             <span className="w-stack">{p.stack.slice(0, 4).join(' · ')}</span>
           </Link>
         ))}

@@ -65,9 +65,9 @@ export function Certificates({ lang, all = false }: { lang: Lang; all?: boolean 
         </div>
       ) : null}
       <RevealGroup className="cert-grid">
-        {CERTIFICATES.map((c) => (
+        {CERTIFICATES.map((c, i) => (
           <TiltCard key={c.slug} className="rv cert">
-            <img src={`/certificates/${c.slug}.webp`} alt={`${c.title} — ${c.issuer}`} loading="lazy" width={900} height={640} />
+            <img src={`/certificates/${c.slug}.webp`} alt={`${c.title}, ${c.issuer}`} loading={all && i === 0 ? 'eager' : 'lazy'} fetchPriority={all && i === 0 ? 'high' : 'auto'} width={900} height={640} />
             <div className="cert-body">
               <span className="cert-date">{t(c.date, lang)}</span>
               {all ? <h2>{c.title}</h2> : <h3>{c.title}</h3>}
@@ -81,7 +81,7 @@ export function Certificates({ lang, all = false }: { lang: Lang; all?: boolean 
           </TiltCard>
         ))}
       </RevealGroup>
-      {!all ? <Link className="more" href={href(lang, '/certificates/')}>{t(UI.allCerts, lang)} →</Link> : null}
+      {!all ? <Link className="more" href={href(lang, '/certificates/')}>{t(UI.allCerts, lang)}</Link> : null}
     </section>
   )
 }

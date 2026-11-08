@@ -22,7 +22,7 @@ export type BlockRig = {
   on: number
   /** 0..1 scale-in */
   scale: number
-  /** 0..1 "opened" — faces pull apart to reveal the glowing core */
+  /** 0..1 "opened": faces pull apart to reveal the glowing core */
   open: number
   /** 0..1 highlighted by scroll */
   lit: number

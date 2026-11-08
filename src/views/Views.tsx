@@ -7,7 +7,6 @@ import { getProjects } from '@/lib/github'
 import { JsonLd, faqJsonLd, profilePageJsonLd, projectJsonLd } from '@/lib/seo'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
-import { HtmlLang } from '@/components/HtmlLang'
 import { XProfileBadge, XProfileDialog } from '@/components/XProfile'
 import { HeroGenesis } from '@/components/home/HeroGenesis'
 import { ChainSection } from '@/components/home/ChainSection'
@@ -20,7 +19,6 @@ import { WorkGrid } from '@/components/work/WorkGrid'
 function Page({ lang, children, home = false }: { lang: Lang; children: ReactNode; home?: boolean }) {
   return (
     <div lang={lang} className={home ? 'page page-home' : 'page'}>
-      <HtmlLang lang={lang} />
       <a className="skip" href="#main">{lang === 'en' ? 'Skip to content' : 'Langsung ke konten'}</a>
       <Header lang={lang} hidden={home} />
       <main id="main">{children}</main>
@@ -96,7 +94,7 @@ export async function CaseStudyView({ lang, slug }: { lang: Lang; slug: string }
             {p.gallery.map((g, i) => (
               <figure key={g.src}>
                 <a href={g.src} target="_blank" rel="noopener">
-                  <img src={g.src} alt={t(g.alt, lang)} width={g.width} height={g.height} loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
+                  <img src={g.src} alt={t(g.alt, lang)} width={g.width} height={g.height} loading={i === 0 ? 'eager' : 'lazy'} fetchPriority={i === 0 ? 'high' : 'auto'} decoding="async" />
                 </a>
                 <figcaption>{t(g.caption, lang)}</figcaption>
               </figure>
@@ -121,7 +119,7 @@ export async function CaseStudyView({ lang, slug }: { lang: Lang; slug: string }
         ) : null}
         {next && next.slug !== p.slug ? (
           <Link className="next-block" href={href(lang, `/work/${next.slug}/`)}>
-            <span>{t(UI.next, lang)} →</span>
+            <span>{t(UI.next, lang)}</span>
             <b>{next.title}</b>
           </Link>
         ) : null}
@@ -146,7 +144,7 @@ export function AboutView({ lang }: { lang: Lang }) {
           <figure className="about-pic">
             <picture>
               <source srcSet={SITE.photo} type="image/webp" />
-              <img src={SITE.photoJpg} alt={SITE.name} width={1200} height={1226} loading="eager" />
+              <img src={SITE.photoJpg} alt={SITE.name} width={1200} height={1226} loading="eager" fetchPriority="high" />
             </picture>
             <figcaption>{lang === 'en' ? 'Timotius in East Java.' : 'Timotius di Jawa Timur.'}</figcaption>
           </figure>
@@ -156,7 +154,7 @@ export function AboutView({ lang }: { lang: Lang }) {
           <p>{t(ABOUT.story, lang)}</p>
           <div className="about-actions">
             {SITE.email ? <a className="cta p" href={`mailto:${SITE.email}`}>{t(UI.emailMe, lang)} ↗</a> : null}
-            {SITE.cv ? <Link className="cta" href={href(lang, '/cv/')}>{t(UI.cv, lang)} →</Link> : null}
+            {SITE.cv ? <Link className="cta" href={href(lang, '/cv/')}>{t(UI.cv, lang)}</Link> : null}
           </div>
           <dl className="glance" aria-label={t(UI.atAGlance, lang)}>
             {ABOUT.glance.map((g) => (
@@ -217,7 +215,7 @@ export function CvView({ lang }: { lang: Lang }) {
         <div className="case-links">
           <a className="cta p" href={mine.url} target="_blank" rel="noopener" type="application/pdf">{t(UI.openPdf, lang)} ↗</a>
           <a className="cta" href={mine.url} download={mine.file}>{t(UI.downloadPdf, lang)} ↓</a>
-          <Link className="cta" href={href(other, '/cv/')} hrefLang={other} lang={other}>{t(UI.cvOther, lang)} →</Link>
+          <Link className="cta" href={href(other, '/cv/')} hrefLang={other} lang={other}>{t(UI.cvOther, lang)}</Link>
         </div>
       </section>
       <section className="section cv-pages" aria-label={t(UI.cvTitle, lang)}>
@@ -229,6 +227,7 @@ export function CvView({ lang }: { lang: Lang }) {
               width={1241}
               height={1754}
               loading={i === 0 ? 'eager' : 'lazy'}
+              fetchPriority={i === 0 ? 'high' : 'auto'}
               decoding="async"
             />
           </a>

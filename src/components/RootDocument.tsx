@@ -4,16 +4,17 @@ import { IBM_Plex_Mono, IBM_Plex_Sans, Instrument_Serif } from 'next/font/google
 import { SmoothScroll } from '@/components/SmoothScroll'
 import { Terminal } from '@/components/Terminal'
 import { SITE } from '@/content/site'
+import type { Lang } from '@/content/types'
 import { JsonLd, personJsonLd, websiteJsonLd } from '@/lib/seo'
-import './globals.css'
+import '@/app/globals.css'
 
 const serif = Instrument_Serif({ subsets: ['latin'], weight: '400', style: ['normal', 'italic'], variable: '--font-serif', display: 'swap' })
 const sans = IBM_Plex_Sans({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-sans', display: 'swap' })
 const mono = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-mono', display: 'swap' })
 
-export const metadata: Metadata = {
+export const rootMetadata: Metadata = {
   metadataBase: new URL(SITE.url),
-  title: { default: `${SITE.name} — Web3 developer`, template: `%s · ${SITE.alias}` },
+  title: { default: `${SITE.name} · Web3 developer`, template: `%s · ${SITE.alias}` },
   description: SITE.identity.en,
   applicationName: 'masterputra.tech',
   authors: [{ name: SITE.name, url: SITE.url }],
@@ -23,11 +24,15 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-export const viewport: Viewport = { themeColor: '#07080A', colorScheme: 'dark' }
+export const rootViewport: Viewport = { themeColor: '#07080A', colorScheme: 'dark' }
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+/**
+ * The <html> shell shared by the two root layouts, app/(en) and app/id. Each language has its own
+ * root layout so the exported HTML carries the right `lang` straight from Next.js.
+ */
+export function RootDocument({ lang, children }: { lang: Lang; children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${serif.variable} ${sans.variable} ${mono.variable}`}>
+    <html lang={lang} suppressHydrationWarning className={`${serif.variable} ${sans.variable} ${mono.variable}`}>
       <body>
         {/* .js lets CSS hide what the intro reveals, from the first paint. If the app never hydrates
             (blocked or failed scripts), drop it after 15 s so the page falls back to its static layout. */}
@@ -37,7 +42,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           }}
         />
         <JsonLd data={websiteJsonLd()} />
-        <JsonLd data={personJsonLd('en')} />
+        <JsonLd data={personJsonLd(lang)} />
         <SmoothScroll />
         {children}
         <Terminal />

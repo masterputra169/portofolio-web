@@ -3,7 +3,7 @@ import { SITE } from '@/content/site'
 
 export const dynamic = 'force-static'
 
-/** Every crawler is welcome — search engines and AI assistants alike (SEO + GEO). */
+/** Every crawler is welcome: search engines and AI assistants alike (SEO + GEO). */
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [{ userAgent: '*', allow: '/' }],

@@ -73,7 +73,7 @@ export const SOCIALS = [
   { key: 'linkedin', label: 'LinkedIn', handle: 'Timotius K. W. Putra', url: 'https://www.linkedin.com/in/timotius-kusuma-wardana-putra/' },
 ] as const
 
-/** "current arc" status — edit freely, the label cycles through these */
+/** "current arc" status. Edit freely;, the label cycles through these */
 export const ARCS = [
   { key: 'builder', label: 'builder arc', meaning: { en: 'Shipping projects', id: 'Sedang shipping proyek' } },
   { key: 'locked', label: 'locked in arc', meaning: { en: 'Heads down: thesis, study, code every day', id: 'Fokus penuh: TA, belajar, ngoding tiap hari' } },
@@ -84,7 +84,7 @@ export const EXPERTISE = {
   shipping: ['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'Laravel', 'Firebase', 'XGBoost', 'LightGBM', 'Solana', 'EVM / Base', 'Vercel', 'Cloudflare', 'Railway', 'VPS'],
   obsessed: [
     { en: 'Game theory', id: 'Game theory' },
-    { en: 'Quant finance — Monte Carlo, copulas, Brier score', id: 'Quant finance — Monte Carlo, copula, Brier score' },
+    { en: 'Quant finance: Monte Carlo, copulas, Brier score', id: 'Quant finance: Monte Carlo, copula, Brier score' },
     { en: 'On-chain analytics', id: 'Analisis data on-chain' },
     { en: 'Prediction markets', id: 'Prediction market' },
     { en: 'Liquidity providing', id: 'Liquidity providing' },
@@ -93,9 +93,9 @@ export const EXPERTISE = {
 
 /** `start` (YYYY-MM) orders the list: newest first, whatever order the entries are written in. */
 export const EXPERIENCE = [
-  { start: '2026-09', org: 'PLN UP3 Kediri', role: { en: 'Intern — current', id: 'Magang — saat ini' }, period: { en: 'Sep – Dec 2026 · now', id: 'Sep – Des 2026 · sekarang' }, note: { en: 'Three-month internship.', id: 'Magang tiga bulan.' } },
+  { start: '2026-09', org: 'PLN UP3 Kediri', role: { en: 'Intern (current)', id: 'Magang (saat ini)' }, period: { en: 'Sep – Dec 2026 · now', id: 'Sep – Des 2026 · sekarang' }, note: { en: 'Three-month internship.', id: 'Magang tiga bulan.' } },
   { start: '2026-07', org: 'Indonesia Web3 Hackathon 2026 · online workshop', role: { en: 'Workshop participant', id: 'Peserta workshop' }, period: { en: 'Jul – Aug 2026', id: 'Jul – Agu 2026' }, note: { en: 'The hackathon’s weekly online workshops: Web3 fundamentals, smart contracts in Solidity, AI × Web3. Mentored by Dev Web3 Jogja.', id: 'Workshop online mingguan dari hackathon ini: fundamental Web3, smart contract dengan Solidity, AI × Web3. Dimentori Dev Web3 Jogja.' } },
-  { start: '2026-04', org: 'Colosseum Frontier 2026 · Indonesia National Campus Hackathon', role: { en: 'Hackathon participant — dollarkilat', id: 'Peserta hackathon — dollarkilat' }, period: { en: 'Apr – May 2026', id: 'Apr – Mei 2026' }, note: { en: 'Built a Solana payment PWA with a team and entered it in both: Colosseum Frontier 2026 and Superteam Indonesia’s National Campus Hackathon.', id: 'Membangun PWA pembayaran Solana bersama tim dan mengikutkannya di keduanya: Colosseum Frontier 2026 dan Indonesia National Campus Hackathon dari Superteam Indonesia.' } },
+  { start: '2026-04', org: 'Colosseum Frontier 2026 · Indonesia National Campus Hackathon', role: { en: 'Hackathon participant (dollarkilat)', id: 'Peserta hackathon (dollarkilat)' }, period: { en: 'Apr – May 2026', id: 'Apr – Mei 2026' }, note: { en: 'Built a Solana payment PWA with a team and entered it in both: Colosseum Frontier 2026 and Superteam Indonesia’s National Campus Hackathon.', id: 'Membangun PWA pembayaran Solana bersama tim dan mengikutkannya di keduanya: Colosseum Frontier 2026 dan Indonesia National Campus Hackathon dari Superteam Indonesia.' } },
   { start: '2023-09', org: 'Universitas Dian Nuswantoro · PSDKU Kediri', role: { en: 'B.Sc. Informatics Engineering', id: 'S1 Teknik Informatika' }, period: { en: '2023 – present', id: '2023 – sekarang' }, note: { en: 'Final-year thesis on Bitcoin price prediction.', id: 'Tugas akhir tentang prediksi harga Bitcoin.' } },
 ] as const
 
@@ -110,7 +110,7 @@ export const CERTIFICATES = [
   },
   {
     slug: 'asean-data-science-explorers-2026',
-    title: 'ASEAN Data Science Explorers 2026 — Enablement Session: SAP Analytics Cloud',
+    title: 'ASEAN Data Science Explorers 2026 Enablement Session: SAP Analytics Cloud',
     issuer: 'SAP & ASEAN Foundation',
     date: { en: '2026', id: '2026' },
     topics: { en: 'SAP Analytics Cloud training session', id: 'Sesi pelatihan SAP Analytics Cloud' },

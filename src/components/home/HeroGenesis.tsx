@@ -282,11 +282,21 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
           i = (i + 1) % ARCS.length
           gsap.to(el, { duration: 0.5, overwrite: true, scrambleText: { text: ARCS[i].label, chars: '0123456789abcdef', speed: 1 } })
         }
-        arcTl = gsap.timeline({ repeat: -1 })
+        // one round only (it ends back on the first arc), paused while hovered or focused; a click
+        // hands control to the visitor and stops the automatic cycle (WCAG 2.2.2, nothing moves > 5 s on its own)
+        const stop = () => { arcTl?.kill(); arcTl = null; gsap.set(bar, { scaleX: 0 }) }
+        arcTl = gsap.timeline({ repeat: ARCS.length - 1, onComplete: stop })
         arcTl.fromTo(bar, { scaleX: 0 }, { scaleX: 1, duration: ARC_HOLD, ease: 'none', immediateRender: true }).call(next)
+        const btn = el.closest('button')
+        const hold = () => arcTl?.pause()
+        const resume = () => { if (btn && (btn.matches(':hover') || btn === document.activeElement)) return; arcTl?.resume() }
+        btn?.addEventListener('pointerenter', hold)
+        btn?.addEventListener('focus', hold)
+        btn?.addEventListener('pointerleave', resume)
+        btn?.addEventListener('blur', resume)
         ;(root.current as HTMLDivElement & { __nextArc?: () => void }).__nextArc = () => {
+          stop()
           next()
-          arcTl?.restart()
         }
       }
 
@@ -336,8 +346,8 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
           <div className="m-row"><span>&gt; task</span><span>{t(UI.mining.task, lang)}</span></div>
           <div className="m-row"><span>target</span><span>00000…</span></div>
           <div className="m-row"><span>nonce</span><span className="m-nonce">0</span></div>
-          <div className="m-row"><span>hash/s</span><span className="m-rate">—</span></div>
-          <div className="m-row"><span>sha-256</span><span className="m-hash">—</span></div>
+          <div className="m-row"><span>hash/s</span><span className="m-rate">…</span></div>
+          <div className="m-row"><span>sha-256</span><span className="m-hash">…</span></div>
           <div className="m-bar"><i /></div>
           <div className="m-status blink">{t(UI.mining.searching, lang)}</div>
         </div>
@@ -352,7 +362,6 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
             <a className="cta p" href={href(lang, '/work/')}>{t(UI.viewWork, lang)}</a>
             {SITE.cv ? <a className="cta" href={href(lang, '/cv/')}>{t(UI.cv, lang)}</a> : null}
             <button className="arc" type="button" onClick={nextArc} aria-label="Current arc. Click to switch.">
-              <span className="dot" aria-hidden="true" />
               <span>{t(UI.currentArc, lang)}&nbsp;</span>
               <span className="arc-text">{ARCS[0].label}</span>
               <span className="arc-bar" aria-hidden="true" />

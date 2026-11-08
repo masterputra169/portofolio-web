@@ -7,7 +7,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
-/** Infinite stack ticker that skews and speeds up with scroll velocity. */
+/**
+ * Stack ticker driven by the scroll: it moves only while the visitor scrolls (and skews with the
+ * scroll speed), so nothing slides on its own and no pause button is needed.
+ */
 export function Marquee({ items }: { items: string[] }) {
   const root = useRef<HTMLDivElement>(null)
   useGSAP(
@@ -16,18 +19,18 @@ export function Marquee({ items }: { items: string[] }) {
       mm.add('(prefers-reduced-motion: no-preference)', () => {
         const track = root.current?.querySelector('.mq-track')
         if (!track) return
-        const loop = gsap.to(track, { xPercent: -50, duration: 38, ease: 'none', repeat: -1 })
         const skew = gsap.quickTo(track, 'skewX', { duration: 0.5, ease: 'power3.out' })
-        ScrollTrigger.create({
-          trigger: root.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          onUpdate: (self) => {
-            const v = self.getVelocity()
-            skew(gsap.utils.clamp(-12, 12, v / -220))
-            loop.timeScale(1 + Math.min(6, Math.abs(v) / 400))
+        gsap.fromTo(track, { xPercent: 0 }, {
+          xPercent: -30,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: root.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 0.6,
+            onUpdate: (self) => skew(gsap.utils.clamp(-12, 12, self.getVelocity() / -220)),
+            onToggle: (self) => { if (!self.isActive) skew(0) },
           },
-          onToggle: (self) => { if (!self.isActive) { skew(0); loop.timeScale(1) } },
         })
       })
     },

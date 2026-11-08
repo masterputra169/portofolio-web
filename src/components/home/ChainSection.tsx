@@ -90,7 +90,7 @@ export function ChainSection({ lang, projects }: { lang: Lang; projects: Project
               </div>
             ) : null}
             <div className="cp-item cp-links">
-              <Link href={href(lang, `/work/${p.slug}/`)}>{t(UI.readCase, lang)} →</Link>
+              <Link href={href(lang, `/work/${p.slug}/`)}>{t(UI.readCase, lang)}</Link>
               {p.repoUrl ? <a href={p.repoUrl} target="_blank" rel="noopener">{t(UI.onGithub, lang)} ↗</a> : null}
             </div>
           </article>

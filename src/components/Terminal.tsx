@@ -89,7 +89,7 @@ export function Terminal() {
       case 'cat': {
         const q = (args[0] ?? '').toLowerCase()
         const p = CURATED.find((x) => x.slug === q || x.title.toLowerCase() === q || x.repo?.toLowerCase() === q)
-        return print(p ? `<span class="c">${esc(p.title)}</span>\n${esc(p.summary.en)}\n<span class="m">${p.stack.join(' · ')}</span>` : `cat: ${esc(args[0] ?? '')}: no such project — try <span class="c">ls</span>`)
+        return print(p ? `<span class="c">${esc(p.title)}</span>\n${esc(p.summary.en)}\n<span class="m">${p.stack.join(' · ')}</span>` : `cat: ${esc(args[0] ?? '')}: no such project. Try <span class="c">ls</span>`)
       }
       case 'journey':
         return print(`<span class="y">crypto     </span> trader ─ airdrop ─ alpha ─────┐\n<span class="b">developer  </span> informatics ─ infra ─ bots ─┼──▶ <span class="c">builder</span>\n<span class="g">ai explorer</span> ml ─ vision ─ production ───┘`)
@@ -119,7 +119,7 @@ export function Terminal() {
       }
       case 'clear': return setLines([])
       case 'exit': return hide()
-      default: return print(`command not found: ${esc(cmd)} — try <span class="c">help</span>`)
+      default: return print(`command not found: ${esc(cmd)}. Try <span class="c">help</span>`)
     }
   }
 
@@ -142,7 +142,7 @@ export function Terminal() {
   return (
     <div className={`term${open ? ' open' : ''}`} role="dialog" aria-label="Terminal" aria-hidden={!open}>
       <div className="term-bar">
-        <span>guest@masterputra.tech — type <b>help</b></span>
+        <span>guest@masterputra.tech · type <b>help</b></span>
         <button type="button" onClick={hide} aria-label="Close terminal" tabIndex={open ? 0 : -1}>esc ✕</button>
       </div>
       <div className="term-out" ref={out}>
