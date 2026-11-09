@@ -167,7 +167,8 @@ a:hover { color: var(--acc); }
 .chain { position: relative; z-index: 5; }
 .chain-stage { position: relative; height: 100vh; height: 100svh; perspective: 1200px; display: grid; align-items: center; justify-items: end; padding: 0 var(--pad); }
 .chain-panel { grid-area: 1 / 1; position: relative; width: min(480px, 88vw); padding: 26px 28px; background: rgba(7, 8, 10, 0.9); border: 1px solid rgba(51, 52, 58, 0.7); }
-.js .chain-panel { visibility: hidden; }
+.js .chain-panel { opacity: 0; pointer-events: none; }
+.js .chain-panel.on { pointer-events: auto; }
 .cp-tx { font-family: var(--mono); font-size: 12px; color: var(--mut); display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
 .cp-tx b { color: var(--acc); font-weight: 500; }
 .cp-cat { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 18px; }

@@ -25,6 +25,8 @@ export function ChainSection({ lang, projects }: { lang: Lang; projects: Project
       const panels = q('.chain-panel')
       const bars = q('.rail i b')
       const mm = gsap.matchMedia()
+      // only the panel on screen takes clicks; the others sit transparent on top of it
+      const setOn = (i: number) => panels.forEach((p, k) => p.classList.toggle('on', k === i))
 
       mm.add({ motion: '(prefers-reduced-motion: no-preference)', reduce: '(prefers-reduced-motion: reduce)' }, (ctx) => {
         const { motion } = ctx.conditions as { motion: boolean }
@@ -42,7 +44,9 @@ export function ChainSection({ lang, projects }: { lang: Lang; projects: Project
               const seg = self.progress * (featured.length + 0.6) - 0.3
               bus.focus = Math.max(0, seg + 0.5)
               bus.active = seg >= 0 && seg < featured.length ? Math.floor(seg) : -1
+              setOn(bus.active)
             },
+            onToggle: (self) => { if (!self.isActive) setOn(-1) },
             onLeave: () => { bus.active = -1 },
             onLeaveBack: () => { bus.active = -1; bus.scroll = 0; bus.focus = 0 },
           },
@@ -52,15 +56,31 @@ export function ChainSection({ lang, projects }: { lang: Lang; projects: Project
           const kids = p.querySelectorAll('.cp-item')
           const at = 0.3 + i
           if (motion) {
-            tl.fromTo(p, { autoAlpha: 0, y: 70, rotateX: -8 }, { autoAlpha: 1, y: 0, rotateX: 0, duration: 0.18, ease: 'power3.out' }, at)
-              .fromTo(kids, { autoAlpha: 0, y: 26, filter: 'blur(6px)' }, { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 0.16, stagger: 0.022, ease: 'power3.out' }, at + 0.02)
+            tl.fromTo(p, { opacity: 0, y: 70, rotateX: -8 }, { opacity: 1, y: 0, rotateX: 0, duration: 0.18, ease: 'power3.out' }, at)
+              .fromTo(kids, { opacity: 0, y: 26, filter: 'blur(6px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.16, stagger: 0.022, ease: 'power3.out' }, at + 0.02)
               .fromTo(bars[i], { scaleX: 0 }, { scaleX: 1, duration: 1 }, at)
-              .to(p, { autoAlpha: 0, y: -60, duration: 0.16, ease: 'power2.in' }, at + 0.84)
+              .to(p, { opacity: 0, y: -60, duration: 0.16, ease: 'power2.in' }, at + 0.84)
           } else {
-            tl.fromTo(p, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.05 }, at).to(p, { autoAlpha: 0, duration: 0.05 }, at + 0.9)
+            tl.fromTo(p, { opacity: 0 }, { opacity: 1, duration: 0.05 }, at).to(p, { opacity: 0, duration: 0.05 }, at + 0.9)
           }
         })
         tl.to({}, { duration: 0.3 })
+
+        // Keyboard: Tab into a panel's link scrolls the page to where that panel is fully shown.
+        // (Panels fade with opacity, not visibility, so their links stay in the tab order.)
+        const onFocus = (e: FocusEvent) => {
+          const panel = (e.target as Element).closest('.chain-panel')
+          const st = tl.scrollTrigger
+          if (!panel || !st) return
+          const i = panels.indexOf(panel as HTMLElement)
+          const at = (0.3 + i + 0.45) / tl.duration()
+          window.scrollTo({ top: st.start + (st.end - st.start) * at, behavior: 'instant' })
+          tl.progress(at)
+          setOn(i)
+        }
+        const el = root.current
+        el?.addEventListener('focusin', onFocus)
+        return () => el?.removeEventListener('focusin', onFocus)
       })
     },
     { scope: root, dependencies: [featured.length] },

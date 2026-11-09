@@ -42,8 +42,9 @@ export function Journeys({ lang, showTitle = true }: { lang: Lang; showTitle?: b
             if (dot) tl.fromTo(dot, { scale: 0.4 }, { scale: 1, duration: 0.1 }, at)
           })
           const head = lane.querySelector('.lane-head')
+          // opacity, not autoAlpha: a visibility-hidden lane heading drops out of the heading outline
           if (head) gsap.from(head, {
-            autoAlpha: 0, y: 30, duration: 1, ease: 'expo.out', delay: li * 0.08,
+            opacity: 0, y: 30, duration: 1, ease: 'expo.out', delay: li * 0.08,
             scrollTrigger: { trigger: lane, start: 'top 85%', toggleActions: 'play none none reverse' },
           })
         })

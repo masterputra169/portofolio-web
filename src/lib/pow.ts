@@ -69,7 +69,14 @@ export async function mine(data: string, opts: { prefix?: string; budgetMs?: num
   let best: { nonce: number; hash: string } | null = null
   let lastTick = t0
   let lastNonce = 0
+  let lastYield = t0
   for (;;) {
+    // WebCrypto promises resolve as microtasks, so without this the whole search is one long task
+    // that blocks input and painting; hand the thread back every ~40 ms (cheap inside the worker too)
+    if (performance.now() - lastYield > 40) {
+      await new Promise((res) => setTimeout(res, 0))
+      lastYield = performance.now()
+    }
     const jobs: Array<Promise<ArrayBuffer>> = []
     for (let i = 0; i < BATCH; i++) {
       const bytes = enc.encode(`${data}|${nonce + i}`)
@@ -101,3 +108,4 @@ export async function mine(data: string, opts: { prefix?: string; budgetMs?: num
 }
 
 export const shortHash = (h: string) => `${h.slice(0, 10)}…${h.slice(-6)}`
+

@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 'react'
 import { ARCS, CERTIFICATES, SOCIALS, SITE } from '@/content/site'
 import { CURATED } from '@/content/projects'
-import { mine, shortHash } from '@/lib/pow'
+import { shortHash } from '@/lib/pow'
+import { mineOffThread } from '@/lib/mineOffThread'
 import { bus } from '@/scene/bus'
 
 const EVT = 'mp:terminal'
@@ -102,7 +103,7 @@ export function Terminal() {
       case 'mine': {
         print('<span class="m">mining… target 0000</span>')
         const prev = bus.genesisHash || '0'.repeat(64)
-        const r = await mine(`${prev}|guest|${Date.now()}`, { budgetMs: 3500 })
+        const r = await mineOffThread(`${prev}|guest|${Date.now()}`, { budgetMs: 3500 })
         const z = r.hash.match(/^0*/)?.[0].length ?? 0
         return print(`block found · nonce ${r.nonce.toLocaleString('en-US')} · ${(r.ms / 1000).toFixed(2)}s\nprev  ${shortHash(prev)}\nhash  <span class="c">${r.hash.slice(0, z)}</span>${r.hash.slice(z)}\n<span class="m">real SHA-256 work, done by your machine.</span>`)
       }

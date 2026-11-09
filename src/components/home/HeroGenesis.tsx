@@ -9,7 +9,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import type { Lang } from '@/content/types'
 import { ARCS, SITE, SOCIALS } from '@/content/site'
 import { UI, href, t } from '@/content/i18n'
-import { mine, sha256, shortHash } from '@/lib/pow'
+import { sha256, shortHash } from '@/lib/pow'
+import { mineOffThread } from '@/lib/mineOffThread'
 import { bus } from '@/scene/bus'
 import { openXProfile } from '../XProfile'
 import type { GenesisScene } from '@/scene/genesis'
@@ -95,7 +96,7 @@ export function HeroGenesis({ lang }: { lang: Lang }) {
         const seed = `${SITE.url}|genesis|${new Date().toISOString().slice(0, 10)}|${Math.random().toString(36).slice(2, 8)}`
         const zeros = (h: string) => { const z = h.match(/^0*/)?.[0].length ?? 0; return `<span class="z">${h.slice(0, z)}</span>${h.slice(z)}` }
         const t0 = performance.now()
-        const r = await mine(seed, {
+        const r = await mineOffThread(seed, {
           prefix: reduced ? '0000' : '00000',
           budgetMs: reduced ? 400 : 2600,
           onTick: (tk) => {
