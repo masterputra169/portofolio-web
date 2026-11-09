@@ -96,6 +96,48 @@ export const CURATED: CuratedProject[] = [
       { value: 'MIT', label: { en: 'open source', id: 'open source' } },
     ],
     stack: ['Solana', 'Next.js', 'PWA', 'QRIS', 'Vercel'],
+    gallery: [
+      {
+        src: '/images/work/dollarkilat/landing-desktop.webp',
+        width: 1440,
+        height: 900,
+        alt: { en: 'dollarkilat landing page: Earned in dollars, spend in rupiah', id: 'Halaman depan dollarkilat: Earned in dollars, spend in rupiah' },
+        caption: {
+          en: 'The public landing page at dollarkilat.xyz, the MVP running on Solana devnet.',
+          id: 'Halaman publik dollarkilat.xyz, MVP yang berjalan di Solana devnet.',
+        },
+      },
+      {
+        src: '/images/work/dollarkilat/landing-phone.webp',
+        width: 720,
+        height: 1561,
+        alt: { en: 'dollarkilat on a phone: headline, sign-up buttons and a balance preview card', id: 'dollarkilat di HP: judul, tombol daftar, dan kartu contoh saldo' },
+        caption: {
+          en: 'On a phone, where the PWA is meant to be used. The balance card is the page’s own preview, not a real account.',
+          id: 'Di HP, tempat PWA ini dipakai. Kartu saldo adalah contoh dari halamannya sendiri, bukan akun sungguhan.',
+        },
+      },
+      {
+        src: '/images/work/dollarkilat/features-phone.webp',
+        width: 720,
+        height: 1561,
+        alt: { en: 'dollarkilat features: embedded wallet, instant QRIS, live rate', id: 'Fitur dollarkilat: embedded wallet, QRIS instan, kurs live' },
+        caption: {
+          en: 'An embedded Solana wallet created from your email, QRIS payments, and a live USDC to IDR rate.',
+          id: 'Wallet Solana yang dibuat otomatis dari email, pembayaran QRIS, dan kurs USDC ke IDR yang live.',
+        },
+      },
+      {
+        src: '/images/work/dollarkilat/steps-phone.webp',
+        width: 720,
+        height: 1561,
+        alt: { en: 'dollarkilat in three steps: sign up with email, receive USDC, scan QRIS', id: 'dollarkilat dalam tiga langkah: daftar dengan email, terima USDC, scan QRIS' },
+        caption: {
+          en: 'Three steps: sign up with email, receive USDC, scan a QRIS code. No seed phrase and no wallet to install.',
+          id: 'Tiga langkah: daftar dengan email, terima USDC, scan QRIS. Tanpa seed phrase dan tanpa install wallet.',
+        },
+      },
+    ],
     caseStudy: {
       overview: {
         en: 'Indonesian freelancers increasingly get paid in USDC, but daily life runs on QRIS. dollarkilat bridges the two in one mobile web app.',
@@ -135,6 +177,38 @@ export const CURATED: CuratedProject[] = [
       { value: '6–12', label: { en: 'months inactive', id: 'bulan tidak aktif' } },
     ],
     stack: ['Chrome Extension', 'JavaScript'],
+    gallery: [
+      {
+        src: '/images/work/sapux/review.webp',
+        width: 720,
+        height: 1384,
+        alt: { en: 'SapuX Review tab: accounts grouped as inactive, small and one-way, each with days since its last post', id: 'Tab Review SapuX: akun dikelompokkan jadi tidak aktif, kecil, dan satu arah, masing-masing dengan hari sejak post terakhir' },
+        caption: {
+          en: 'The Review tab after a scan of a test account: who has been silent, for how long, and who to keep. Simulation mode is on until you turn it off.',
+          id: 'Tab Review setelah memindai akun uji: siapa yang diam, sudah berapa lama, dan siapa yang dipertahankan. Mode simulasi aktif sampai kamu matikan.',
+        },
+      },
+      {
+        src: '/images/work/sapux/confirm.webp',
+        width: 720,
+        height: 1384,
+        alt: { en: 'SapuX confirmation before a live run: accounts to unfollow, estimated time and warnings', id: 'Konfirmasi SapuX sebelum menjalankan sungguhan: jumlah akun, perkiraan waktu, dan peringatan' },
+        caption: {
+          en: 'Before a live run it shows how many accounts, how long it will take, and which ones may still be active.',
+          id: 'Sebelum menjalankan sungguhan, SapuX menunjukkan jumlah akun, perkiraan waktu, dan akun mana yang mungkin masih aktif.',
+        },
+      },
+      {
+        src: '/images/work/sapux/queue.webp',
+        width: 720,
+        height: 1384,
+        alt: { en: 'SapuX queue card after the daily limit: Resume or Discard', id: 'Kartu antrean SapuX setelah batas harian: Resume atau Discard' },
+        caption: {
+          en: 'A daily limit stops the run; what is left waits in a queue you can resume the next day.',
+          id: 'Batas harian menghentikan proses; sisanya menunggu di antrean yang bisa dilanjutkan besok.',
+        },
+      },
+    ],
     caseStudy: {
       overview: {
         en: 'SapuX ("sapu" means broom) cleans up the accounts you follow on X: anyone silent for six months to a year, optionally filtered by follower count.',

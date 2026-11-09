@@ -92,7 +92,7 @@ export async function CaseStudyView({ lang, slug }: { lang: Lang; slug: string }
           <section className="section gallery" aria-labelledby="shots">
             <h2 id="shots">{t(UI.screens, lang)}</h2>
             {p.gallery.map((g, i) => (
-              <figure key={g.src}>
+              <figure key={g.src} className={g.height > g.width ? 'tall' : 'wide'}>
                 <a href={g.src} target="_blank" rel="noopener">
                   <img src={g.src} alt={t(g.alt, lang)} width={g.width} height={g.height} loading={i === 0 ? 'eager' : 'lazy'} fetchPriority={i === 0 ? 'high' : 'auto'} decoding="async" />
                 </a>
