@@ -148,16 +148,16 @@ export const CURATED: CuratedProject[] = [
         id: 'Dari stablecoin ke secangkir kopi di Kediri biasanya harus lewat exchange, transfer bank, dan menunggu. Setiap langkah memakan fee dan waktu.',
       },
       approach: {
-        en: 'A Solana-based PWA with a QRIS switching flow, explored together with payment-gateway sandboxes, QRIS merchant registration and the licensing it requires. The pitch covered the business model and a Value Proposition Canvas.',
-        id: 'PWA berbasis Solana dengan alur switching QRIS, dieksplorasi bersama sandbox payment gateway, registrasi merchant QRIS, dan perizinan yang dibutuhkan. Pitch-nya mencakup model bisnis dan Value Proposition Canvas.',
+        en: 'A Solana-based PWA: an embedded wallet created from an email sign-up (no seed phrase, no wallet to install), USDC received on Solana, and a QRIS payment flow that converts USDC to rupiah at the moment of payment. The team’s pitch covered the business model and a Value Proposition Canvas.',
+        id: 'PWA berbasis Solana: wallet yang dibuat otomatis dari pendaftaran email (tanpa seed phrase, tanpa install wallet), USDC diterima di Solana, dan alur pembayaran QRIS yang mengonversi USDC ke rupiah saat membayar. Pitch tim mencakup model bisnis dan Value Proposition Canvas.',
       },
       broke: {
-        en: 'The hard part is not the chain, it is the regulated rail on the other side: QRIS merchant onboarding and payment licensing shape what can ship.',
-        id: 'Bagian tersulitnya bukan di chain, tapi di jalur yang diregulasi di sisi lain: onboarding merchant QRIS dan perizinan pembayaran menentukan apa yang bisa dirilis.',
+        en: 'The hard part is not the chain but regulation. Real QRIS payouts need licensing and oversight from Bank Indonesia and OJK, directly or through a licensed payment service provider (PJP), and getting those licenses is a long, difficult process that a student hackathon team could not realistically complete. So the MVP does not use any OJK, Bank Indonesia or PJP licensing or services, and it does not move real money.',
+        id: 'Bagian tersulitnya bukan di chain, tapi di regulasi. Pembayaran QRIS sungguhan butuh izin dan pengawasan dari Bank Indonesia dan OJK, langsung atau lewat penyedia jasa pembayaran (PJP) berizin, dan mendapatkan izin itu adalah proses panjang dan sulit yang secara realistis tidak bisa diselesaikan tim hackathon mahasiswa. Karena itu MVP ini tidak memakai izin maupun layanan OJK, Bank Indonesia, atau PJP, dan tidak memindahkan uang sungguhan.',
       },
       results: {
-        en: 'Shipped as an MVP for Colosseum Frontier 2026 and Superteam Indonesia’s National Campus Hackathon: the full code is open source under MIT on GitHub, and the app is live at dollarkilat.xyz on Solana devnet. It was built for the hackathons, so its users so far are a small group; taking QRIS payouts to mainnet would need a licensed payment partner.',
-        id: 'Dirilis sebagai MVP untuk Colosseum Frontier 2026 dan Indonesia National Campus Hackathon dari Superteam Indonesia: seluruh kodenya open source (MIT) di GitHub, dan aplikasinya live di dollarkilat.xyz di Solana devnet. Karena dibuat untuk hackathon, penggunanya sejauh ini masih sedikit; membawa pembayaran QRIS ke mainnet butuh mitra pembayaran berizin.',
+        en: 'Shipped as an MVP for Colosseum Frontier 2026 and Superteam Indonesia’s National Campus Hackathon: the full code is open source under MIT on GitHub, and the app is live at dollarkilat.xyz on Solana devnet. It was built for the hackathons, so its users so far are a small group; taking it to mainnet with real QRIS payouts would require partnering with a licensed PJP.',
+        id: 'Dirilis sebagai MVP untuk Colosseum Frontier 2026 dan Indonesia National Campus Hackathon dari Superteam Indonesia: seluruh kodenya open source (MIT) di GitHub, dan aplikasinya live di dollarkilat.xyz di Solana devnet. Karena dibuat untuk hackathon, penggunanya sejauh ini masih sedikit; membawanya ke mainnet dengan pembayaran QRIS sungguhan butuh kerja sama dengan PJP berizin.',
       },
     },
   },
