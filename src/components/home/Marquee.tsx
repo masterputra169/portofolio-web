@@ -19,16 +19,20 @@ export function Marquee({ items }: { items: string[] }) {
       mm.add('(prefers-reduced-motion: no-preference)', () => {
         const track = root.current?.querySelector('.mq-track')
         if (!track) return
-        const skew = gsap.quickTo(track, 'skewX', { duration: 0.5, ease: 'power3.out' })
-        gsap.fromTo(track, { xPercent: 0 }, {
-          xPercent: -30,
+        const skew = gsap.quickTo(track, 'skewX', { duration: 0.9, ease: 'power2.out' })
+        // the row drifts at ~0.35x the scroll speed (it used to cover ~1.2x, faster than the page),
+        // with a soft scrub and only a slight lean, so the words stay readable while they move
+        const SPEED = 0.35
+        gsap.fromTo(track, { x: 0 }, {
+          x: () => -(window.innerHeight + (root.current?.offsetHeight ?? 0)) * SPEED,
           ease: 'none',
           scrollTrigger: {
             trigger: root.current,
             start: 'top bottom',
             end: 'bottom top',
-            scrub: 0.6,
-            onUpdate: (self) => skew(gsap.utils.clamp(-12, 12, self.getVelocity() / -220)),
+            scrub: 1.2,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => skew(gsap.utils.clamp(-3, 3, self.getVelocity() / -900)),
             onToggle: (self) => { if (!self.isActive) skew(0) },
           },
         })
