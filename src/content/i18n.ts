@@ -34,6 +34,8 @@ export const UI = {
   confirmed: { en: 'confirmed', id: 'terkonfirmasi' },
   readCase: { en: 'Read the case study', id: 'Baca studi kasus' },
   caseLabel: { en: 'case study', id: 'studi kasus' },
+  mqPause: { en: 'Pause', id: 'Jeda' },
+  mqPlay: { en: 'Play', id: 'Putar' },
   onGithub: { en: 'View on GitHub', id: 'Lihat di GitHub' },
   liveSite: { en: 'Live site', id: 'Situs live' },
   journeysTitle: { en: 'Three chains, one builder.', id: 'Tiga rantai, satu builder.' },

@@ -13,7 +13,7 @@ export function Expertise({ lang }: { lang: Lang }) {
         <span className="eyebrow">BLOCK #4</span>
         <RevealText className="sec-title">{t(UI.expertiseTitle, lang)}</RevealText>
       </div>
-      <Marquee items={EXPERTISE.shipping} />
+      <Marquee items={EXPERTISE.shipping} lang={lang} />
       <RevealGroup className="two-col">
         <div className="rv">
           <h3 className="col-title">{t(UI.shipping, lang)}</h3>

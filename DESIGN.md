@@ -54,7 +54,7 @@ Hanya gelap, tanpa toggle. Alasannya: scene 3D memakai glow dan partikel aditif 
 ## Gerak (R-19, R-39)
 
 - Intro, chain yang di-pin, lajur Journey, dan filter Work adalah koreografi yang punya tujuan (menjelaskan cerita, menunjukkan perubahan). Animasi kata-naik untuk judul hanya ada di beranda.
-- Tidak ada yang bergerak sendiri lebih dari 5 detik: siklus "current arc" berjalan satu putaran (3 × 3 detik) lalu berhenti, berhenti sementara saat disorot atau difokus, dan berhenti saat diklik; marquee hanya bergerak saat halaman di-scroll. Kursor berkedip di panel mining hanya ada selama intro.
+- Gerak otomatis lebih dari 5 detik selalu bisa dihentikan (WCAG 2.2.2): siklus "current arc" berjalan satu putaran (3 × 3 detik) lalu berhenti, berhenti sementara saat disorot atau difokus, dan berhenti saat diklik. Marquee BLOCK #4 berjalan sendiri atas pilihan pemilik (2026-11-09): pelan (satu putaran 60 detik), sedikit lebih cepat saat di-scroll (maksimal 3×), berhenti saat disorot mouse, saat di luar layar, atau lewat tombol Jeda di bawahnya. Kursor berkedip di panel mining hanya ada selama intro.
 - `prefers-reduced-motion: reduce` mematikan semua animasi CSS dan GSAP; intro dilewati.
 
 ## Dekorasi
@@ -78,7 +78,7 @@ Hanya gelap, tanpa toggle. Alasannya: scene 3D memakai glow dan partikel aditif 
 | Nomor blok di setiap bagian | Portofolio dibaca sebagai rantai blok |
 | Kartu studi kasus lebih besar | Yang punya tulisan lengkap harus terlihat beda dari repo biasa |
 | Beranda sinematik, halaman lain tenang | Beranda memperkenalkan, halaman lain untuk dibaca |
-| Tidak ada animasi otomatis > 5 detik | WCAG 2.2.2; arc satu putaran, marquee mengikuti scroll |
+| Gerak otomatis > 5 detik selalu bisa dihentikan | WCAG 2.2.2; arc satu putaran, marquee berjalan pelan dengan tombol Jeda (pilihan pemilik) |
 | Area sentuh minimal 44 px | Diuji di 390 px; header, link, filter, avatar |
 | Dua root layout (EN dan `/id/`) | `<html lang>` benar langsung dari Next.js, tanpa script tambalan |
 | Glow di 2 tempat, blur di 2 tempat | Efek dipakai di tempat yang butuh perhatian, bukan di mana-mana |
